@@ -14,16 +14,16 @@
             <div class="col-8">
                 <h3><i class="fas fa-eye me-2"></i>Ver Funcionário</h3>
             </div>
-            <div class="col-4 text-end">
+            <div class="col-3 text-end">
                 <a href="{{ route('admin.employeee.index') }}" style="width: 90px;"
                     class="btn btn-outline-secondary btn-sm me-2">
                     <i class="fas fa-arrow-left"></i> Voltar
                 </a>
 
-                <a href="{{ route('admin.employeee.showPdf', $data->id) }}" style="width: 90px;"
+                {{-- <a href="{{ route('admin.employeee.showPdf', $data->id) }}" style="width: 90px;"
                     class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener noreferrer">
                     <i class="fas fa-download"></i> Baixar PDF
-                </a>
+                </a> --}}
             </div>
         </div>
 
