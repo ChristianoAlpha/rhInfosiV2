@@ -1,5 +1,5 @@
 @extends('layouts.admin.layout')
-@section('title', 'Departments (Departamentos)')
+@section('title', 'Departamentos')
 @section('content')
 
     <div class="card mb-4 mt-4 shadow">

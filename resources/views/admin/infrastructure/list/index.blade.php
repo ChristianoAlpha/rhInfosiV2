@@ -3,11 +3,16 @@
 
 @section('content')
     <div class="card mt-4 shadow">
-        <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+        <div class="card-header bg-secondary text-white ">
             <span><i class="fas fa-tools me-2"></i> Materiais de Infraestrutura</span>
-            <a href="{{ route('admin.infrastructures.create') }}" class="btn btn-outline-light btn-sm">
-                <i class="fas fa-plus-circle me-1"></i> Novo Material
-            </a>
+            <div>
+                <a href="{{ route('admin.infrastructures.allPdf') }}" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-plus-circle me-1"></i> Baixar Lista
+                </a>
+                <a href="{{ route('admin.infrastructures.create') }}" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-plus-circle me-1"></i> Novo Material
+                </a>
+            </div>
         </div>
         <div class="card-body">
             @if (session('msg'))
@@ -45,12 +50,14 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="{{ route('admin.infrastructures.show', $item->id) }}" class="dropdown-item">
+                                            <a href="{{ route('admin.infrastructures.show', $item->id) }}"
+                                                class="dropdown-item">
                                                 <i class="fas fa-eye"></i> Detalhes
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('admin.infrastructures.edit', $item->id) }}" class="dropdown-item">
+                                            <a href="{{ route('admin.infrastructures.edit', $item->id) }}"
+                                                class="dropdown-item">
                                                 <i class="fas fa-pencil"></i>Editar
                                             </a>
                                         </li>

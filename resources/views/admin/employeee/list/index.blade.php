@@ -39,10 +39,10 @@
                         <th>Departamento</th>
                         <th>Cargo</th>
                         <th>Especialidade</th>
-                        <th>Tipo</th>
+                        {{-- <th>Tipo</th> --}}
                         <th>Categoria</th>
-                        <th>Nível Acadêmico</th>
-                        <th>Curso</th>
+                        {{-- <th>Nível Acadêmico</th> --}}
+                        {{-- <th>Curso</th> --}}
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -54,10 +54,10 @@
                             <td>{{ $item->department->title ?? '-' }}</td>
                             <td>{{ $item->position->name ?? '-' }}</td>
                             <td>{{ $item->specialty->name ?? '-' }}</td>
-                            <td>{{ $item->employeeType->name ?? '-' }}</td>
+                            {{-- <td>{{ $item->employeeType->name ?? '-' }}</td> --}}
                             <td>{{ $item->employeeCategory->name ?? '-' }}</td>
-                            <td>{{ $item->academicLevel ?? '-' }}</td>
-                            <td>{{ $item->course->name ?? '-' }}</td>
+                            {{-- <td>{{ $item->academicLevel ?? '-' }}</td> --}}
+                            {{-- <td>{{ $item->course->name ?? '-' }}</td> --}}
                             <td>
                                 <div class="btn-group">
                                     <button class="btn btn-outline-secondary dropdown-toggle" type="button"

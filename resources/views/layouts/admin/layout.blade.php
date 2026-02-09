@@ -51,10 +51,11 @@
             <button class="btn btn-primary">Apply</button>
         </div>
     </div>
-    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+    {{-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('assets/vendors/js/select2-active.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/js/select2-active.min.js') }}"></script>
     <script src="{{ asset('assets/js/theme-customizer-init.min.js') }}"></script>
 
     <!-- start Modal Dinâmica Única -->
@@ -63,6 +64,10 @@
     
     {{-- end script do editor de texto --}}
     <script>
+
+        //select2
+        $('.select2').select2();
+        
         // Abre/fecha sidebar em mobile ao clicar no botão hamburger
         document.querySelector('.navbar-toggler').addEventListener('click', function () {
             document.querySelector('.sidebar').classList.toggle('show');

@@ -82,7 +82,12 @@ class EmployeeHistoryController extends Controller
 
         $employee['vacation'] = VacationRequest::where('employeeId', $id)->where('approvalStatus', 'Validado')->get();
 
-        $pdf = PDF::loadView('pdf.employeee.history', compact('employee'))->setPaper('a4', 'portrait');
+         // Gera o QR Code com os dados desejados
+        $qrData = route('admin.employeee.show', $employee->id); // ou qualquer link/texto que você quiser
+
+        $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" . urlencode($qrData);
+
+        $pdf = PDF::loadView('pdf.employeee.history', compact(['employee', 'qrUrl']))->setPaper('a4', 'portrait');
         return $pdf->stream('historico_funcionario_' . $employee->id . '.pdf');
         /* return view('pdf.employeee.history', compact('employee')); */
         /* return response()->json($employee->department); */

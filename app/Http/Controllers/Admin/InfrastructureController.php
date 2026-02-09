@@ -7,6 +7,7 @@ use App\Models\Infrastructure;
 use App\Models\InfrastructureMoviments;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class InfrastructureController extends Controller
 {
@@ -261,4 +262,15 @@ class InfrastructureController extends Controller
         }
     }
     /* end registrar saída de material */
+
+
+    /* relatórios pdf */
+    public function reportAll()
+    {
+        $data = Infrastructure::all();
+            
+        // Usar PDF::loadView para garantir que os estilos do layout são aplicados
+        $pdf = PDF::loadView('pdf.infrastructure.infrastructurePdf', compact('data'));
+        return $pdf->stream('relatorio_total_material.pdf');
+    }
 }

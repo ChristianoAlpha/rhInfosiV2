@@ -31,12 +31,12 @@ use App\Http\Controllers\Admin\SupplierController;
 
 Route::middleware('auth')->name('admin.')->group(function () {
 
-    /* start dashboard routes */
+    /* inicio dashboard routes */
     Route::get('/dashboard/filter-by-category/{categoryId}/{academicLevel?}', [DashboardController::class, 'filterByCategory'])->name('dashboard.filterByCategory');
     Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard");
-    /* end dashboard routes */
+    /* fim dashboard routes */
 
-    /* start department routes */
+    /* inicio department routes */
     Route::prefix('departamentos')->group(function () {
 
         Route::get('/lista', [DepartmentController::class, 'index'])->name('department.index');
@@ -51,9 +51,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get("{departmentId}/pdf", [DepartmentController::class, "employeeePdf"])->name("department.employeee.pdf");
         Route::get("employeee", [DepartmentController::class, "employeee"])->name("department.employeee");
     });
-    /* end department routes */
+    /* fim department routes */
 
-    // start Cargos (Positions) 
+    // inicio Cargos (Positions) 
     Route::prefix('cargos')->group(function () {
 
         Route::get('/lista', [PositionController::class, 'index'])->name('positions.index');
@@ -68,9 +68,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get("/funcionarios", [PositionController::class, "employeee"])->name("positions.employeee.filter");
         Route::get("/{positionId}/pdf", [PositionController::class, "pdf"])->name("positions.employeee.pdf");
     });
-    // end Cargos (Positions)
+    // fim Cargos (Positions)
 
-    // start funcao (role) 
+    // inicio funcao (role) 
     Route::prefix('funcao')->group(function () {
 
         Route::get('/lista', [RoleController::class, 'index'])->name('roles.index');
@@ -85,9 +85,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get("/funcionarios", [RoleController::class, "employeee"])->name("roles.employeee.filter");
         Route::get("/{positionId}/pdf", [RoleController::class, "pdf"])->name("roles.employeee.pdf");
     });
-    // end funcao (role)
+    // fim funcao (role)
 
-    // start Especialidades (Specialties) routes
+    // inicio Especialidades (Specialties) routes
     Route::prefix('especialidades')->group(function () {
 
         Route::get('/lista', [SpecialtyController::class, 'index'])->name('specialties.index');
@@ -102,9 +102,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get("specialties/employeee", [SpecialtyController::class, "employeee"])->name("specialties.employeee.filter");
         Route::get("specialties/{specialtyId}/pdf", [SpecialtyController::class, "pdf"])->name("specialties.pdf");
     });
-    // end Especialidades (Specialties) routes
+    // fim Especialidades (Specialties) routes
 
-    // start Rotas Para o Tipo de Funcionário (EmployeeType) 
+    // inicio Rotas Para o Tipo de Funcionário (EmployeeType) 
     Route::prefix('vinculo-funcionario')->group(function () {
 
         Route::get('/lista', [EmployeeTypeController::class, 'index'])->name('employeeTypes.index');
@@ -115,10 +115,10 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/detalhes/{id}', [EmployeeTypeController::class, 'show'])->name('employeeTypes.show');
         Route::get("{id}/delete", [EmployeeTypeController::class, "destroy"])->name("employeeTypes.destroy");
     });
-    // end Rotas Para o Tipo de Funcionário (EmployeeType) 
+    // fim Rotas Para o Tipo de Funcionário (EmployeeType) 
 
 
-    // start Rotas Para Categoria de Funcionário (EmployeeCategory) 
+    // inicio Rotas Para Categoria de Funcionário (EmployeeCategory) 
     Route::prefix('categoria-funcionario')->group(function () {
 
         Route::get('/lista', [EmployeeCategoryController::class, 'index'])->name('employeeCategories.index');
@@ -129,9 +129,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/detalhes/{id}', [EmployeeCategoryController::class, 'show'])->name('employeeCategories.show');
         Route::get("{id}/delete", [EmployeeCategoryController::class, "destroy"])->name("employeeCategories.destroy");
     });
-    // end Rotas Para Categoria de Funcionário (EmployeeCategory) 
+    // fim Rotas Para Categoria de Funcionário (EmployeeCategory) 
 
-    /* start course routes */
+    /* inicio course routes */
     Route::prefix('cursos')->group(function () {
 
         Route::get('/lista', [CourseController::class, 'index'])->name('courses.index');
@@ -142,10 +142,10 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/detalhes/{id}', [CourseController::class, 'show'])->name('courses.show');
         Route::get("{id}/delete", [CourseController::class, "destroy"])->name("courses.destroy");
     });
-    /* end course routes */
+    /* fim course routes */
 
 
-    /* start Employee routes */
+    /* inicio Employee routes */
     Route::prefix('funcionarios')->group(function () {
 
         Route::get('/lista', [EmployeeeController::class, 'index'])->name('employeee.index');
@@ -173,9 +173,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get("employeee/filter", [EmployeeeController::class, "filterByDate"])->name("employeee.filter");
         Route::post("employeee/filter/pdf", [EmployeeeController::class, "pdfFiltered"])->name("employeee.filter.pdf");
     });
-    /* end Employee routes */
+    /* fim Employee routes */
 
-    // start Estagiários (Intern) routes
+    // inicio Estagiários (Intern) routes
     Route::prefix('estagiarios')->group(function () {
 
         Route::get('/lista', [InternController::class, 'index'])->name('intern.index');
@@ -192,9 +192,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get("filtros", [InternController::class, "filterByDate"])->name("intern.filter");
         Route::post("filtros/pdf", [InternController::class, "pdfFiltered"])->name("intern.filter.pdf");
     });
-    // end Estagiários (Intern) routes
+    // fim Estagiários (Intern) routes
 
-    // start Reforma (Retirement) routes
+    // inicio Reforma (Retirement) routes
     Route::prefix('reformas')->group(function () {
 
         Route::get('/lista', [RetirementController::class, 'index'])->name('retirements.index');
@@ -210,9 +210,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get("reformas/pdf-filtered", [RetirementController::class, "pdfAll"])->name("retirements.exportFilteredPDF");
         Route::get("reformas/pdf", [RetirementController::class, "pdfAll"])->name("retirements.pdf");
     });
-    // end Reforma (Retirement) routes
+    // fim Reforma (Retirement) routes
 
-    // start Viaturas (vehicles) routes
+    // inicio Viaturas (vehicles) routes
     Route::prefix('veiculos')->group(function () {
 
         Route::get('/lista', [VehicleController::class, 'index'])->name('vehicles.index');
@@ -228,9 +228,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get("pdf", [VehicleController::class, "pdfAll"])->name("vehicles.pdfAll");
         Route::get("pdf-filtered", [VehicleController::class, "exportFilteredPDF"])->name("vehicles.pdfFiltered");
     });
-    // end Viaturas (vehicles) routes
+    // fim Viaturas (vehicles) routes
 
-    //Start Atribuições de Recursos (Resource Assignments) routes
+    //inicio Atribuições de Recursos (Resource Assignments) routes
     Route::prefix('atribuicoes')->group(function () {
 
         Route::get('/lista', [ResourceAssignmentController::class, 'index'])->name('resourceAssignments.index');
@@ -247,9 +247,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get("pdf", [ResourceAssignmentController::class, "pdfAll"])->name("resourceAssignments.pdfAll");
         Route::get("pdf-filtered", [ResourceAssignmentController::class, "exportFilteredPDF"])->name("resourceAssignments.pdfFiltered");
     });
-    //end Atribuições de Recursos (Resource Assignments) routes
+    //fim Atribuições de Recursos (Resource Assignments) routes
 
-    // start Tipos de Licença (LeaveType) 
+    // inicio Tipos de Licença (LeaveType) 
     Route::prefix('tipos-licenca')->group(function () {
 
         Route::get('/lista', [LeaveTypeController::class, 'index'])->name('leaveTypes.index');
@@ -260,9 +260,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/detalhes/{id}', [LeaveTypeController::class, 'show'])->name('leaveTypes.show');
         Route::delete('/deletar/{id}', [LeaveTypeController::class, 'destroy'])->name('leaveTypes.destroy');
     });
-    // end Tipos de Licença (LeaveType) 
+    // fim Tipos de Licença (LeaveType) 
 
-    // start Manutenções (maintenance) routes
+    // inicio Manutenções (maintenance) routes
 
     Route::prefix('manutencoes')->group(function () {
 
@@ -279,9 +279,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
     Route::get("maintenance/{maintenance}/pdf", [MaintenanceController::class, "showPdf"])->name("maintenances.showPdf");
     Route::get("maintenance/pdf", [MaintenanceController::class, "pdfAll"])->name("maintenances.pdfAll");
     Route::get("maintenance/pdf-filtered", [MaintenanceController::class, "exportFilteredPDF"])->name("maintenances.pdfFiltered");
-    // end Manutenções (maintenance) routes
+    // fim Manutenções (maintenance) routes
 
-    // start estatuto (statute) routes
+    // inicio estatuto (statute) routes
     Route::prefix('estatuto')->group(function () {
 
         Route::get('/lista', [StatuteController::class, 'index'])->name('statutes.index');
@@ -292,9 +292,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/detalhes/{id}', [StatuteController::class, 'show'])->name('statutes.show');
         Route::get('/deletar/{id}', [StatuteController::class, 'destroy'])->name('statutes.destroy');
     });
-    // end estatuto (statute) routes
+    // fim estatuto (statute) routes
 
-    // start categoria de Património
+    // inicio categoria de Património
     Route::prefix('categoria-patrimonio')->group(function () {
 
         Route::get("/listar", [HeritageTypeController::class, "index"])->name("heritageTypes.index");
@@ -305,9 +305,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::put("/atualizar/{id}", [HeritageTypeController::class, "update"])->name("heritageTypes.update");
         Route::delete("/apagar/{id}", [HeritageTypeController::class, "destroy"])->name("heritageTypes.destroy");
     });
-    // end categoria de Património
+    // fim categoria de Património
 
-    // start Mobilidade (Mobility)
+    // inicio Mobilidade (Mobility)
     Route::prefix('mobilidade')->group(function () {
 
         Route::get("/listar", [MobilityController::class, "index"])->name("mobilities.index");
@@ -322,9 +322,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
     //filtros
     Route::get("/pdf", [MobilityController::class, "pdfAll"])->name("mobilities.pdfAll");
     Route::get("/search-employee", [MobilityController::class, "searchEmployee"])->name("mobilities.searchEmployee");
-    // end Mobilidade (Mobility)
+    // fim Mobilidade (Mobility)
 
-    // start Trabalhos extras(ExtraJobs)
+    // inicio Trabalhos extras(ExtraJobs)
     Route::prefix('trabalhos-extras')->group(function () {
 
         Route::get("/listar", [ExtraJobController::class, "index"])->name("extras.index");
@@ -340,9 +340,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get("/{id}/pdf", [ExtraJobController::class, "pdfShow"])->whereNumber("id")->name("extras.pdfShow");
         Route::get("/search-employee", [ExtraJobController::class, "searchEmployee"])->name("extras.searchEmployee");
     });
-    // end Trabalhos extras(ExtraJobs)
+    // fim Trabalhos extras(ExtraJobs)
 
-    // start categoria de Licença (LeaveRequest) 
+    // inicio categoria de Licença (LeaveRequest) 
     Route::prefix('categoria-licenca')->group(function () {
 
         Route::get("/listar", [LicenseCategoryController::class, "index"])->name("licenseCategories.index");
@@ -353,9 +353,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::put("/atualizar/{id}", [LicenseCategoryController::class, "update"])->name("licenseCategories.update");
         Route::delete("/apagar/{id}", [LicenseCategoryController::class, "destroy"])->name("licenseCategories.destroy");
     });
-    // end Pedido de Licença (LeaveRequest) 
+    // fim Pedido de Licença (LeaveRequest) 
 
-    // start Pedido de Licença (LeaveRequest) 
+    // inicio Pedido de Licença (LeaveRequest) 
     Route::prefix('pedido-licenca')->group(function () {
 
         Route::get("/listar", [LeaveRequestController::class, "index"])->name("leaveRequestes.index");
@@ -371,10 +371,10 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get("leave-request/pdf-filtered", [LeaveRequestController::class, "pdfAll"])->name("leaveRequestes.exportFilteredPDF");
         Route::get("leaveRequest/pdf", [LeaveRequestController::class, "pdfAll"])->name("leaveRequestes.pdfAll");
     });
-    // end Pedido de Licença (LeaveRequest) 
+    // fim Pedido de Licença (LeaveRequest) 
 
 
-    // start Pedido de Férias (Vacation Request) 
+    // inicio Pedido de Férias (Vacation Request) 
     Route::prefix('pedido-ferias')->group(function () {
 
         Route::get("/listar", [VacationRequestController::class, "index"])->name("vacationRequestes.index");
@@ -391,9 +391,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get("vacation-request/pdf-filtered",  [VacationRequestController::class, "pdfAll"])->name("vacationRequestes.exportFilteredPDF");
         Route::get("vacationRequest/pdf", [VacationRequestController::class, "pdfAll"])->name("vacationRequestes.pdfAll");
     });
-    // end Pedido de Férias (Vacation Request) 
+    // fim Pedido de Férias (Vacation Request) 
 
-    // start fornecedo(supplier) 
+    // inicio fornecedo(supplier) 
     Route::prefix('fornecedor')->group(function () {
 
         Route::get("/listar", [SupplierController::class, "index"])->name("suppliers.index");
@@ -404,9 +404,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::put("/atualizar/{id}", [SupplierController::class, "update"])->name("suppliers.update");
         Route::delete("/apagar/{id}", [SupplierController::class, "destroy"])->name("suppliers.destroy");
     });
-    // end fornecedo(supplier) 
+    // fim fornecedo(supplier) 
 
-    //start infraestrutura (infrastructure)
+    //inicio infraestrutura (infrastructure)
     Route::prefix('infraestrutura')->group(function () {
 
         Route::get('/listar', [InfrastructureController::class, 'index'])->name('infrastructures.index');
@@ -416,16 +416,20 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get("/editar/{id}/edit", [InfrastructureController::class, "edit"])->name("infrastructures.edit");
         Route::put("/atualizar/{id}", [InfrastructureController::class, "update"])->name("infrastructures.update");
         Route::delete("/apagar/{id}", [InfrastructureController::class, "destroy"])->name("infrastructures.destroy");
-        
+
+        //relatorios
+        Route::get('/relatorio', [InfrastructureController::class, 'reportAll'])->name('infrastructures.allPdf');
+
+        // outras rotas
         Route::get('/entrada', [InfrastructureController::class, 'materialInput'])->name('infrastructures.materialInput');
         Route::get('/saida', [InfrastructureController::class, 'materialOutput'])->name('infrastructures.materialOutput');
         Route::put('input', [InfrastructureController::class, 'input'])->name('infrastructures.input');
         Route::put('output', [InfrastructureController::class, 'output'])->name('infrastructures.output');
         Route::get('/limite/{id}', [InfrastructureController::class, 'inputLimit'])->name('input.limit');
     });
-    //end infraestrutura (infrastructure)
-   
-    //start patrimonio (heritage)
+    //fim infraestrutura (infrastructure)
+
+    //inicio patrimonio (heritage)
     Route::prefix('patrimonio')->group(function () {
 
         Route::get('/listar', [HeritageController::class, 'index'])->name('heritages.index');
@@ -435,17 +439,20 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get("/editar/{id}/edit", [HeritageController::class, "edit"])->name("heritages.edit");
         Route::put("/atualizar/{id}", [HeritageController::class, "update"])->name("heritages.update");
         Route::delete("/apagar/{id}", [HeritageController::class, "destroy"])->name("heritages.destroy");
-        
+
+        //relatorios
+        Route::get('/relatorio', [HeritageController::class, 'reportAll'])->name('heritages.allPdf');
+
         Route::get('/entrada', [HeritageController::class, 'materialInput'])->name('heritages.materialInput');
         Route::get('/saida', [HeritageController::class, 'materialOutput'])->name('heritages.materialOutput');
         Route::put('input', [HeritageController::class, 'input'])->name('heritages.input');
         Route::put('output', [HeritageController::class, 'output'])->name('heritages.output');
         Route::get('/limite/{id}', [HeritageController::class, 'inputLimit'])->name('input.limit');
     });
-    //end patrimonio (heritage)
+    //fim patrimonio (heritage)
 
 
-    // start users routes
+    // inicio users routes
     Route::prefix('utilizadores')->group(function () {
 
         Route::get("/listar", [AdminAuthController::class, "index"])->name("users.index");
@@ -460,21 +467,22 @@ Route::middleware('auth')->name('admin.')->group(function () {
         //cotrato em pdf
         Route::get("/{id}/contract", [AdminAuthController::class, "contractPdf"])->name("users.contract");
     });
-    // end users routes
+    // fim users routes
 
 
-    // start Administrative Area (RH) routes
+    // inicio Administrative Area (RH) routes
     Route::prefix('area-administrativa')->group(function () {
         Route::get('/ferias-pendentes', [App\Http\Controllers\AdministrativeAreaController::class, 'pendingVacations'])->name('hr.pendingVacations');
         Route::post('/encaminhar-ferias/{id}', [App\Http\Controllers\AdministrativeAreaController::class, 'forwardVacation'])->name('hr.forwardVacation');
     });
+    //fim Administrative Area (RH) routes
 
-
-    // start Director General routes
+    // inicio Director General routes
     Route::prefix('direcao-geral')->group(function () {
         Route::get('/ferias-pendentes', [App\Http\Controllers\DirectorGeneralController::class, 'pendingVacations'])->name('director.pendingVacations');
         Route::post('/aprovar-ferias/{id}', [App\Http\Controllers\DirectorGeneralController::class, 'approveVacation'])->name('director.approveVacation');
         Route::post('/rejeitar-ferias/{id}', [App\Http\Controllers\DirectorGeneralController::class, 'rejectVacation'])->name('director.rejectVacation');
         Route::get('/download-ferias-assinada/{id}', [VacationRequestController::class, 'downloadSignedPdf'])->name('director.downloadSignedPdf');
     });
+    //fim Director General routes
 });

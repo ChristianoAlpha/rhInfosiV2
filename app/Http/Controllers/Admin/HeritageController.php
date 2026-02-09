@@ -256,6 +256,16 @@ class HeritageController extends Controller
             return redirect()->back()->with('error', 'Impossível regitrar o pedido. Quantidade exede o estoque!');
         }
     }
+
+    /* relatórios pdf */
+    public function reportAll()
+    {
+        $data = Heritage::all();
+            
+        // Usar PDF::loadView para garantir que os estilos do layout são aplicados
+        $pdf = PDF::loadView('pdf.heritage.heritagePdf', compact('data'));
+        return $pdf->stream('relatorio_total_material.pdf');
+    }
     /* end registrar saída de material */
 
     /*     // Manutenção - CRUD Completo

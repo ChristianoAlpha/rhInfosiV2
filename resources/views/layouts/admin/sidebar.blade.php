@@ -318,7 +318,7 @@
                     <a class="nav-link" href="#" data-bs-toggle="collapse"
                         data-bs-target="#collapseAttendance" aria-expanded="false"
                         aria-controls="collapseAttendance">
-                        <i class="fa-solid fa-calendar-check me-2""></i> Mapa de Efetividade <i
+                        <i class="fa-solid fa-calendar-check me-2"></i> Mapa de Efetividade <i
                             class="fas fa-chevron-down ms-auto"></i>
                     </a>
                     <div class="collapse" id="collapseAttendance">
@@ -376,18 +376,12 @@
                     </a>
                     <div class="collapse" id="collapseMaterial">
                         <ul class="submenu">
-                           {{-- <li><a class="nav-link" href="{{ route('admin.suppliers.index') }}"><i
-                                        class="fas fa-box me-2"></i> Entrada de Material</a></li>
-                            <li><a class="nav-link" href="{{ route('admin.suppliers.create') }}"><i
-                                        class="fas fa-box me-2"></i> Saída de Material</a></li>
-                             <li><a class="nav-link" href="{{ route('materials.index') }}"><i
-                                        class="fas fa-box me-2"></i> Materiais</a></li>--}}
                             <li><a class="nav-link" href="{{ route('admin.infrastructures.index') }}"><i
                                         class="fas fa-eye me-2"></i> Lista</a></li>
                             <li><a class="nav-link" href="{{ route('admin.infrastructures.create') }}"><i
-                                        class="fas fa-plus me-2"></i> Novo Material</a></li>
-                            <li><a class="nav-link" href="{{ route('admin.infrastructures.materialInput') }}"><i
                                         class="fas fa-sign-in-alt me-2"></i> Registrar Entrada</a></li>
+                            {{-- <li><a class="nav-link" href="{{ route('admin.infrastructures.materialInput') }}"><i
+                                        class="fas fa-sign-in-alt me-2"></i> Registrar Entrada</a></li> --}}
                             <li><a class="nav-link" href="{{ route('admin.infrastructures.materialOutput') }}"><i
                                         class="fas fa-sign-out-alt me-2"></i> Registrar Saída</a></li>
                         </ul>
@@ -410,9 +404,9 @@
                                         <li><a class="nav-link" href="{{ route('admin.heritages.index') }}"><i
                                         class="fas fa-eye me-2"></i> Lista</a></li>
                             <li><a class="nav-link" href="{{ route('admin.heritages.create') }}"><i
-                                        class="fas fa-plus me-2"></i> Novo Material</a></li>
-                            <li><a class="nav-link" href="{{ route('admin.heritages.materialInput') }}"><i
                                         class="fas fa-sign-in-alt me-2"></i> Registrar Entrada</a></li>
+                            {{-- <li><a class="nav-link" href="{{ route('admin.heritages.materialInput') }}"><i
+                                        class="fas fa-sign-in-alt me-2"></i> Registrar Entrada</a></li> --}}
                             <li><a class="nav-link" href="{{ route('admin.heritages.materialOutput') }}"><i
                                         class="fas fa-sign-out-alt me-2"></i> Registrar Saída</a></li>
                             {{-- ROTAS DE TRANSAÇÃO (Histórico, Entrada, Saída) REMOVIDAS --}}
