@@ -3,7 +3,7 @@
     <hr>
     <div class="col-md-6 mb-3">
         <div class="form-floating">
-            <select type="text" name="heritageId" id="heritageId" class="form-select" placeholder=""
+            <select type="text" name="heritageId" id="heritageId" class="form-select select2" placeholder=""
                 value="{{ old('heritageId') }}" >
                 <option value="">selecione</option>
                 @foreach ($heritages as $item)

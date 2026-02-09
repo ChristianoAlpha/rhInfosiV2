@@ -5,9 +5,14 @@
     <div class="card mt-4 shadow">
         <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
             <span><i class="fas fa-tools me-2"></i> Materiais de Infraestrutura</span>
-            <a href="{{ route('admin.infrastructures.create') }}" class="btn btn-outline-light btn-sm">
-                <i class="fas fa-plus-circle me-1"></i> Novo Material
-            </a>
+            <div>
+                <a href="{{ route('admin.heritages.allPdf') }}" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-plus-circle me-1"></i> Baixar Lista
+                </a>
+                <a href="{{ route('admin.heritages.create') }}" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-plus-circle me-1"></i> Novo Material
+                </a>
+            </div>
         </div>
         <div class="card-body">
             <table class="table table-striped">

@@ -6,7 +6,7 @@
             <div class="card mt-4 shadow">
                 <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
                     <span><i class="fas fa-file-alt me-2"></i>Novo Pedido de Licença</span>
-                    <a href="{{ route('admin.leaveRequestes.index') }}" class="btn btn-outline-light btn-sm" title="Voltar">
+                    <a href="{{ route('admin.resourceAssignments.index') }}" class="btn btn-outline-light btn-sm" title="Voltar">
                         <i class="fas fa-arrow-left"></i> Voltar
                     </a>
                 </div>
@@ -45,7 +45,7 @@
 
                             <div class="mb-3">
                                 <div class="form-floating">
-                                    <select name="vehicleId" id="vehicleId" class="form-select" required>
+                                    <select name="vehicleId" id="vehicleId" class="form-select select2" required>
                                         <option value="">-- Selecione o Veículo --</option>
                                         @foreach ($vehicles as $vehicle)
                                             <option value="{{ $vehicle->id }}"
