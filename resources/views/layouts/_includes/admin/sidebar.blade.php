@@ -203,9 +203,9 @@
                     </a>
                     <div class="collapse" id="collapseSalaryPayment">
                         <ul class="submenu">
-                            <li><a class="nav-link" href="{{ route('salaryPayment.index') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.salaryPayments.index') }}"><i
                                         class="fas fa-eye me-2"></i>Ver Todos</a></li>
-                            <li><a class="nav-link" href="{{ route('salaryPayment.create') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.salaryPayments.create') }}"><i
                                         class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
                         </ul>
                     </div>

@@ -2,17 +2,17 @@
 @section('title','Adicionar Pagamento de Salário')
 @section('content')
 <div class="row justify-content-center" style="margin-top: 1.5rem;">
-  <div class="col-md-7">
+  <div class="col-md-12">
     <div class="card mt-4 shadow">
       <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
         <h4 class="mb-0">Adicionar Pagamento de Salário</h4>
-        <a href="{{ route('salaryPayment.index') }}" class="btn btn-outline-light btn-sm">
+        <a href="{{ route('admin.salaryPayments.index') }}" class="btn btn-outline-light btn-sm">
           Voltar
         </a>
       </div>
 
       <div class="card-body">
-        <form id="salaryForm" method="POST" action="{{ route('salaryPayment.store') }}">
+        <form id="salaryForm" method="POST" action="{{ route('admin.salaryPayments.store') }}">
           @csrf
 
           <!-- BUSCA DE FUNCIONÁRIO -->
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (query.length < 2) return;
 
     try {
-      const res = await fetch(`{{ route('salaryPayment.searchEmployeeAjax') }}?q=${encodeURIComponent(query)}`);
+      const res = await fetch(`{{ route('admin.salaryPayments.searchEmployeeAjax') }}?q=${encodeURIComponent(query)}`);
       const employees = await res.json();
 
       if (employees.length === 0) {
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const subs = parseFloat($('#subsidies').val().replace(/\./g,'').replace(',','.')) || 0;
     const month = $('#workMonth').val();
 
-    fetch(`{{ route('salaryPayment.calculateDiscount') }}?employeeId=${hiddenId.value}&baseSalary=${base}&subsidies=${subs}&workMonth=${month}`)
+    fetch(`{{ route('admin.salaryPayments.calculateDiscount') }}?employeeId=${hiddenId.value}&baseSalary=${base}&subsidies=${subs}&workMonth=${month}`)
       .then(r => r.json())
       .then(j => {
         $('#discount').val(formatMoney(j.discount));
