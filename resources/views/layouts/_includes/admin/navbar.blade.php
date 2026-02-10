@@ -17,7 +17,7 @@
                     placeholder="Pesquisar funcionário..."
                     autocomplete="off">
 
-                <button class="btn btn-outline-primary btn-sm" type="button">
+                <button class="btn btn-outline-secondary btn-sm" type="button">
                     <i class="fas fa-search"></i>
                 </button>
 
@@ -28,22 +28,22 @@
 
             <ul class="navbar-nav ms-3">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-primary" href="#" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-bell"></i> <span class="badge bg-primary">1</span>
+                    <a class="nav-link dropdown-toggle text-secondary" href="#" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-bell"></i> <span class="badge bg-secondary">1</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationsDropdown">
                         <li><a class="dropdown-item" href="#">Notificação 1</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-primary" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle text-secondary" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user-circle"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item text-primary" href="{{ route('profile') }}">Meu Perfil</a></li>
+                        <li><a class="dropdown-item text-secondary" href="{{ route('profile') }}">Meu Perfil</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item text-primary" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
+                            <a class="dropdown-item text-secondary" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>

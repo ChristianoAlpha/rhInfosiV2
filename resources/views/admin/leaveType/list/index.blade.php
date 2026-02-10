@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Lista de Tipos de Licença')
 @section('content')
 

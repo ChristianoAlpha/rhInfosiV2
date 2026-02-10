@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', $type == 'in' ? 'Registrar Entrada de Material' : 'Registrar Saída de Material')
 
 @section('content')

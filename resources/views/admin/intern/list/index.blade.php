@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Estagiários')
 @section('content')
 
@@ -7,10 +7,10 @@
         {{-- <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
     <span><i class="fas fa-person-lines-fill me-2"></i>Todos os Estagiários</span>
     <div>
-      <a href="{{ route('admin.intern.pdfAll') }}" class="btn btn-outline-light btn-sm" target="_blank">
+      <a href="{{ route('admin.interns.pdfAll') }}" class="btn btn-outline-light btn-sm" target="_blank">
         <i class="fas fa-file-earmark-pdf"></i> PDF
       </a>
-      <a href="{{ route('admin.intern.create') }}" class="btn btn-outline-light btn-sm">
+      <a href="{{ route('admin.interns.create') }}" class="btn btn-outline-light btn-sm">
         Novo <i class="fas fa-plus-circle"></i>
       </a>
     </div>
@@ -19,13 +19,13 @@
             <h4><i class="fas fa-users me-2"></i>Todos os Estagiários</h4>
 
             <div class="d-flex gap-2">
-                <a href="{{ route('admin.intern.pdfAll') }}" class="btn btn-outline-secondary btn-sm" target="_blank">
+                <a href="{{ route('admin.interns.pdfAll') }}" class="btn btn-outline-secondary btn-sm" target="_blank">
                     <i class="fas fa-file-earmark-pdf"></i> PDF
                 </a>
-                <a href="{{ route('admin.intern.filter') }}" class="btn btn-outline-secondary btn-sm">
+                <a href="{{ route('admin.interns.filter') }}" class="btn btn-outline-secondary btn-sm">
                     <i class="fas fa-calendar-alt"></i> Filtrar
                 </a>
-                <a href="{{ route('admin.intern.create') }}" class="btn btn-outline-secondary btn-sm">
+                <a href="{{ route('admin.interns.create') }}" class="btn btn-outline-secondary btn-sm">
                     Novo <i class="fas fa-plus-circle"></i>
                 </a>
             </div>
@@ -72,19 +72,19 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li>
-                                                <a href="{{ route('admin.intern.show', $item->id) }}"
+                                                <a href="{{ route('admin.interns.show', $item->id) }}"
                                                     class="dropdown-item">
                                                     <i class="fas fa-eye"></i> Detalhes
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('admin.intern.edit', $item->id) }}"
+                                                <a href="{{ route('admin.interns.edit', $item->id) }}"
                                                     class="dropdown-item">
                                                     <i class="fas fa-pencil"></i>Editar
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('admin.intern.destroy', $item->id) }}"
+                                                <a href="{{ route('admin.interns.destroy', $item->id) }}"
                                                     class="dropdown-item">
                                                     <i class="fas fa-trash"></i>Deletar
                                                 </a>

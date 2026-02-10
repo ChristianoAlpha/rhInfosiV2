@@ -1,5 +1,5 @@
 {{--Mostrar--}}
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Ver Especialidade')
 @section('content')
 

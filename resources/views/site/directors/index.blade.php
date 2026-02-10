@@ -1,5 +1,5 @@
 {{-- resources/views/frontend/directors.blade.php --}}
-@extends('layouts.site.frontend')
+@extends('layouts.merge.site')
 
 @push('styles')
   <style>

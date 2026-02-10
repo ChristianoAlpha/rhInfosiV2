@@ -210,8 +210,8 @@ Route::middleware(["auth"])->group(function () {
     /*  Route::get("employeee/filter", [EmployeeeController::class, "filterByDate"])->name("employeee.filter");
      Route::get("employeee/filter/pdf", [EmployeeeController::class, "pdfFiltered"])->name("employeee.filter.pdf"); */
      // Estagiários
-     /* Route::get("intern/filter", [InternController::class, "filterByDate"])->name("intern.filter");
-     Route::get("intern/filter/pdf", [InternController::class, "pdfFiltered"])->name("intern.filter.pdf");
+     /* Route::get("intern/filter", [InternController::class, "filterByDate"])->name("interns.filter");
+     Route::get("intern/filter/pdf", [InternController::class, "pdfFiltered"])->name("interns.filter.pdf");
 
  */
 /*      // ====================== Rotas Para o Tipo de Funcionário (EmployeeType) ======================
@@ -294,7 +294,7 @@ Route::middleware(["auth"])->group(function () {
  */
 
      /* // ====================== Estagiários (Intern) ======================
-     Route::get("intern/pdf", [InternController::class, "pdfAll"])->name("intern.pdfAll");
+     Route::get("intern/pdf", [InternController::class, "pdfAll"])->name("interns.pdfAll");
      Route::resource("intern", InternController::class);
      Route::get("intern/{id}/delete", [InternController::class, "destroy"]);
  */

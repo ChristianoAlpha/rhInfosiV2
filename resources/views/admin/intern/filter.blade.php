@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Filtrar Estagiários por Data')
 @section('content')
 
@@ -7,7 +7,7 @@
             <span><i class="fas fa-calendar-event me-2"></i>Filtrar Estagiários por Data</span>
             <div>
                 @if (isset($filtered))
-                    <form action="{{ route('admin.intern.filter.pdf') }}" target="_blank" method="POST">
+                    <form action="{{ route('admin.interns.filter.pdf') }}" target="_blank" method="POST">
                         @csrf
                         <input type="hidden" name="start_date" value="{{ request('start_date', $start ?? '') }}">
                         <input type="hidden" name="end_date" value="{{ request('end_date', $end ?? '') }}">
@@ -19,7 +19,7 @@
                     </form>
                 @endif
 
-                <a href="{{ route('admin.intern.index') }}" class="btn btn-outline-light btn-sm" title="Voltar">
+                <a href="{{ route('admin.interns.index') }}" class="btn btn-outline-light btn-sm" title="Voltar">
                     <i class="fas fa-arrow-left"></i> Voltar
                 </a>
             </div>
@@ -27,7 +27,7 @@
 
         <div class="card-body">
 
-            <form action="{{ route('admin.intern.filter') }}" method="GET" class="mb-4">
+            <form action="{{ route('admin.interns.filter') }}" method="GET" class="mb-4">
                 @csrf
                 <div class="row g-3">
                     <div class="col-md-6">

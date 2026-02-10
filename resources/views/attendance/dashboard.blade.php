@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Mapa de Efetividade')
 @section('content')
 <div class="card mt-4 shadow">

@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'View Intern')
 @section('content')
 
@@ -6,10 +6,10 @@
   <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
     <span><i class="fas fa-eye me-2"></i>Ver Estagiário</span>
     <div class="dropdown">
-      <a href="{{ route("admin.intern.index") }}" style="width: 90px;" class="btn btn-outline-light btn-sm me-2">
+      <a href="{{ route("admin.interns.index") }}" style="width: 90px;" class="btn btn-outline-light btn-sm me-2">
         <i class="fas fa-arrow-left"></i> Voltar
       </a>
-      <a href="{{ route("admin.intern.showPdf", $data->id) }}" style="width: 90px;" class="btn btn-outline-light btn-sm" target="_blank" rel="noopener noreferrer">
+      <a href="{{ route("admin.interns.showPdf", $data->id) }}" style="width: 90px;" class="btn btn-outline-light btn-sm" target="_blank" rel="noopener noreferrer">
         <i class="fas fa-download" ></i> Baixar PDF
       </a>
     </div>

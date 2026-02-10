@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Histórico de ' . $employee->fullName)
 @section('content')
 <div class="card mt-4">

@@ -1,4 +1,4 @@
-@extends('layouts.site.frontend')
+@extends('layouts.merge.site')
 
 @section('content')
   <!-- REVOLUTION SLIDER -->

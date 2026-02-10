@@ -18,7 +18,7 @@ class DepartmentController extends Controller
 
     public function create()
     {
-        return view('admin.department.create.index');
+        return view('admin.departments.create.index');
     }
 
     public function store(Request $request)
@@ -48,13 +48,13 @@ class DepartmentController extends Controller
         $departmentId = $request->input('department');
         $department   = Department::with('employeee')
                           ->findOrFail($departmentId);
-        return view('admin.department.employeee', compact('department'));
+        return view('admin.departments.employeee', compact('department'));
     }
 
     public function edit($id)
     {
         $departs = Department::findOrFail($id);
-        return view('admin.department.edit.index', ['data' => $departs]);
+        return view('admin.departments.edit.index', ['data' => $departs]);
     }
 
     public function update(Request $request, $id)
@@ -80,7 +80,7 @@ class DepartmentController extends Controller
     {
         $department = Department::with('employeee')
                           ->findOrFail($departmentId);
-        $pdf        = PDF::loadView('department.employeee_pdf', compact('department'));
+        $pdf        = PDF::loadView('departments.employeee_pdf', compact('department'));
         return $pdf->stream('RelatorioDepartamento.pdf');
     }
 

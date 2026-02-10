@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Ver Viatura')
 @section('content')
 <div class="container my-5">
