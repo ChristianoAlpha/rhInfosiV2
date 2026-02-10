@@ -1,11 +1,11 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Departamentos')
 @section('content')
 
     <div class="card mb-4 mt-4 shadow">
         <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
             <span><i class="fas fa-building me-2"></i>Lista de Departamentos</span>
-            <a href="{{ route('admin.department.create') }}" class="btn btn-outline-light btn-sm" title="Adicionar Novo"> Novo
+            <a href="{{ route('admin.departments.create') }}" class="btn btn-outline-light btn-sm" title="Adicionar Novo"> Novo
                 <i class="fas fa-plus-circle"></i>
             </a>
         </div>
@@ -14,7 +14,7 @@
             <!-- Formulário para selecionar departamento e listar seus funcionários -->
             <div class="mt-4">
                 <p class="mb-3  text-muted">Listar funcionários por departamento:</p>
-                <form action="{{ route('admin.department.employeee') }}" method="GET" class="d-inline-flex">
+                <form action="{{ route('admin.departments.employeee') }}" method="GET" class="d-inline-flex">
                     <div class="input-group w-auto">
                         <select name="department" class="form-select" style="max-width: 300px;" required>
                             <option value=""> Selecione o Departamento </option>
@@ -55,19 +55,19 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a href="{{ route('admin.department.show', $item->id) }}"
+                                                    <a href="{{ route('admin.departments.show', $item->id) }}"
                                                         class="dropdown-item">
                                                         <i class="fas fa-eye"></i> Detalhes
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('admin.department.edit', $item->id) }}"
+                                                    <a href="{{ route('admin.departments.edit', $item->id) }}"
                                                         class="dropdown-item">
                                                         <i class="fas fa-pencil"></i>Editar
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('admin.department.destroy', $item->id) }}"
+                                                    <a href="{{ route('admin.departments.destroy', $item->id) }}"
                                                         class="dropdown-item">
                                                         <i class="fas fa-trash"></i>Deletar
                                                     </a>

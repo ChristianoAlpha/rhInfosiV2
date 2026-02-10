@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Funcionários do Departamento')
 @section('content')
 
@@ -11,12 +11,12 @@
 
     <!-- Botão para gerar PDF -->
     <div>
-      <a href="{{ route('admin.department.employeee.pdf', $department->id) }}" 
+      <a href="{{ route('admin.departments.employeee.pdf', $department->id) }}" 
          class="btn btn-outline-light btn-sm" 
          title="Baixar PDF" target="_blank" rel="noopener noreferrer">
         <i class="fas fa-file-earmark-pdf"></i> Baixar PDF
       </a>
-      <a href="{{ route('admin.department.index') }}" class="btn btn-outline-light btn-sm" title="Voltar">
+      <a href="{{ route('admin.departments.index') }}" class="btn btn-outline-light btn-sm" title="Voltar">
         <i class="fas fa-arrow-left"></i> Voltar
       </a>
     </div>

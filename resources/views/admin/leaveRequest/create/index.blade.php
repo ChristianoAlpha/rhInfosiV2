@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Novo Pedido de Licença')
 @section('content')
     <div class="row justify-content-center" style="margin-top: 1.5rem">
@@ -6,14 +6,14 @@
             <div class="card mt-4 shadow">
                 <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
                     <span><i class="fas fa-file-alt me-2"></i>Novo Pedido de Licença</span>
-                    <a href="{{ route('admin.leaveRequestes.index') }}" class="btn btn-outline-light btn-sm" title="Voltar">
+                    <a href="{{ route('admin.leaveRequests.index') }}" class="btn btn-outline-light btn-sm" title="Voltar">
                         <i class="fas fa-arrow-left"></i> Voltar
                     </a>
                 </div>
                 <div class="card-body">
                     @if (!isset($employee))
                         <!-- Formulário de busca -->
-                        <form action="{{ route('admin.leaveRequestes.searchEmployee') }}" method="GET" class="mb-3">
+                        <form action="{{ route('admin.leaveRequests.searchEmployee') }}" method="GET" class="mb-3">
                             <div class="row g-2">
                                 <div class="col-8">
                                     <div class="form-floating">
@@ -39,7 +39,7 @@
                             <p class="mb-0"><strong>Departamento:</strong> {{ $employee->department->title ?? '-' }}</p>
                         </div>
                         <!-- Formulário de Pedido de Licença -->
-                        <form method="POST" action="{{ route('admin.leaveRequestes.store') }}">
+                        <form method="POST" action="{{ route('admin.leaveRequests.store') }}">
                             @csrf
                             <input type="hidden" name="employeeId" value="{{ $employee->id }}">
                             <input type="hidden" name="departmentId" value="{{ $employee->department->id ?? '' }}">

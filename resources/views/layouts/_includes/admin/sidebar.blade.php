@@ -48,9 +48,9 @@
                     </a>
                     <div class="collapse" id="collapseDept">
                         <ul class="submenu">
-                            <li><a class="nav-link" href="{{ route('admin.department.index') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.departments.index') }}"><i
                                         class="fas fa-eye me-2"></i> Ver Todos</a></li>
-                            <li><a class="nav-link" href="{{ route('admin.department.create') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.departments.create') }}"><i
                                         class="fas fa-plus me-2"></i> Adicionar Novo</a></li>
                         </ul>
                     </div>
@@ -172,9 +172,9 @@
                     </a>
                     <div class="collapse" id="collapseIntern">
                         <ul class="submenu">
-                            <li><a class="nav-link" href="{{ route('admin.intern.index') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.interns.index') }}"><i
                                         class="fas fa-eye me-2"></i>Ver Todos</a></li>
-                            <li><a class="nav-link" href="{{ route('admin.intern.create') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.interns.create') }}"><i
                                         class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
                         </ul>
                     </div>
@@ -234,11 +234,11 @@
                     </a>
                     <div class="collapse" id="collapseVacationRequest">
                         <ul class="submenu">
-                            <li><a class="nav-link" href="{{ route('admin.vacationRequestes.departmentSummary') }}">Férias
+                            <li><a class="nav-link" href="{{ route('admin.vacationRequests.departmentSummary') }}">Férias
                                     por Departamento</a></li>
-                            <li><a class="nav-link" href="{{ route('admin.vacationRequestes.index') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.vacationRequests.index') }}"><i
                                         class="fas fa-eye me-2"></i>Ver Todos</a></li>
-                            <li><a class="nav-link" href="{{ route('admin.vacationRequestes.create') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.vacationRequests.create') }}"><i
                                         class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
                         </ul>
                     </div>
@@ -272,9 +272,9 @@
                     </a>
                     <div class="collapse" id="collapseLeaveRequest">
                         <ul class="submenu">
-                            <li><a class="nav-link" href="{{ route('admin.leaveRequestes.index') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.leaveRequests.index') }}"><i
                                         class="fas fa-eye me-2"></i>Ver Todos</a></li>
-                            <li><a class="nav-link" href="{{ route('admin.leaveRequestes.create') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.leaveRequests.create') }}"><i
                                         class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
                         </ul>
                     </div>
@@ -534,10 +534,10 @@
                     </a>
                     <div class="collapse" id="collapseDept">
                         <ul class="submenu">
-                            <li><a class="nav-link" href="{{ route('admin.department.index') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.departments.index') }}"><i
                                         class="fas fa-eye me-2"></i>Ver
                                     Todos</a></li>
-                            <li><a class="nav-link" href="{{ route('admin.department.create') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.departments.create') }}"><i
                                         class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
                         </ul>
                     </div>
@@ -604,7 +604,7 @@
                     </a>
                     <div class="collapse" id="collapseVacationRequest">
                         <ul class="submenu">
-                            <li><a class="nav-link" href="{{ route('vacationRequestes.departmentSummary') }}">Férias
+                            <li><a class="nav-link" href="{{ route('vacationRequests.departmentSummary') }}">Férias
                                     por Departamento</a></li>
                             <li><a class="nav-link" href="{{ url('vacationRequest') }}"><i
                                         class="fas fa-eye me-2"></i>Ver Todos</a></li>
@@ -626,9 +626,9 @@
                     </a>
                     <div class="collapse" id="collapseLeaveRequest">
                         <ul class="submenu">
-                            <li><a class="nav-link" href="{{ route('admin.leaveRequestes.index') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.leaveRequests.index') }}"><i
                                         class="fas fa-eye me-2"></i>Ver Todos</a></li>
-                            <li><a class="nav-link" href="{{ route('admin.leaveRequestes.create') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.leaveRequests.create') }}"><i
                                         class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
                         </ul>
                     </div>
@@ -733,7 +733,7 @@
                     </a>
                     <div class="collapse" id="collapseVacationRequest">
                         <ul class="submenu">
-                            <li><a class="nav-link" href="{{ route('vacationRequestes.departmentSummary') }}">Férias
+                            <li><a class="nav-link" href="{{ route('vacationRequests.departmentSummary') }}">Férias
                                     por Departamento</a></li>
                             <li><a class="nav-link" href="{{ url('vacationRequest') }}"><i
                                         class="fas fa-eye me-2"></i>Ver Todos</a></li>
@@ -786,9 +786,9 @@
                     </a>
                     <div class="collapse" id="collapseLeaveRequest">
                         <ul class="submenu">
-                            <li><a class="nav-link" href="{{ route('admin.leaveRequestes.index') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.leaveRequests.index') }}"><i
                                         class="fas fa-eye me-2"></i>Ver Todos</a></li>
-                            <li><a class="nav-link" href="{{ route('admin.leaveRequestes.create') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.leaveRequests.create') }}"><i
                                         class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
                         </ul>
                     </div>

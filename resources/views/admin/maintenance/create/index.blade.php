@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Nova Manutenção')
 @section('content')
     {{-- start Dependências do Editor de Texto --}}

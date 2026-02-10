@@ -1,4 +1,4 @@
-@extends('layouts.admin.chat-layout')
+@extends('layouts.chat-layout')
 
 @section('content')
 <!-- Botão para voltar ao  Painel de Controle  -->

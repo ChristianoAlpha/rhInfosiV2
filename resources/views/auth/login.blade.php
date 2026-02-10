@@ -1,4 +1,4 @@
-@extends('layouts.admin.auth')
+@extends('layouts.auth')
 
 @section('title', 'Login - INFOSI')
 

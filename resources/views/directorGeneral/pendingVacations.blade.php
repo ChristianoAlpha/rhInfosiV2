@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Pedidos de Férias - Direção Geral')
 @section('content')
 

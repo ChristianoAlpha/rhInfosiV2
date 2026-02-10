@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Atualizar departamento')
 @section('content')
 
@@ -7,10 +7,10 @@
     <i class="fas fa-table me-1"></i>
     Atualizar departamento
 
-    <a href="{{ route('admin.department.index') }}" class="float-end btn btn-sm btn-info"><i class="fa-solid fa-list"></i></a>
+    <a href="{{ route('admin.departments.index') }}" class="float-end btn btn-sm btn-info"><i class="fa-solid fa-list"></i></a>
   </div>
 
-    <form method="POST" action="{{ route('admin.department.update', $data->id) }}"> 
+    <form method="POST" action="{{ route('admin.departments.update', $data->id) }}"> 
       @method('PUT')
       @csrf
       <table class="table table-bordered">

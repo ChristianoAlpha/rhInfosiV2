@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Detalhes do Pedido de Férias')
 @section('content')
 <div class="row justify-content-center" style="margin-top: 1.5rem;">
@@ -6,7 +6,7 @@
     <div class="card mt-4 shadow">
       <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
         <span>Detalhes do Pedido de Férias</span>
-        <a href="{{ route('admin.leaveRequestes.index') }}" class="btn btn-outline-light btn-sm" title="Voltar">
+        <a href="{{ route('admin.leaveRequests.index') }}" class="btn btn-outline-light btn-sm" title="Voltar">
           <i class="fas fa-arrow-left"></i> Voltar
         </a>
       </div>

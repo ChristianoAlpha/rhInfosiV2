@@ -1,11 +1,11 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Edit Intern')
 @section('content')
 
 <div class="card my-4 shadow">
   <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
     <span><i class="fas fa-pencil-square me-2"></i>Edit Intern</span>
-    <a href="{{ route('admin.intern.index') }}" class="btn btn-outline-light btn-sm" title="View All">
+    <a href="{{ route('admin.interns.index') }}" class="btn btn-outline-light btn-sm" title="View All">
       <i class="fa-solid fa-list"></i>
     </a>
   </div>

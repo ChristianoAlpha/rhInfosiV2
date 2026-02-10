@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Ver Manutenção')
 @section('content')
     <div class="container my-5">

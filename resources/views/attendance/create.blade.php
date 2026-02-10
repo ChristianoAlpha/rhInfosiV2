@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Registrar Presença')
 @section('content')
     <div class="row justify-content-center" style="margin-top: 1.5rem;">

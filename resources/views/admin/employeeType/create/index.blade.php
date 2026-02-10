@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Adivcionar Vínculo de Funcionário')
 @section('content')
 

@@ -23,7 +23,7 @@ class InternController extends Controller
         $departments = Department::all();
         $specialties = Specialty::all();
 
-        return view('admin.intern.create.index', compact('departments', 'specialties'));
+        return view('admin.interns.create.index', compact('departments', 'specialties'));
     }
 
     public function store(Request $request)
@@ -70,7 +70,7 @@ class InternController extends Controller
         $intern->institution     = $request->institution;
         $intern->save();
 
-        return redirect()->route('admin.intern.create')->with('success', 'Estagiário cadastrado com sucesso');
+        return redirect()->route('admin.interns.create')->with('success', 'Estagiário cadastrado com sucesso');
     }
 
     public function show($id)
@@ -85,7 +85,7 @@ class InternController extends Controller
         $departments = Department::orderByDesc('id')->get();
         $specialties = Specialty::all();
 
-        return view('admin.intern.edit.index', compact('data', 'departments', 'specialties'));
+        return view('admin.interns.edit.index', compact('data', 'departments', 'specialties'));
     }
 
     public function update(Request $request, $id)
@@ -119,13 +119,13 @@ class InternController extends Controller
         $intern->nationality     = $request->nationality;
         $intern->save();
 
-        return redirect()->route('admin.intern.edit', $id)->with('success', 'Estagiário atualizado com sucesso');
+        return redirect()->route('admin.interns.edit', $id)->with('success', 'Estagiário atualizado com sucesso');
     }
 
     public function destroy($id)
     {
         Intern::findOrFail($id)->delete();
-        return redirect()->route('admin.intern.index')->with('success', 'Estagiário deletado com sucesso');
+        return redirect()->route('admin.interns.index')->with('success', 'Estagiário deletado com sucesso');
     }
 
     /* ==================== Filtros e relatorios ==================== */
@@ -136,7 +136,7 @@ class InternController extends Controller
         $speciality = Specialty::all();
 
         if (!$request->has('start_date') && !$request->has('end_date') && !$request->has('departmentId') && !$request->has('specialityId')) {
-            return view('admin.intern.filter', compact('departments', 'speciality'));
+            return view('admin.interns.filter', compact('departments', 'speciality'));
         }
 
         $request->validate([
@@ -164,7 +164,7 @@ class InternController extends Controller
         $startDate = $request->start_date;
         $endDate   = $request->end_date;
 
-        return view('admin.intern.filter', [
+        return view('admin.interns.filter', [
             'departments' => $departments,
             'filtered'  => $filtered,
             'startDate' => $startDate,
@@ -203,7 +203,7 @@ class InternController extends Controller
         $startDate = $request->start_date;
         $endDate   = $request->end_date;
 
-        $pdf = PDF::loadView('pdf.intern.filtered_pdf', compact('filtered', 'startDate', 'endDate'))
+        $pdf = PDF::loadView('pdf.interns.filtered_pdf', compact('filtered', 'startDate', 'endDate'))
             ->setPaper('a3', 'portrait');
 
         return $pdf->download("RelatorioInterns_{$startDate}_{$endDate}.pdf");
@@ -227,12 +227,12 @@ class InternController extends Controller
             ->findOrFail($id);
 
         // Gera o QR Code com os dados desejados
-        $qrData = route('admin.intern.show', $intern->id); // ou qualquer link/texto que você quiser
+        $qrData = route('admin.interns.show', $intern->id); // ou qualquer link/texto que você quiser
 
         $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" . urlencode($qrData);
 
-        // Renderiza o Blade 'admin.intern.show_pdf' e gera o PDF
-        $pdf = PDF::loadView('pdf.intern.show_pdf', compact(['intern', 'qrUrl']))
+        // Renderiza o Blade 'admin.interns.show_pdf' e gera o PDF
+        $pdf = PDF::loadView('pdf.interns.show_pdf', compact(['intern', 'qrUrl']))
             ->setPaper('a4', 'portrait');
 
         // Força o download com nome de arquivo dinâmico

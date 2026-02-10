@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Novo Pedido de Licença - Selecionar Funcionário')
 @section('content')
 
