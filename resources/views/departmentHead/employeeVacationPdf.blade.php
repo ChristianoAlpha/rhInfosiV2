@@ -1,4 +1,4 @@
-@extends('layouts.admin.pdf')
+@extends('layouts.pdf')
 
 @section('titleSection')
     <!-- Opcional: Título extra, se necessário -->

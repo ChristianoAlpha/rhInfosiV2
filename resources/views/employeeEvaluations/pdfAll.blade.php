@@ -1,5 +1,5 @@
 {{-- resources/views/employeeEvaluations/pdfAll.blade.php --}}
-@extends('layouts.admin.pdf')
+@extends('layouts.pdf')
 @section('pdfTitle','Todas Avaliações de Funcionários')
 @section('titleSection')
   <h4>Todas as Avaliações de Funcionários</h4>
