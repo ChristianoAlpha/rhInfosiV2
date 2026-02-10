@@ -1,4 +1,4 @@
-@extends('layouts.admin.pdf')
+@extends('layouts.pdf')
 @section('pdfTitle','Relatório de Pagamentos')
 @section('titleSection')
   <h4>Relatório de Pagamentos de Salário</h4>

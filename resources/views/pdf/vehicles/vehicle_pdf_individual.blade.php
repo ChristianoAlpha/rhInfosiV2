@@ -1,4 +1,4 @@
-@extends('layouts.admin.pdf')
+@extends('layouts.pdf')
 @section('pdfTitle', "Viatura #{$vehicle->id}")
 @section('titleSection')
     <h4>Detalhes da Viatura</h4>

@@ -1,4 +1,4 @@
-@extends('layouts.admin.pdf')
+@extends('layouts.pdf')
 @section('pdfTitle', 'Ficha de Material: ' . $material->Name)
 @section('titleSection')
   <h4>Ficha de Material</h4>

@@ -1,4 +1,4 @@
-@extends('layouts.admin.pdf')
+@extends('layouts.pdf')
 <style>
     body {
         font-family: Arial, sans-serif;

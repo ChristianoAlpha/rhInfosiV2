@@ -1,4 +1,4 @@
-@extends('layouts.admin.pdf')
+@extends('layouts.pdf')
 @section('title', 'Relatório de Entradas de Património')
 
 @section('content')

@@ -1,4 +1,4 @@
-@extends('layouts.admin.pdf')
+@extends('layouts.pdf')
 @section('pdfTitle', "Manutenção #{$maintenance->id}")
 @section('titleSection')
 <style>
