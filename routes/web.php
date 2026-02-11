@@ -299,7 +299,7 @@ Route::middleware(["auth"])->group(function () {
      Route::get("intern/{id}/delete", [InternController::class, "destroy"]);
  */
 
-     // ====================== Pagamento de Salário (Salary Payment) ======================
+     /* // ====================== Pagamento de Salário (Salary Payment) ======================
      Route::get('salaryPayment/search-employee-ajax', [SalaryPaymentController::class, 'searchEmployeeAjax'])
           ->name('salaryPayment.searchEmployeeAjax');
      Route::get("salaryPayment/pdf-period", [SalaryPaymentController::class, "pdfPeriod"])->name("salaryPayment.pdfPeriod");
@@ -309,7 +309,7 @@ Route::middleware(["auth"])->group(function () {
      Route::get("salaryPayment/searchEmployee", [SalaryPaymentController::class, "searchEmployee"])->name("salaryPayment.searchEmployee");
      Route::get("salaryPayment/pdf", [SalaryPaymentController::class, "pdfAll"])->name("salaryPayment.pdfAll");
      Route::get("salaryPayment/calculateDiscount", [SalaryPaymentController::class, "calculateDiscount"])->name("salaryPayment.calculateDiscount");
-     Route::resource("salaryPayment", SalaryPaymentController::class);
+     Route::resource("salaryPayment", SalaryPaymentController::class); */
 
 
      // ====================== Avaliação dos Estagiários (Intern Evaluation) ======================

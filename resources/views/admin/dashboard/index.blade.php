@@ -3,18 +3,18 @@
 @section('title', 'Dashboard Gestão de Capital Humano')
 
 @section('content')
-    <div class="container-fluid px-4">
-        <h1 class="mt-4">Painel de Controle </h1>
-        <!-- <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active"> Painel de Controle </li>
-        </ol>
-         -->
+    <!-- [ Main Content ] start -->
+    <div class="main-content">
+        <div class="row">
+            <h1 class="mt-4">Painel de Controle </h1>
+            <!-- <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active"> Painel de Controle </li>
+                    </ol>
+                     -->
 
-        <p>Bem-vindo, {{ Auth::user()->employee->fullName ?? Auth::user()->email }}</p>
+            <p>Bem-vindo, {{ Auth::user()->employee->fullName ?? Auth::user()->email }}</p>
 
-        @if (Auth::user()->role === 'admin' || Auth::user()->role === 'director')
-            <!-- Cards -->
-            <div class="row g-4">
+            @if (Auth::user()->role === 'admin' || Auth::user()->role === 'director')
                 <!-- Total de Funcionários -->
                 <div class="col-xxl-3 col-md-6">
                     <div class="card stretch stretch-full">
@@ -301,12 +301,7 @@
                     </div>
                 </div>
 
-            </div>
-
-
-
-            <!-- Tabela de Chefes de Departamento -->
-            <div class="row g-4">
+                <!-- Tabela de Chefes de Departamento -->
                 <div class="col-xxl-8">
                     <div class="card stretch stretch-full">
                         <div class="card-header">
@@ -386,53 +381,57 @@
                             </ul>
                         </div>
                     </div>
-                </div>
 
-                <!-- Gráficos de Círculo -->
-                <div class="col-xxl-4">
-                    <div class="card stretch stretch-full">
-                        <div class="card-body">
-                            <div class="hstack justify-content-between mb-4 pb-0">
-                                <div>
-                                    <h5 class="mb-1">Distribuição de Funcionários</h5>
-                                    <span class="fs-12 text-muted">Percentagem por Tipo de Contracto</span>
-                                </div>
-                                <a href="{{ route('admin.employeee.index') }}" class="btn btn-light-brand">Ver Todos</a>
-                            </div>
-                            <div class="row g-4">
-                                <div class="col-md-6">
-                                    <div class="card-body border border-dashed border-gray-5 rounded-3 position-relative">
-                                        <div class="hstack justify-content-between gap-4">
-                                            <div>
-                                                <h6 class="fs-14 text-truncate-1-line">Efectivos</h6>
-                                                <div class="fs-12 text-muted"><span
-                                                        class="text-dark fw-medium">Total:</span>
-                                                    {{ $permanentEmployees }}</div>
-                                            </div>
-                                            <div class="employee-progress-permanent"
-                                                data-value="{{ $activeEmployees > 0 ? round(($permanentEmployees / $activeEmployees) * 100) / 100 : 0 }}">
-                                            </div>
-                                        </div>
-                                        <div class="badge bg-gray-200 text-dark project-mini-card-badge">
-                                            {{ $activeEmployees > 0 ? round(($permanentEmployees / $activeEmployees) * 100) : 0 }}%
-                                        </div>
+                    <!-- Gráficos de Círculo -->
+                    <div class="col-xxl-4">
+                        <div class="card stretch stretch-full">
+                            <div class="card-body">
+                                <div class="hstack justify-content-between mb-4 pb-0">
+                                    <div>
+                                        <h5 class="mb-1">Distribuição de Funcionários</h5>
+                                        <span class="fs-12 text-muted">Percentagem por Tipo de Contracto</span>
                                     </div>
+                                    <a href="{{ route('admin.employeee.index') }}" class="btn btn-light-brand">Ver
+                                        Todos</a>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="card-body border border-dashed border-gray-5 rounded-3 position-relative">
-                                        <div class="hstack justify-content-between gap-4">
-                                            <div>
-                                                <h6 class="fs-14 text-truncate-1-line">Contratados</h6>
-                                                <div class="fs-12 text-muted"><span
-                                                        class="text-dark fw-medium">Total:</span> {{ $contractEmployees }}
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <div
+                                            class="card-body border border-dashed border-gray-5 rounded-3 position-relative">
+                                            <div class="hstack justify-content-between gap-4">
+                                                <div>
+                                                    <h6 class="fs-14 text-truncate-1-line">Efectivos</h6>
+                                                    <div class="fs-12 text-muted"><span
+                                                            class="text-dark fw-medium">Total:</span>
+                                                        {{ $permanentEmployees }}</div>
+                                                </div>
+                                                <div class="employee-progress-permanent"
+                                                    data-value="{{ $activeEmployees > 0 ? round(($permanentEmployees / $activeEmployees) * 100) / 100 : 0 }}">
                                                 </div>
                                             </div>
-                                            <div class="employee-progress-contract"
-                                                data-value="{{ $activeEmployees > 0 ? round(($contractEmployees / $activeEmployees) * 100) / 100 : 0 }}">
+                                            <div class="badge bg-gray-200 text-dark project-mini-card-badge">
+                                                {{ $activeEmployees > 0 ? round(($permanentEmployees / $activeEmployees) * 100) : 0 }}%
                                             </div>
                                         </div>
-                                        <div class="badge bg-gray-200 text-dark project-mini-card-badge">
-                                            {{ $activeEmployees > 0 ? round(($contractEmployees / $activeEmployees) * 100) : 0 }}%
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div
+                                            class="card-body border border-dashed border-gray-5 rounded-3 position-relative">
+                                            <div class="hstack justify-content-between gap-4">
+                                                <div>
+                                                    <h6 class="fs-14 text-truncate-1-line">Contratados</h6>
+                                                    <div class="fs-12 text-muted"><span
+                                                            class="text-dark fw-medium">Total:</span>
+                                                        {{ $contractEmployees }}
+                                                    </div>
+                                                </div>
+                                                <div class="employee-progress-contract"
+                                                    data-value="{{ $activeEmployees > 0 ? round(($contractEmployees / $activeEmployees) * 100) / 100 : 0 }}">
+                                                </div>
+                                            </div>
+                                            <div class="badge bg-gray-200 text-dark project-mini-card-badge">
+                                                {{ $activeEmployees > 0 ? round(($contractEmployees / $activeEmployees) * 100) : 0 }}%
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -440,33 +439,34 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Funcionários por Categoria (UNICO GRÁFICO com todas as categorias) -->
-            <div class="col-xxl-12 mt-4">
-                <div class="card stretch stretch-full">
-                    <div class="card-header">
-                        <h5 class="card-title">Funcionários por Categoria</h5>
-                    </div>
+                <!-- Funcionários por Categoria (UNICO GRÁFICO com todas as categorias) -->
+                <div class="col-xxl-12 mt-4">
+                    <div class="card stretch stretch-full">
+                        <div class="card-header">
+                            <h5 class="card-title">Funcionários por Categoria</h5>
+                        </div>
 
-                    <div class="card-body custom-card-action">
-                        <!-- Gráfico único que recebe todas as categorias -->
-                        <div id="allCategoriesChart" style="min-height: 360px;"></div>
-                    </div>
+                        <div class="card-body custom-card-action">
+                            <!-- Gráfico único que recebe todas as categorias -->
+                            <div id="allCategoriesChart" style="min-height: 360px;"></div>
+                        </div>
 
-                    <div class="card-footer d-md-flex flex-wrap p-4 pt-5 border-top border-gray-5">
-                        <!-- Mantido vazio / minimal conforme pedido -->
+                        <div class="card-footer d-md-flex flex-wrap p-4 pt-5 border-top border-gray-5">
+                            <!-- Mantido vazio / minimal conforme pedido -->
+                        </div>
                     </div>
                 </div>
-            </div>
-        @else
-            <div class="alert alert-info">
+            @else
+                <div class="alert alert-info">
 
-                <strong>Atenção: </strong>Você tem acesso aos menus gerais do sistema, porém não pode visualizar os dados
-                estatísticos do Painel de Controle.
+                    <strong>Atenção: </strong>Você tem acesso aos menus gerais do sistema, porém não pode visualizar os
+                    dados
+                    estatísticos do Painel de Controle.
 
-            </div>
-        @endif
+                </div>
+            @endif
+        </div>
     </div>
 @endsection
 
@@ -590,7 +590,7 @@
                     var rowHeight = 28; // px por categoria (aumenta se quiseres mais espaço vertical)
                     var baseHeight = 360; // minimo
                     var calculated = Math.max(baseHeight, Math.min(1200, categoryData.length * rowHeight +
-                    120)); // limitado entre base e 1200
+                        120)); // limitado entre base e 1200
                     var chartHeight = calculated;
 
                     // ---------- preparar arrays ----------

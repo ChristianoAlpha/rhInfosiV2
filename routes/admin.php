@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\MaintenanceController;
 use App\Http\Controllers\Admin\MobilityController;
 use App\Http\Controllers\Admin\PositionController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SalaryPaymentController;
 use App\Http\Controllers\Admin\SpecialtyController;
 use App\Http\Controllers\Admin\StatuteController;
 use App\Http\Controllers\Admin\VacationRequestController;
@@ -33,7 +34,7 @@ Route::middleware('auth')->name('admin.')->group(function () {
 
     /* inicio dashboard routes */
     Route::get('/dashboard/filter-by-category/{categoryId}/{academicLevel?}', [DashboardController::class, 'filterByCategory'])->name('dashboard.filterByCategory');
-    Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard");
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     /* fim dashboard routes */
 
     /* inicio department routes */
@@ -45,11 +46,11 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/editar/{id}', [DepartmentController::class, 'edit'])->name('departments.edit');
         Route::put('/atualizar/{id}', [DepartmentController::class, 'update'])->name('departments.update');
         Route::get('/detalhes/{id}', [DepartmentController::class, 'show'])->name('departments.show');
-        Route::get("{id}/delete", [DepartmentController::class, "destroy"])->name("departments.destroy");
+        Route::get('{id}/delete', [DepartmentController::class, 'destroy'])->name('departments.destroy');
 
         //outras rotas de departamento
-        Route::get("{departmentId}/pdf", [DepartmentController::class, "employeeePdf"])->name("departments.employeee.pdf");
-        Route::get("employeee", [DepartmentController::class, "employeee"])->name("departments.employeee");
+        Route::get('{departmentId}/pdf', [DepartmentController::class, 'employeeePdf'])->name('departments.employeee.pdf');
+        Route::get('employeee', [DepartmentController::class, 'employeee'])->name('departments.employeee');
     });
     /* fim department routes */
 
@@ -62,11 +63,11 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/editar/{id}', [PositionController::class, 'edit'])->name('positions.edit');
         Route::put('/atualizar/{id}', [PositionController::class, 'update'])->name('positions.update');
         Route::get('/detalhes/{id}', [PositionController::class, 'show'])->name('positions.show');
-        Route::get("/{id}/delete", [PositionController::class, "destroy"])->name("positions.destroy");
+        Route::get('/{id}/delete', [PositionController::class, 'destroy'])->name('positions.destroy');
 
         //filtros
-        Route::get("/funcionarios", [PositionController::class, "employeee"])->name("positions.employeee.filter");
-        Route::get("/{positionId}/pdf", [PositionController::class, "pdf"])->name("positions.employeee.pdf");
+        Route::get('/funcionarios', [PositionController::class, 'employeee'])->name('positions.employeee.filter');
+        Route::get('/{positionId}/pdf', [PositionController::class, 'pdf'])->name('positions.employeee.pdf');
     });
     // fim Cargos (Positions)
 
@@ -79,11 +80,11 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/editar/{id}', [RoleController::class, 'edit'])->name('roles.edit');
         Route::put('/atualizar/{id}', [RoleController::class, 'update'])->name('roles.update');
         Route::get('/detalhes/{id}', [RoleController::class, 'show'])->name('roles.show');
-        Route::get("/{id}/delete", [RoleController::class, "destroy"])->name("roles.destroy");
+        Route::get('/{id}/delete', [RoleController::class, 'destroy'])->name('roles.destroy');
 
         //filtros
-        Route::get("/funcionarios", [RoleController::class, "employeee"])->name("roles.employeee.filter");
-        Route::get("/{positionId}/pdf", [RoleController::class, "pdf"])->name("roles.employeee.pdf");
+        Route::get('/funcionarios', [RoleController::class, 'employeee'])->name('roles.employeee.filter');
+        Route::get('/{positionId}/pdf', [RoleController::class, 'pdf'])->name('roles.employeee.pdf');
     });
     // fim funcao (role)
 
@@ -96,11 +97,11 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/editar/{id}', [SpecialtyController::class, 'edit'])->name('specialties.edit');
         Route::put('/atualizar/{id}', [SpecialtyController::class, 'update'])->name('specialties.update');
         Route::get('/detalhes/{id}', [SpecialtyController::class, 'show'])->name('specialties.show');
-        Route::get("specialties/{id}/delete", [SpecialtyController::class, "destroy"])->name('specialties.destroy');
+        Route::get('specialties/{id}/delete', [SpecialtyController::class, 'destroy'])->name('specialties.destroy');
 
         //filtros
-        Route::get("specialties/employeee", [SpecialtyController::class, "employeee"])->name("specialties.employeee.filter");
-        Route::get("specialties/{specialtyId}/pdf", [SpecialtyController::class, "pdf"])->name("specialties.pdf");
+        Route::get('specialties/employeee', [SpecialtyController::class, 'employeee'])->name('specialties.employeee.filter');
+        Route::get('specialties/{specialtyId}/pdf', [SpecialtyController::class, 'pdf'])->name('specialties.pdf');
     });
     // fim Especialidades (Specialties) routes
 
@@ -113,7 +114,7 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/editar/{id}', [EmployeeTypeController::class, 'edit'])->name('employeeTypes.edit');
         Route::put('/atualizar/{id}', [EmployeeTypeController::class, 'update'])->name('employeeTypes.update');
         Route::get('/detalhes/{id}', [EmployeeTypeController::class, 'show'])->name('employeeTypes.show');
-        Route::get("{id}/delete", [EmployeeTypeController::class, "destroy"])->name("employeeTypes.destroy");
+        Route::get('{id}/delete', [EmployeeTypeController::class, 'destroy'])->name('employeeTypes.destroy');
     });
     // fim Rotas Para o Tipo de Funcionário (EmployeeType) 
 
@@ -127,7 +128,7 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/editar/{id}', [EmployeeCategoryController::class, 'edit'])->name('employeeCategories.edit');
         Route::put('/atualizar/{id}', [EmployeeCategoryController::class, 'update'])->name('employeeCategories.update');
         Route::get('/detalhes/{id}', [EmployeeCategoryController::class, 'show'])->name('employeeCategories.show');
-        Route::get("{id}/delete", [EmployeeCategoryController::class, "destroy"])->name("employeeCategories.destroy");
+        Route::get('{id}/delete', [EmployeeCategoryController::class, 'destroy'])->name('employeeCategories.destroy');
     });
     // fim Rotas Para Categoria de Funcionário (EmployeeCategory) 
 
@@ -140,7 +141,7 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/editar/{id}', [CourseController::class, 'edit'])->name('courses.edit');
         Route::put('/atualizar/{id}', [CourseController::class, 'update'])->name('courses.update');
         Route::get('/detalhes/{id}', [CourseController::class, 'show'])->name('courses.show');
-        Route::get("{id}/delete", [CourseController::class, "destroy"])->name("courses.destroy");
+        Route::get('{id}/delete', [CourseController::class, 'destroy'])->name('courses.destroy');
     });
     /* fim course routes */
 
@@ -164,14 +165,14 @@ Route::middleware('auth')->name('admin.')->group(function () {
         // filtros
 
         /* Rota GET com parâmetro ?status=... */
-        Route::get("employeee/filter-by-status", [EmployeeeController::class, "filterByStatus"])->name("employeee.filterByStatus");
+        Route::get('employeee/filter-by-status', [EmployeeeController::class, 'filterByStatus'])->name('employeee.filterByStatus');
         /* FIm da Rota GET com parâmetro ?status=... */
 
         Route::get('/navbar/employee-search', [EmployeeeController::class, 'navbarSearch'])->name('employeee.navbar.search');
-        Route::get("employeee/pdf", [EmployeeeController::class, "pdfAll"])->name("employeee.pdfAll");
-        Route::get("employeee/{id}/pdf", [EmployeeeController::class, "showPdf"])->name("employeee.showPdf");
-        Route::get("employeee/filter", [EmployeeeController::class, "filterByDate"])->name("employeee.filter");
-        Route::post("employeee/filter/pdf", [EmployeeeController::class, "pdfFiltered"])->name("employeee.filter.pdf");
+        Route::get('employeee/pdf', [EmployeeeController::class, 'pdfAll'])->name('employeee.pdfAll');
+        Route::get('employeee/{id}/pdf', [EmployeeeController::class, 'showPdf'])->name('employeee.showPdf');
+        Route::get('employeee/filter', [EmployeeeController::class, 'filterByDate'])->name('employeee.filter');
+        Route::post('employeee/filter/pdf', [EmployeeeController::class, 'pdfFiltered'])->name('employeee.filter.pdf');
     });
     /* fim Employee routes */
 
@@ -187,10 +188,10 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/deletar/{id}', [InternController::class, 'destroy'])->name('interns.destroy');
 
         /* filtros */
-        Route::get("{id}/pdf", [InternController::class, "showPdf"])->name("interns.showPdf");
-        Route::get("pdf", [InternController::class, "pdfAll"])->name("interns.pdfAll");
-        Route::get("filtros", [InternController::class, "filterByDate"])->name("interns.filter");
-        Route::post("filtros/pdf", [InternController::class, "pdfFiltered"])->name("interns.filter.pdf");
+        Route::get('{id}/pdf', [InternController::class, 'showPdf'])->name('interns.showPdf');
+        Route::get('pdf', [InternController::class, 'pdfAll'])->name('interns.pdfAll');
+        Route::get('filtros', [InternController::class, 'filterByDate'])->name('interns.filter');
+        Route::post('filtros/pdf', [InternController::class, 'pdfFiltered'])->name('interns.filter.pdf');
     });
     // fim Estagiários (Intern) routes
 
@@ -206,11 +207,33 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::delete('/deletar/{id}', [RetirementController::class, 'destroy'])->name('retirements.destroy');
 
         //filtros
-        Route::get("reformas/searchEmployee", [RetirementController::class, "searchEmployee"])->name("retirements.searchEmployee");
-        Route::get("reformas/pdf-filtered", [RetirementController::class, "pdfAll"])->name("retirements.exportFilteredPDF");
-        Route::get("reformas/pdf", [RetirementController::class, "pdfAll"])->name("retirements.pdf");
+        Route::get('reformas/searchEmployee', [RetirementController::class, 'searchEmployee'])->name('retirements.searchEmployee');
+        Route::get('reformas/pdf-filtered', [RetirementController::class, 'pdfAll'])->name('retirements.exportFilteredPDF');
+        Route::get('reformas/pdf', [RetirementController::class, 'pdfAll'])->name('retirements.pdf');
     });
     // fim Reforma (Retirement) routes
+
+    // inicio Pagamento de Salário (Salary Payment)
+    Route::prefix('pagamento-salario')->group(function () {
+
+        Route::get('/lista', [SalaryPaymentController::class, 'index'])->name('salaryPayments.index');
+        Route::get('/criar', [SalaryPaymentController::class, 'create'])->name('salaryPayments.create');
+        Route::post('/salvar', [SalaryPaymentController::class, 'store'])->name('salaryPayments.store');
+        Route::get('/editar/{id}', [SalaryPaymentController::class, 'edit'])->name('salaryPayments.edit');
+        Route::put('/atualizar/{id}', [SalaryPaymentController::class, 'update'])->name('salaryPayments.update');
+        Route::get('/detalhes/{id}', [SalaryPaymentController::class, 'show'])->name('salaryPayments.show');
+        Route::delete('/deletar/{id}', [SalaryPaymentController::class, 'destroy'])->name('salaryPayments.destroy');
+
+        //filtros
+        Route::get('/search-employee-ajax', [SalaryPaymentController::class, 'searchEmployeeAjax'])->name('salaryPayments.searchEmployeeAjax');
+        Route::get('/pdf-period', [SalaryPaymentController::class, 'pdfPeriod'])->name('salaryPayments.pdfPeriod');
+        Route::get('/pdf-employee/{employeeId}', [SalaryPaymentController::class, 'pdfByEmployee'])->name('salaryPayments.pdfByEmployee');
+
+        Route::get('/searchEmployee', [SalaryPaymentController::class, 'searchEmployee'])->name('salaryPayments.searchEmployee');
+        Route::get('/pdf', [SalaryPaymentController::class, 'pdfAll'])->name('salaryPayments.pdfAll');
+        Route::get('/calculateDiscount', [SalaryPaymentController::class, 'calculateDiscount'])->name('salaryPayments.calculateDiscount');
+    });
+    // fim Pagamento de Salário (Salary Payment)
 
     // inicio Viaturas (vehicles) routes
     Route::prefix('veiculos')->group(function () {
@@ -224,9 +247,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/deletar/{vehicle}', [VehicleController::class, 'destroy'])->name('vehicles.destroy');
 
         //filtros
-        Route::get("vehicles/{vehicle}/pdf", [VehicleController::class, "showPdf"])->name("vehicles.showPdf");
-        Route::get("pdf", [VehicleController::class, "pdfAll"])->name("vehicles.pdfAll");
-        Route::get("pdf-filtered", [VehicleController::class, "exportFilteredPDF"])->name("vehicles.pdfFiltered");
+        Route::get('vehicles/{vehicle}/pdf', [VehicleController::class, 'showPdf'])->name('vehicles.showPdf');
+        Route::get('pdf', [VehicleController::class, 'pdfAll'])->name('vehicles.pdfAll');
+        Route::get('pdf-filtered', [VehicleController::class, 'exportFilteredPDF'])->name('vehicles.pdfFiltered');
     });
     // fim Viaturas (vehicles) routes
 
@@ -242,10 +265,10 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/deletar/{resourceAssignment}', [ResourceAssignmentController::class, 'destroy'])->name('resourceAssignments.destroy');
 
         //filtros
-        /*  Route::get('pesquisar/funcionario', [ResourceAssignmentController::class, "searchEmployee"])->name("resourceAssignments.searchEmployee"); */
-        Route::get("atribuicoes/{resourceAssignment}/pdf", [ResourceAssignmentController::class, "showPdf"])->name("resourceAssignments.showPdf");
-        Route::get("pdf", [ResourceAssignmentController::class, "pdfAll"])->name("resourceAssignments.pdfAll");
-        Route::get("pdf-filtered", [ResourceAssignmentController::class, "exportFilteredPDF"])->name("resourceAssignments.pdfFiltered");
+        /*  Route::get('pesquisar/funcionario', [ResourceAssignmentController::class, 'searchEmployee'])->name('resourceAssignments.searchEmployee'); */
+        Route::get('atribuicoes/{resourceAssignment}/pdf', [ResourceAssignmentController::class, 'showPdf'])->name('resourceAssignments.showPdf');
+        Route::get('pdf', [ResourceAssignmentController::class, 'pdfAll'])->name('resourceAssignments.pdfAll');
+        Route::get('pdf-filtered', [ResourceAssignmentController::class, 'exportFilteredPDF'])->name('resourceAssignments.pdfFiltered');
     });
     //fim Atribuições de Recursos (Resource Assignments) routes
 
@@ -276,9 +299,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
     });
 
     //filtros e pdf
-    Route::get("maintenance/{maintenance}/pdf", [MaintenanceController::class, "showPdf"])->name("maintenances.showPdf");
-    Route::get("maintenance/pdf", [MaintenanceController::class, "pdfAll"])->name("maintenances.pdfAll");
-    Route::get("maintenance/pdf-filtered", [MaintenanceController::class, "exportFilteredPDF"])->name("maintenances.pdfFiltered");
+    Route::get('maintenance/{maintenance}/pdf', [MaintenanceController::class, 'showPdf'])->name('maintenances.showPdf');
+    Route::get('maintenance/pdf', [MaintenanceController::class, 'pdfAll'])->name('maintenances.pdfAll');
+    Route::get('maintenance/pdf-filtered', [MaintenanceController::class, 'exportFilteredPDF'])->name('maintenances.pdfFiltered');
     // fim Manutenções (maintenance) routes
 
     // inicio estatuto (statute) routes
@@ -297,79 +320,79 @@ Route::middleware('auth')->name('admin.')->group(function () {
     // inicio categoria de Património
     Route::prefix('categoria-patrimonio')->group(function () {
 
-        Route::get("/listar", [HeritageTypeController::class, "index"])->name("heritageTypes.index");
-        Route::get("/criar", [HeritageTypeController::class, "create"])->name("heritageTypes.create");
-        Route::post("/salvar", [HeritageTypeController::class, "store"])->name("heritageTypes.store");
-        Route::get("/detalhes/{id}", [HeritageTypeController::class, "show"])->name("heritageTypes.show");
-        Route::get("/editar/{id}/edit", [HeritageTypeController::class, "edit"])->name("heritageTypes.edit");
-        Route::put("/atualizar/{id}", [HeritageTypeController::class, "update"])->name("heritageTypes.update");
-        Route::delete("/apagar/{id}", [HeritageTypeController::class, "destroy"])->name("heritageTypes.destroy");
+        Route::get('/listar', [HeritageTypeController::class, 'index'])->name('heritageTypes.index');
+        Route::get('/criar', [HeritageTypeController::class, 'create'])->name('heritageTypes.create');
+        Route::post('/salvar', [HeritageTypeController::class, 'store'])->name('heritageTypes.store');
+        Route::get('/detalhes/{id}', [HeritageTypeController::class, 'show'])->name('heritageTypes.show');
+        Route::get('/editar/{id}/edit', [HeritageTypeController::class, 'edit'])->name('heritageTypes.edit');
+        Route::put('/atualizar/{id}', [HeritageTypeController::class, 'update'])->name('heritageTypes.update');
+        Route::delete('/apagar/{id}', [HeritageTypeController::class, 'destroy'])->name('heritageTypes.destroy');
     });
     // fim categoria de Património
 
     // inicio Mobilidade (Mobility)
     Route::prefix('mobilidade')->group(function () {
 
-        Route::get("/listar", [MobilityController::class, "index"])->name("mobilities.index");
-        Route::get("/criar", [MobilityController::class, "create"])->name("mobilities.create");
-        Route::post("/salvar", [MobilityController::class, "store"])->name("mobilities.store");
-        Route::get("/detalhes/{id}", [MobilityController::class, "show"])->name("mobilities.show");
-        Route::get("/editar/{id}/edit", [MobilityController::class, "edit"])->name("mobilities.edit");
-        Route::put("/atualizar/{id}", [MobilityController::class, "update"])->name("mobilities.update");
-        Route::delete("/apagar/{id}", [MobilityController::class, "destroy"])->name("mobilities.destroy");
+        Route::get('/listar', [MobilityController::class, 'index'])->name('mobilities.index');
+        Route::get('/criar', [MobilityController::class, 'create'])->name('mobilities.create');
+        Route::post('/salvar', [MobilityController::class, 'store'])->name('mobilities.store');
+        Route::get('/detalhes/{id}', [MobilityController::class, 'show'])->name('mobilities.show');
+        Route::get('/editar/{id}/edit', [MobilityController::class, 'edit'])->name('mobilities.edit');
+        Route::put('/atualizar/{id}', [MobilityController::class, 'update'])->name('mobilities.update');
+        Route::delete('/apagar/{id}', [MobilityController::class, 'destroy'])->name('mobilities.destroy');
     });
 
     //filtros
-    Route::get("/pdf", [MobilityController::class, "pdfAll"])->name("mobilities.pdfAll");
-    Route::get("/search-employee", [MobilityController::class, "searchEmployee"])->name("mobilities.searchEmployee");
+    Route::get('/pdf', [MobilityController::class, 'pdfAll'])->name('mobilities.pdfAll');
+    Route::get('/search-employee', [MobilityController::class, 'searchEmployee'])->name('mobilities.searchEmployee');
     // fim Mobilidade (Mobility)
 
     // inicio Trabalhos extras(ExtraJobs)
     Route::prefix('trabalhos-extras')->group(function () {
 
-        Route::get("/listar", [ExtraJobController::class, "index"])->name("extras.index");
-        Route::get("/criar", [ExtraJobController::class, "create"])->name("extras.create");
-        Route::post("/salvar", [ExtraJobController::class, "store"])->name("extras.store");
-        Route::get("/detalhes/{id}", [ExtraJobController::class, "show"])->name("extras.show");
-        Route::get("/editar/{id}/edit", [ExtraJobController::class, "edit"])->name("extras.edit");
-        Route::put("/atualizar/{id}", [ExtraJobController::class, "update"])->name("extras.update");
-        Route::delete("/apagar/{id}", [ExtraJobController::class, "destroy"])->name("extras.destroy");
+        Route::get('/listar', [ExtraJobController::class, 'index'])->name('extras.index');
+        Route::get('/criar', [ExtraJobController::class, 'create'])->name('extras.create');
+        Route::post('/salvar', [ExtraJobController::class, 'store'])->name('extras.store');
+        Route::get('/detalhes/{id}', [ExtraJobController::class, 'show'])->name('extras.show');
+        Route::get('/editar/{id}/edit', [ExtraJobController::class, 'edit'])->name('extras.edit');
+        Route::put('/atualizar/{id}', [ExtraJobController::class, 'update'])->name('extras.update');
+        Route::delete('/apagar/{id}', [ExtraJobController::class, 'destroy'])->name('extras.destroy');
 
         //filtros
-        Route::get("/pdf", [ExtraJobController::class, "pdfAll"])->name("extras.pdfAll");
-        Route::get("/{id}/pdf", [ExtraJobController::class, "pdfShow"])->whereNumber("id")->name("extras.pdfShow");
-        Route::get("/search-employee", [ExtraJobController::class, "searchEmployee"])->name("extras.searchEmployee");
+        Route::get('/pdf', [ExtraJobController::class, 'pdfAll'])->name('extras.pdfAll');
+        Route::get('/{id}/pdf', [ExtraJobController::class, 'pdfShow'])->whereNumber('id')->name('extras.pdfShow');
+        Route::get('/search-employee', [ExtraJobController::class, 'searchEmployee'])->name('extras.searchEmployee');
     });
     // fim Trabalhos extras(ExtraJobs)
 
     // inicio categoria de Licença (LeaveRequest) 
     Route::prefix('categoria-licenca')->group(function () {
 
-        Route::get("/listar", [LicenseCategoryController::class, "index"])->name("licenseCategories.index");
-        Route::get("/criar", [LicenseCategoryController::class, "create"])->name("licenseCategories.create");
-        Route::post("/salvar", [LicenseCategoryController::class, "store"])->name("licenseCategories.store");
-        Route::get("/detalhes/{id}", [LicenseCategoryController::class, "show"])->name("licenseCategories.show");
-        Route::get("/editar/{id}/edit", [LicenseCategoryController::class, "edit"])->name("licenseCategories.edit");
-        Route::put("/atualizar/{id}", [LicenseCategoryController::class, "update"])->name("licenseCategories.update");
-        Route::delete("/apagar/{id}", [LicenseCategoryController::class, "destroy"])->name("licenseCategories.destroy");
+        Route::get('/listar', [LicenseCategoryController::class, 'index'])->name('licenseCategories.index');
+        Route::get('/criar', [LicenseCategoryController::class, 'create'])->name('licenseCategories.create');
+        Route::post('/salvar', [LicenseCategoryController::class, 'store'])->name('licenseCategories.store');
+        Route::get('/detalhes/{id}', [LicenseCategoryController::class, 'show'])->name('licenseCategories.show');
+        Route::get('/editar/{id}/edit', [LicenseCategoryController::class, 'edit'])->name('licenseCategories.edit');
+        Route::put('/atualizar/{id}', [LicenseCategoryController::class, 'update'])->name('licenseCategories.update');
+        Route::delete('/apagar/{id}', [LicenseCategoryController::class, 'destroy'])->name('licenseCategories.destroy');
     });
     // fim Pedido de Licença (LeaveRequest) 
 
     // inicio Pedido de Licença (LeaveRequest) 
     Route::prefix('pedido-licenca')->group(function () {
 
-        Route::get("/listar", [LeaveRequestController::class, "index"])->name("leaveRequests.index");
-        Route::get("/criar", [LeaveRequestController::class, "create"])->name("leaveRequests.create");
-        Route::post("/salvar", [LeaveRequestController::class, "store"])->name("leaveRequests.store");
-        Route::get("/detalhes/{id}", [LeaveRequestController::class, "show"])->name("leaveRequests.show");
-        Route::get("/editar/{id}/edit", [LeaveRequestController::class, "edit"])->name("leaveRequests.edit");
-        Route::put("/atualizar/{id}", [LeaveRequestController::class, "update"])->name("leaveRequests.update");
-        Route::delete("/apagar/{id}", [LeaveRequestController::class, "destroy"])->name("leaveRequests.destroy");
+        Route::get('/listar', [LeaveRequestController::class, 'index'])->name('leaveRequests.index');
+        Route::get('/criar', [LeaveRequestController::class, 'create'])->name('leaveRequests.create');
+        Route::post('/salvar', [LeaveRequestController::class, 'store'])->name('leaveRequests.store');
+        Route::get('/detalhes/{id}', [LeaveRequestController::class, 'show'])->name('leaveRequests.show');
+        Route::get('/editar/{id}/edit', [LeaveRequestController::class, 'edit'])->name('leaveRequests.edit');
+        Route::put('/atualizar/{id}', [LeaveRequestController::class, 'update'])->name('leaveRequests.update');
+        Route::delete('/apagar/{id}', [LeaveRequestController::class, 'destroy'])->name('leaveRequests.destroy');
 
         //filtros
-        Route::get("leaveRequest/searchEmployee", [LeaveRequestController::class, "searchEmployee"])->name("leaveRequests.searchEmployee");
-        Route::get("leave-request/pdf-filtered", [LeaveRequestController::class, "pdfAll"])->name("leaveRequests.exportFilteredPDF");
-        Route::get("leaveRequest/pdf", [LeaveRequestController::class, "pdfAll"])->name("leaveRequests.pdfAll");
+        Route::get('leaveRequest/searchEmployee', [LeaveRequestController::class, 'searchEmployee'])->name('leaveRequests.searchEmployee');
+        Route::get('leave-request/pdf-filtered', [LeaveRequestController::class, 'pdfAll'])->name('leaveRequests.exportFilteredPDF');
+        Route::get('leaveRequest/pdf', [LeaveRequestController::class, 'pdfAll'])->name('leaveRequests.pdfAll');
     });
     // fim Pedido de Licença (LeaveRequest) 
 
@@ -377,32 +400,32 @@ Route::middleware('auth')->name('admin.')->group(function () {
     // inicio Pedido de Férias (Vacation Request) 
     Route::prefix('pedido-ferias')->group(function () {
 
-        Route::get("/listar", [VacationRequestController::class, "index"])->name("vacationRequests.index");
-        Route::get("/criar", [VacationRequestController::class, "create"])->name("vacationRequests.create");
-        Route::post("/salvar", [VacationRequestController::class, "store"])->name("vacationRequests.store");
-        Route::get("/detalhes/{id}", [VacationRequestController::class, "show"])->name("vacationRequests.show");
-        Route::get("/editar/{id}/edit", [VacationRequestController::class, "edit"])->name("vacationRequests.edit");
-        Route::put("/atualizar/{id}", [VacationRequestController::class, "update"])->name("vacationRequests.update");
-        Route::delete("/apagar/{id}", [VacationRequestController::class, "destroy"])->name("vacationRequests.destroy");
+        Route::get('/listar', [VacationRequestController::class, 'index'])->name('vacationRequests.index');
+        Route::get('/criar', [VacationRequestController::class, 'create'])->name('vacationRequests.create');
+        Route::post('/salvar', [VacationRequestController::class, 'store'])->name('vacationRequests.store');
+        Route::get('/detalhes/{id}', [VacationRequestController::class, 'show'])->name('vacationRequests.show');
+        Route::get('/editar/{id}/edit', [VacationRequestController::class, 'edit'])->name('vacationRequests.edit');
+        Route::put('/atualizar/{id}', [VacationRequestController::class, 'update'])->name('vacationRequests.update');
+        Route::delete('/apagar/{id}', [VacationRequestController::class, 'destroy'])->name('vacationRequests.destroy');
 
         //filtros
-        Route::get("vacationRequest/departmentSummary", [VacationRequestController::class, "departmentSummary"])->name("vacationRequests.departmentSummary");
-        Route::get("vacationRequest/searchEmployee", [VacationRequestController::class, "searchEmployee"])->name("vacationRequests.searchEmployee");
-        Route::get("vacation-request/pdf-filtered",  [VacationRequestController::class, "pdfAll"])->name("vacationRequests.exportFilteredPDF");
-        Route::get("vacationRequest/pdf", [VacationRequestController::class, "pdfAll"])->name("vacationRequests.pdfAll");
+        Route::get('vacationRequest/departmentSummary', [VacationRequestController::class, 'departmentSummary'])->name('vacationRequests.departmentSummary');
+        Route::get('vacationRequest/searchEmployee', [VacationRequestController::class, 'searchEmployee'])->name('vacationRequests.searchEmployee');
+        Route::get('vacation-request/pdf-filtered',  [VacationRequestController::class, 'pdfAll'])->name('vacationRequests.exportFilteredPDF');
+        Route::get('vacationRequest/pdf', [VacationRequestController::class, 'pdfAll'])->name('vacationRequests.pdfAll');
     });
     // fim Pedido de Férias (Vacation Request) 
 
     // inicio fornecedo(supplier) 
     Route::prefix('fornecedor')->group(function () {
 
-        Route::get("/listar", [SupplierController::class, "index"])->name("suppliers.index");
-        Route::get("/criar", [SupplierController::class, "create"])->name("suppliers.create");
-        Route::post("/salvar", [SupplierController::class, "store"])->name("suppliers.store");
-        Route::get("/detalhes/{id}", [SupplierController::class, "show"])->name("suppliers.show");
-        Route::get("/editar/{id}/edit", [SupplierController::class, "edit"])->name("suppliers.edit");
-        Route::put("/atualizar/{id}", [SupplierController::class, "update"])->name("suppliers.update");
-        Route::delete("/apagar/{id}", [SupplierController::class, "destroy"])->name("suppliers.destroy");
+        Route::get('/listar', [SupplierController::class, 'index'])->name('suppliers.index');
+        Route::get('/criar', [SupplierController::class, 'create'])->name('suppliers.create');
+        Route::post('/salvar', [SupplierController::class, 'store'])->name('suppliers.store');
+        Route::get('/detalhes/{id}', [SupplierController::class, 'show'])->name('suppliers.show');
+        Route::get('/editar/{id}/edit', [SupplierController::class, 'edit'])->name('suppliers.edit');
+        Route::put('/atualizar/{id}', [SupplierController::class, 'update'])->name('suppliers.update');
+        Route::delete('/apagar/{id}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
     });
     // fim fornecedo(supplier) 
 
@@ -412,10 +435,10 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/listar', [InfrastructureController::class, 'index'])->name('infrastructures.index');
         Route::get('/criar', [InfrastructureController::class, 'create'])->name('infrastructures.create');
         Route::post('/salvar', [InfrastructureController::class, 'store'])->name('infrastructures.store');
-        Route::get("/detalhes/{id}", [InfrastructureController::class, "show"])->name("infrastructures.show");
-        Route::get("/editar/{id}/edit", [InfrastructureController::class, "edit"])->name("infrastructures.edit");
-        Route::put("/atualizar/{id}", [InfrastructureController::class, "update"])->name("infrastructures.update");
-        Route::delete("/apagar/{id}", [InfrastructureController::class, "destroy"])->name("infrastructures.destroy");
+        Route::get('/detalhes/{id}', [InfrastructureController::class, 'show'])->name('infrastructures.show');
+        Route::get('/editar/{id}/edit', [InfrastructureController::class, 'edit'])->name('infrastructures.edit');
+        Route::put('/atualizar/{id}', [InfrastructureController::class, 'update'])->name('infrastructures.update');
+        Route::delete('/apagar/{id}', [InfrastructureController::class, 'destroy'])->name('infrastructures.destroy');
 
         //relatorios
         Route::get('/relatorio', [InfrastructureController::class, 'reportAll'])->name('infrastructures.allPdf');
@@ -435,10 +458,10 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::get('/listar', [HeritageController::class, 'index'])->name('heritages.index');
         Route::get('/criar', [HeritageController::class, 'create'])->name('heritages.create');
         Route::post('/salvar', [HeritageController::class, 'store'])->name('heritages.store');
-        Route::get("/detalhes/{id}", [HeritageController::class, "show"])->name("heritages.show");
-        Route::get("/editar/{id}/edit", [HeritageController::class, "edit"])->name("heritages.edit");
-        Route::put("/atualizar/{id}", [HeritageController::class, "update"])->name("heritages.update");
-        Route::delete("/apagar/{id}", [HeritageController::class, "destroy"])->name("heritages.destroy");
+        Route::get('/detalhes/{id}', [HeritageController::class, 'show'])->name('heritages.show');
+        Route::get('/editar/{id}/edit', [HeritageController::class, 'edit'])->name('heritages.edit');
+        Route::put('/atualizar/{id}', [HeritageController::class, 'update'])->name('heritages.update');
+        Route::delete('/apagar/{id}', [HeritageController::class, 'destroy'])->name('heritages.destroy');
 
         //relatorios
         Route::get('/relatorio', [HeritageController::class, 'reportAll'])->name('heritages.allPdf');
@@ -455,17 +478,17 @@ Route::middleware('auth')->name('admin.')->group(function () {
     // inicio users routes
     Route::prefix('utilizadores')->group(function () {
 
-        Route::get("/listar", [AdminAuthController::class, "index"])->name("users.index");
-        Route::get("/criar", [AdminAuthController::class, "create"])->name("users.create");
-        Route::post("/salvar", [AdminAuthController::class, "store"])->name("users.store");
-        Route::get("/detalhes/{id}", [AdminAuthController::class, "show"])->name("users.show");
-        Route::get("/editar/{id}/edit", [AdminAuthController::class, "edit"])->name("users.edit");
-        Route::put("/atualizar/{id}", [AdminAuthController::class, "update"])->name("users.update");
-        Route::delete("/apagar/{id}", [AdminAuthController::class, "destroy"])->name("users.destroy");
-        Route::post("/login", [AdminAuthController::class, "login"])->name("users.login");
+        Route::get('/listar', [AdminAuthController::class, 'index'])->name('users.index');
+        Route::get('/criar', [AdminAuthController::class, 'create'])->name('users.create');
+        Route::post('/salvar', [AdminAuthController::class, 'store'])->name('users.store');
+        Route::get('/detalhes/{id}', [AdminAuthController::class, 'show'])->name('users.show');
+        Route::get('/editar/{id}/edit', [AdminAuthController::class, 'edit'])->name('users.edit');
+        Route::put('/atualizar/{id}', [AdminAuthController::class, 'update'])->name('users.update');
+        Route::delete('/apagar/{id}', [AdminAuthController::class, 'destroy'])->name('users.destroy');
+        Route::post('/login', [AdminAuthController::class, 'login'])->name('users.login');
 
         //cotrato em pdf
-        Route::get("/{id}/contract", [AdminAuthController::class, "contractPdf"])->name("users.contract");
+        Route::get('/{id}/contract', [AdminAuthController::class, 'contractPdf'])->name('users.contract');
     });
     // fim users routes
 

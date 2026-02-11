@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Models\SalaryPayment;
@@ -38,7 +39,7 @@ class SalaryPaymentController extends Controller
             $p->paymentStatus = $this->translateStatus($p->paymentStatus);
         });
 
-        return view('salaryPayment.index', [
+        return view('admin.salaryPayment.list.index', [
             'salaryPayments' => $salaryPayments,
             'filters' => $request->only('startDate', 'endDate'),
         ]);
@@ -46,7 +47,7 @@ class SalaryPaymentController extends Controller
 
     public function create()
     {
-        return view('salaryPayment.create');
+        return view('admin.salaryPayment.create.index');
     }
 
     // AJAX para busca de funcionário (com email e IBAN)
@@ -129,22 +130,22 @@ class SalaryPaymentController extends Controller
             Mail::to($payment->employee->email)->queue(new SalaryPaidNotification($payment));
         }
 
-        return redirect()->route('salaryPayment.index')
-            ->with('msg', 'Pagamento de salário registrado com sucesso.');
+        return redirect()->route('admin.salaryPayments.index')
+            ->with('success', 'Pagamento de salário registrado com sucesso.');
     }
 
     public function show($id)
     {
         $salaryPayment = SalaryPayment::with(['employee.department', 'employee.employeeType'])->findOrFail($id);
         $salaryPayment->paymentStatus = $this->translateStatus($salaryPayment->paymentStatus);
-        return view('salaryPayment.show', compact('salaryPayment'));
+        return view('admin.salaryPayment.details.index', compact('salaryPayment'));
     }
 
     public function edit($id)
     {
         $salaryPayment = SalaryPayment::findOrFail($id);
         $salaryPayment->paymentStatus = $this->translateStatus($salaryPayment->paymentStatus);
-        return view('salaryPayment.edit', compact('salaryPayment'));
+        return view('admin.salaryPayment.edit.index', compact('salaryPayment'));
     }
 
     public function update(Request $request, $id)
@@ -158,14 +159,14 @@ class SalaryPaymentController extends Controller
             Mail::to($payment->employee->email)->queue(new SalaryPaidNotification($payment));
         }
 
-        return redirect()->route('salaryPayment.index')
+        return redirect()->route('admin.salaryPayments.index')
             ->with('msg', 'Pagamento de salário atualizado com sucesso.');
     }
 
     public function destroy($id)
     {
         SalaryPayment::destroy($id);
-        return redirect()->route('salaryPayment.index')
+        return redirect()->route('admin.salaryPayments.index')
             ->with('msg', 'Pagamento de salário removido com sucesso.');
     }
 
@@ -174,7 +175,7 @@ class SalaryPaymentController extends Controller
         $payments = SalaryPayment::with(['employee.department', 'employee.employeeType'])->latest()->get();
         $payments->each(fn($p) => $p->paymentStatus = $this->translateStatus($p->paymentStatus));
 
-        $pdf = PDF::loadView('salaryPayment.salaryPayment_pdf', ['salaryPayments' => $payments])
+        $pdf = PDF::loadView('pdf.salaryPayment.salaryPaymentPdf', ['salaryPayments' => $payments])
             ->setPaper('a4', 'landscape');
 
         return $pdf->stream('RelatorioPagamentosSalarial.pdf');
@@ -200,7 +201,7 @@ class SalaryPaymentController extends Controller
 
         $payments->each(fn($p) => $p->paymentStatus = $this->translateStatus($p->paymentStatus));
 
-        $pdf = PDF::loadView('salaryPayment.salaryPayment_period_pdf', [
+        $pdf = PDF::loadView('pdf.salaryPayment.salaryPaymentPeriodPdf', [
             'salaryPayments' => $payments,
             'startDate'      => $startDate,
             'endDate'        => $endDate,
@@ -223,7 +224,7 @@ class SalaryPaymentController extends Controller
 
         $payments->each(fn($p) => $p->paymentStatus = $this->translateStatus($p->paymentStatus));
 
-        $pdf = PDF::loadView('salaryPayment.salaryPayment_employee_pdf', [
+        $pdf = PDF::loadView('pdf.salaryPayment.salaryPaymentEmployeePdf', [
             'payments' => $payments,
             'employee' => Employeee::findOrFail($employeeId),
             'year'     => $year,

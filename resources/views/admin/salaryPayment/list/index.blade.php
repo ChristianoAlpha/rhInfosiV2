@@ -10,7 +10,7 @@
     <div class="d-flex gap-2">
 
 
-      <a href="{{ route('salaryPayment.pdfAll') }}"
+      <a href="{{ route('admin.salaryPayments.pdfAll') }}"
          class="btn btn-outline-light btn-sm"
          style="width:110px;"
          target="_blank" rel="noopener noreferrer">
@@ -26,7 +26,7 @@
       
 
 
-      <a href="{{ route('salaryPayment.create') }}"
+      <a href="{{ route('admin.salaryPayments.create') }}"
          class="btn btn-outline-light btn-sm"
          style="width:110px;"
          title="Novo Pagamento">
@@ -40,7 +40,7 @@
     <div class="collapse" id="filterArea">
       <div class="card-body border-bottom">
 
-        <form class="row g-3" method="GET" action="{{ route('salaryPayment.index') }}">
+        <form class="row g-3" method="GET" action="{{ route('admin.salaryPayments.index') }}">
 
           <div class="col-md-3">
             <input type="date" name="startDate"
@@ -61,14 +61,14 @@
 
         
           <div class="col-md-2">
-            <a href="{{ route('salaryPayment.index') }}" class="btn btn-secondary w-100">
+            <a href="{{ route('admin.salaryPayments.index') }}" class="btn btn-secondary w-100">
               Limpar Filtro Aplicado
             </a>
           </div>
 
   
           <div class="col-md-2">
-            <a href="{{ route('salaryPayment.pdfPeriod', [
+            <a href="{{ route('admin.salaryPayments.pdfPeriod', [
                 'startDate' => $filters['startDate'] ?? '',
                 'endDate'   => $filters['endDate']   ?? ''
             ]) }}"
@@ -138,15 +138,15 @@
 
             {{-- AÇÕES — ADICIONADO ÍCONE NO PDF (QUE FALTAVA) --}}
             <td class="d-flex gap-1">
-              <a href="{{ route('salaryPayment.show',$p->id) }}" class="btn btn-sm btn-warning" title="Ver Detalhes">
+              <a href="{{ route('admin.salaryPayments.show',$p->id) }}" class="btn btn-sm btn-warning" title="Ver Detalhes">
                 <i class="fas fa-eye"></i>
               </a>
 
-              <a href="{{ route('salaryPayment.edit',$p->id) }}" class="btn btn-sm btn-info" title="Editar Registro">
+              <a href="{{ route('admin.salaryPayments.edit',$p->id) }}" class="btn btn-sm btn-info" title="Editar Registro">
                 <i class="fas fa-pencil"></i>
               </a>
 
-              <a href="{{ route('salaryPayment.pdfByEmployee', [
+              <a href="{{ route('admin.salaryPayments.pdfByEmployee', [
                  'employeeId'=>$p->employee->id,
                  'year'=>now()->year
               ]) }}"
@@ -154,7 +154,7 @@
                 <i class="fas fa-file-pdf"></i>
               </a>
 
-              <form action="{{ route('salaryPayment.destroy',$p->id) }}"
+              <form action="{{ route('admin.salaryPayments.destroy',$p->id) }}"
                     method="POST" style="display:inline">
                 @csrf @method('DELETE')
                 <button class="btn btn-sm btn-danger" title="Apagar">

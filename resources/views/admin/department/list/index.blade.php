@@ -22,7 +22,7 @@
                                 <option value="{{ $d->id }}">{{ $d->title }}</option>
                             @endforeach
                         </select>
-                        <button type="submit" class="btn btn-primary" title="Pesquisar">
+                        <button type="submit" class="btn btn-secondary" title="Pesquisar">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
