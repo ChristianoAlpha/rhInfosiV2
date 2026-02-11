@@ -25,9 +25,14 @@ class DirectorGeneralController extends Controller
         }
 
         $from = $request->input('from');
-        $to   = $request->input('to');
+        $to = $request->input('to');
 
         $query = VacationRequest::where('approvalStatus', 'Encaminhado');
+
+        // Se for diretor, filtrar apenas os encaminhados para ele
+        if ($user->role === 'director') {
+            $query->where('forwarded_to_director_id', $user->id);
+        }
 
         if ($from && $to) {
             $query->whereBetween('created_at', [
@@ -50,27 +55,76 @@ class DirectorGeneralController extends Controller
         }
 
         $vacation = VacationRequest::with('employee.department', 'employee.position')->findOrFail($id);
-        
+
+        // Verificar se foi encaminhado para este diretor
+        if ($user->role === 'director' && $vacation->forwarded_to_director_id !== $user->id) {
+            abort(403, 'Este pedido não foi encaminhado para você.');
+        }
+
         $vacation->approvalStatus = 'Aprovado';
         $vacation->approvalComment = $request->input('approvalComment') ?? 'Aprovado pelo Diretor Geral';
-        
-        // Geração do PDF assinado
-        $pdf = PDF::loadView('departmentHead.employeeVacationPdf', [
-            'employee'  => $vacation->employee,
-            'vacations' => [$vacation],
-            'showSignature' => true // Flag para mostrar a sign.png
-        ])->setPaper('a4', 'portrait');
 
-        $fileName = 'Ferias_Assinada_' . $vacation->id . '_' . time() . '.pdf';
-        $path = 'signed_vacations/' . $fileName;
-        
+        // Identificar o prefixo e cargo com base no utilizador logado (Director)
+        $directorName = $user->name;
+        $prefix = 'DG-INFOSI'; // Default
+        $headerTitle = 'GABINETE DO DIRECTOR GERAL';
+        $signerTitle = 'O DIRECTOR GERAL';
+
+        // Lógica baseada no nome do Diretor (Pode ser ajustada para usar ID ou outro campo)
+        if (str_contains($directorName, 'Marcos Cary')) {
+            $prefix = 'DGAAT-INFOSI';
+            $headerTitle = 'GABINETE DO DIRECTOR GERAL ADJUNTO PARA ÁREA TÉCNICA';
+            $signerTitle = 'O DIRECTOR GERAL ADJUNTO PARA ÁREA TÉCNICA';
+        } elseif (str_contains($directorName, 'Rita Patrícia')) {
+            $prefix = 'DGAA-INFOSI';
+            $headerTitle = 'GABINETE DA DIRECTORA GERAL ADJUNTA PARA ÁREA ADMINISTRATIVA E FINANCEIRA';
+            $signerTitle = 'A DIRECTORA GERAL ADJUNTA PARA ÁREA ADMINISTRATIVA E FINANCEIRA';
+        } elseif (str_contains($directorName, 'André Mpumba')) {
+            $prefix = 'DG-INFOSI';
+            $headerTitle = 'GABINETE DO DIRECTOR GERAL';
+            $signerTitle = 'O DIRECTOR GERAL';
+        }
+
+        // Contar aprovações deste diretor neste ano para gerar sequencial
+        $year = Carbon::now()->year;
+        $count = VacationRequest::where('forwarded_to_director_id', $user->id)
+            ->where('approvalStatus', 'Aprovado')
+            ->whereYear('updated_at', $year)
+            ->count();
+
+        $sequence = $count + 1; // O atual será o próximo
+        $sequenceNumber = sprintf('%03d/%s/%s', $sequence, $prefix, $year);
+
+        // --- GERAÇÃO DO PDF ---
+        // Dados para a view
+        $data = [
+            'vacation' => $vacation,
+            'employee' => $vacation->employee,
+            'sequenceNumber' => $sequenceNumber,
+            'headerTitle' => $headerTitle,
+            'signerTitle' => $signerTitle,
+            'directorName' => $directorName,
+            'approvalDate' => Carbon::now(), // Data do despacho = hoje
+            'emissionDate' => Carbon::now(),
+        ];
+
+        // Carregar a view específica 'admin.vacationRequests.pdf.guide'
+        $pdf = PDF::loadView('admin.vacationRequests.pdf.guide', $data)
+            ->setPaper('a4', 'portrait');
+
+        // Nome do arquivo
+        $safeName = preg_replace('/[^A-Za-z0-9_\-]/', '_', $vacation->employee->fullName);
+        $fileName = 'Guia_Ferias_' . $sequence . '_' . $safeName . '_' . $year . '.pdf';
+        $path = 'vacation_guides/' . $fileName;
+
+        // Salvar no storage public
         Storage::disk('public')->put($path, $pdf->output());
-        
+
         $vacation->signedPdfPath = $path;
         $vacation->save();
 
         return redirect()->route('admin.director.pendingVacations')
-            ->with('msg', 'Pedido de férias aprovado e assinado com sucesso!');
+            ->with('msg', 'Pedido de férias aprovado e Guia gerada com sucesso! (' . $sequenceNumber . ')');
     }
 
     // Rejeição pelo Diretor Geral

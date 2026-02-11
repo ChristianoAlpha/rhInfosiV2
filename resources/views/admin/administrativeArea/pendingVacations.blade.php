@@ -2,7 +2,7 @@
 @section('title', 'Pedidos de Férias - Área Administrativa')
 @section('content')
 
-  <div class="card mt-4 shadow">
+  <div class="card mb-4 shadow">
     <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
       <h4 class="mb-0">Pedidos de Férias para Encaminhamento (RH)</h4>
     </div>
@@ -64,19 +64,11 @@
                   <form id="forward-form-{{ $req->id }}" action="{{ route('admin.hr.forwardVacation', $req->id) }}"
                     method="POST">
                     @csrf
-                    <div class="d-flex flex-column gap-2">
-                      <input type="date" name="vacationStart" class="form-control form-control-sm"
-                        value="{{ $req->vacationStart }}" placeholder="Data Início">
-                      <select name="forwarded_to_director_id" class="form-select form-select-sm" required>
-                        <option value="">Selecione o Diretor...</option>
-                        @foreach($directors as $director)
-                          <option value="{{ $director->id }}">{{ $director->name }}</option>
-                        @endforeach
-                      </select>
-                    </div>
+                    <input type="date" name="vacationStart" class="form-control form-control-sm"
+                      value="{{ $req->vacationStart }}">
                 </td>
                 <td>
-                  <button type="submit" class="btn btn-primary btn-sm mt-2">
+                  <button type="submit" class="btn btn-primary btn-sm">
                     <i class="fas fa-share"></i> Encaminhar
                   </button>
                   </form>
