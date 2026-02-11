@@ -1,4 +1,4 @@
-<footer class="footer bg-dark text-white mt-auto">
+<footer class="footer bg-secondary text-white mt-auto">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">

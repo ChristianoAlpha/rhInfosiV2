@@ -47,7 +47,7 @@ class StatuteController extends Controller
         }
         $statute->save();
 
-        return redirect()->route('admin.statutes.index')->with('msg', 'Estatuto criado com sucesso!');
+        return redirect()->route('admin.statutes.index')->with('success', 'Estatuto criado com sucesso!');
     }
 
     /**
@@ -91,7 +91,7 @@ class StatuteController extends Controller
         }
         $statute->save();
 
-        return redirect()->route('admin.statutes.index')->with('msg', 'Estatuto atualizado com sucesso!');
+        return redirect()->route('admin.statutes.index')->with('success', 'Estatuto atualizado com sucesso!');
     }
 
     /**
@@ -102,6 +102,6 @@ class StatuteController extends Controller
         $statute = Statute::findOrFail($id);
         // Opcional: excluir o arquivo físico, se existir
         $statute->delete();
-        return redirect()->back()->with('msg', 'Estatuto removido com sucesso!');
+        return redirect()->back()->with('success', 'Estatuto removido com sucesso!');
     }
 }

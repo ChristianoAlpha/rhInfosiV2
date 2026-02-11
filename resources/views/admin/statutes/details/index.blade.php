@@ -7,7 +7,7 @@
       <div class="card my-4 shadow">
         <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
           <span><i class="fas fa-file-earmark-text me-2"></i>Detalhes do Estatuto</span>
-          <a href="{{ route('statutes.index') }}" class="btn btn-outline-light btn-sm" title="Voltar">
+          <a href="{{ route('admin.statutes.index') }}" class="btn btn-outline-light btn-sm" title="Voltar">
             <i class="fas fa-arrow-left"></i> Voltar
           </a>
         </div>
@@ -24,7 +24,7 @@
               </a>
             </div>
           @endif
-          <a href="{{ route('statutes.edit', $statute->id) }}" class="btn btn-warning">
+          <a href="{{ route('admin.statutes.edit', $statute->id) }}" class="btn btn-warning">
             <i class="fas fa-pencil-square"></i> Editar
           </a>
         </div>

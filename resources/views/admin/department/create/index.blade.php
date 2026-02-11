@@ -2,7 +2,7 @@
 @section('title', 'Novo Departamento')
 @section('content')
 
-<div class="card mt-4 mt-4 shadow">
+<div class="card mt-4 shadow">
   <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
     <span><i class="fas fa-plus-circle me-2"></i>Novo Departamento</span>
     <a href="{{ route('admin.departments.index') }}" class="btn btn-outline-light btn-sm" title="Ver Todos"> {{-- Ver --}}
@@ -33,7 +33,7 @@
           
           <!-- Botão de envio -->
           <div class="d-grid gap-2 col-6 mx-auto mt-4">
-            <button type="submit" class="btn btn-primary btn-lg">
+            <button type="submit" class="btn btn-success btn-lg">
               <i class="fas fa-check-circle me-2"></i>Criar Departamento
             </button>
           </div>

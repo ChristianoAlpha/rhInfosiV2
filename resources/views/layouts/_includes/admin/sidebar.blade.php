@@ -1,3 +1,6 @@
+{{-- script que abre e fecha os menus --}}
+@include('extra._sidebarCollapse.index')
+
 <aside class="sidebar fixed-left" id="sidebarMenu">
     <style>
         .sidebar-nav {
@@ -234,7 +237,8 @@
                     </a>
                     <div class="collapse" id="collapseVacationRequest">
                         <ul class="submenu">
-                            <li><a class="nav-link" href="{{ route('admin.vacationRequests.departmentSummary') }}">Férias
+                            <li><a class="nav-link"
+                                    href="{{ route('admin.vacationRequests.departmentSummary') }}">Férias
                                     por Departamento</a></li>
                             <li><a class="nav-link" href="{{ route('admin.vacationRequests.index') }}"><i
                                         class="fas fa-eye me-2"></i>Ver Todos</a></li>
@@ -287,7 +291,8 @@
                     </a>
                     <div class="collapse" id="collapseMobility">
                         <ul class="submenu">
-                            <li><a class="nav-link" href="{{ route('admin.mobilities.index') }}"><i class="fas fa-eye me-2"></i>Ver
+                            <li><a class="nav-link" href="{{ route('admin.mobilities.index') }}"><i
+                                        class="fas fa-eye me-2"></i>Ver
                                     Todos</a></li>
                             <li><a class="nav-link" href="{{ route('admin.mobilities.create') }}"><i
                                         class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
@@ -399,9 +404,9 @@
                         <ul class="submenu">
                             {{-- <li><a class="nav-link" href="{{ route('admin.heritages.index') }}"><i
                                         class="fas fa-box me-2"></i> Patrimónios</a></li> --}}
-                                        <li><a class="nav-link" href="{{ route('admin.heritageTypes.index') }}"><i
-                                                    class="fas fa-tags me-2"></i> Categoria de Património</a></li>
-                                        <li><a class="nav-link" href="{{ route('admin.heritages.index') }}"><i
+                            <li><a class="nav-link" href="{{ route('admin.heritageTypes.index') }}"><i
+                                        class="fas fa-tags me-2"></i> Categoria de Património</a></li>
+                            <li><a class="nav-link" href="{{ route('admin.heritages.index') }}"><i
                                         class="fas fa-eye me-2"></i> Lista</a></li>
                             <li><a class="nav-link" href="{{ route('admin.heritages.create') }}"><i
                                         class="fas fa-sign-in-alt me-2"></i> Registrar Entrada</a></li>
@@ -890,40 +895,8 @@
                 </li>
             @endif
         @endif
-
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('profile') }}"><i class="fas fa-user me-2"></i> Meu Perfil</a>
-        </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('new-chat.index') }}"><i class="fas fa-comments me-2"></i> Chat</a>
         </li>
     </ul>
 </aside>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var collapseElements = document.querySelectorAll('.collapse');
-        collapseElements.forEach(function(collapse) {
-            var bsCollapse = new bootstrap.Collapse(collapse, {
-                toggle: false
-            });
-            collapse.addEventListener('show.bs.collapse', function() {
-                collapse.closest('.has-submenu').classList.add('show');
-                collapse.previousElementSibling.querySelector('i.ms-auto').style.transform =
-                    'rotate(180deg)';
-                collapseElements.forEach(function(otherCollapse) {
-                    if (otherCollapse !== collapse && otherCollapse.classList.contains(
-                            'show')) {
-                        otherCollapse.classList.remove('show');
-                        otherCollapse.previousElementSibling.querySelector('i.ms-auto')
-                            .style.transform = 'rotate(0deg)';
-                    }
-                });
-            });
-            collapse.addEventListener('hide.bs.collapse', function() {
-                collapse.closest('.has-submenu').classList.remove('show');
-                collapse.previousElementSibling.querySelector('i.ms-auto').style.transform =
-                    'rotate(0deg)';
-            });
-        });
-    });
-</script>

@@ -4,7 +4,7 @@
     <div class="card my-4 shadow">
         <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
             <span><i class="fas fa-file-earmark-text me-2"></i>Lista de Estatutos</span>
-            <a href="{{ route('statutes.create') }}" class="btn btn-outline-light btn-sm">
+            <a href="{{ route('admin.statutes.create') }}" class="btn btn-outline-light btn-sm">
                 <i class="fas fa-plus-circle"></i> Adicionar Novo
             </a>
         </div>
@@ -34,17 +34,17 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li>
-                                                <a href="{{ route('statutes.show', $item->id) }}" class="dropdown-item">
+                                                <a href="{{ route('admin.statutes.show', $item->id) }}" class="dropdown-item">
                                                     <i class="fas fa-eye"></i> Detalhes
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('statutes.edit', $item->id) }}" class="dropdown-item">
+                                                <a href="{{ route('admin.statutes.edit', $item->id) }}" class="dropdown-item">
                                                     <i class="fas fa-pencil"></i>Editar
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('statutes.delete', $item->id) }}" class="dropdown-item">
+                                                <a href="{{ route('admin.statutes.destroy', $item->id) }}" class="dropdown-item">
                                                     <i class="fas fa-trash"></i>Deletar
                                                 </a>
                                             </li>
