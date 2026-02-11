@@ -2,9 +2,11 @@
 @include('layouts._includes.admin.navbar')
 @include('layouts._includes.admin.sidebar')
 
-    <main class="container-fluid p-4">
+<main class="nxl-container">
+    <div class="nxl-content">
         @yield('content')
-    </main>
+    </div>
     @include('components.theme')
+    @include('layouts._includes.admin.footer')
+</main>
 </div>
-@include('layouts._includes.admin.footer')

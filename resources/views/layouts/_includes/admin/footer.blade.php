@@ -1,22 +1,17 @@
-<footer class="footer bg-secondary text-white mt-auto">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4">
-                {{-- Copyright © Gestão de Capital Humano INFOSI {{ date('Y') }} --}}
-            </div>
-            <div class="col-md-4 text-center">
-                <a href="#" class="text-white text-decoration-none">Política de Privacidade</a> ·
-                <a href="#" class="text-white text-decoration-none">Termos & Condições</a><br>
-                Copyright © Gestão de Capital Humano INFOSI {{ date('Y') }} 
-            </div>
-            {{-- <div class="col-md-4 text-end">
-                <a href="#" class="text-white text-decoration-none">Política de Privacidade</a> ·
-                <a href="#" class="text-white text-decoration-none">Termos & Condições</a>
-            </div> --}}
-
-        </div>
+<!-- [ Footer ] start -->
+<footer class="footer">
+    <p class="fs-11 text-muted fw-medium text-uppercase mb-0 copyright">
+        <span>Copyright © Gestão de Capital Humano INFOSI </span>
+        <script>
+            document.write(new Date().getFullYear());
+        </script>
+    </p>
+    <div class="d-flex align-items-center gap-4">
+        <a href="javascript:void(0);" class="fs-11 fw-semibold text-uppercase">Termos & Condições</a>
+        <a href="javascript:void(0);" class="fs-11 fw-semibold text-uppercase">Política de Privacidade</a>
     </div>
 </footer>
+<!-- [ Footer ] end -->
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
@@ -33,6 +28,8 @@
 
 <!-- Common JS -->
 <script src="{{ asset('assets/js/common-init.min.js') }}"></script>
+
+<script src="{{ asset('assets/js/dashboard-init.min.js') }}"></script>
 
 <!-- Theme Customizer -->
 <script src="{{ asset('assets/js/theme-customizer-init.min.js') }}"></script>
@@ -51,7 +48,7 @@
         document.querySelector('.sidebar').classList.toggle('show');
     });
 
-    // Fecha sidebar se clicar fora dela (em mobile)
+    /* // Fecha sidebar se clicar fora dela (em mobile)
     document.addEventListener('click', function(e) {
         const sidebar = document.querySelector('.sidebar');
         const toggler = document.querySelector('.navbar-toggler');
@@ -59,11 +56,11 @@
             toggler.contains(e.target)) {
             sidebar.classList.remove('show');
         }
-    });
+    }); */
 
-    document.getElementById('themeToggle').addEventListener('click', function() {
-        document.querySelector('.theme-panel').classList.toggle('d-none');
-    });
+    /*     document.getElementById('themeToggle').addEventListener('click', function() {
+            document.querySelector('.theme-panel').classList.toggle('d-none');
+        }); */
 
     document.getElementById('skin').addEventListener('change', function(e) {
         document.documentElement.setAttribute('data-theme', e.target.value.toLowerCase());

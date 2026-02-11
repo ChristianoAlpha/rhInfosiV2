@@ -16,7 +16,7 @@
     {{-- selector --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/select2.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/select2-theme.min.css') }}">
-    <style>
+    {{-- <style>
         body {
             font-family: 'Inter', sans-serif;
         }
@@ -103,7 +103,7 @@
                 margin-left: 0 !important;
             }
         }
-    </style>
+    </style> --}}
 </head>
 <body>
     <div class="content-wrapper">
