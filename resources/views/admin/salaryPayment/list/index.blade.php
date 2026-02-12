@@ -72,7 +72,7 @@
                 'startDate' => $filters['startDate'] ?? '',
                 'endDate'   => $filters['endDate']   ?? ''
             ]) }}"
-            class="btn btn-success w-100"
+           type="submit" class="btn btn-outline-secondary w-100"
             target="_blank" rel="noopener noreferrer">
               <i class="fas fa-file-pdf"></i> Baixar Intervalo
             </a>

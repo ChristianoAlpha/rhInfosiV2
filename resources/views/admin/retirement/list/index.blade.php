@@ -63,7 +63,7 @@
                     </select>
                 </div>
                 <div class="col-md-3 d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary w-100">
+                    <button type="submit" class="btn btn-outline-secondary w-100">
                         <i class="fas fa-filter"></i> Filtrar
                     </button>
                 </div>

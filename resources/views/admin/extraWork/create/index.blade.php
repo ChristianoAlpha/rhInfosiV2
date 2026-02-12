@@ -61,7 +61,7 @@
                     <tbody></tbody>
                 </table>
                 <div class="d-grid gap-2 col-3 mx-auto mt-4">
-                    <button type="submit" class="btn btn-success">Salvar</button>
+                    <button type="submit" class="btn btn-outline-secondary">Salvar</button>
                 </div>
             </form>
         </div>

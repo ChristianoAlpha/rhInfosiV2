@@ -26,7 +26,7 @@
         <input type="date" name="to" id="to" value="{{ old('to', $to) }}" class="form-control">
       </div>
       <div class="col-md-4 align-self-end">
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-outline-secondary">
           <i class="fas fa-funnel-fill me-1"></i>Filtrar
         </button>
         <a href="{{ route('dh.pendingRetirements') }}" class="btn btn-secondary">
@@ -79,7 +79,7 @@
                     @csrf
                     @method('PUT')
                     <input type="hidden" id="hidden-approve-{{ $req->id }}" name="approvalComment">
-                    <button type="submit" class="btn btn-success btn-sm">
+                    <button type="submit" class="btn btn-outline-secondary btn-sm">
                       <i class="fas fa-check-circle"></i> Aprovar
                     </button>
                   </form>

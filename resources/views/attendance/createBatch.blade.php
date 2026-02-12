@@ -77,7 +77,7 @@
       @endif
 
       <div class="text-center mt-3">
-        <button type="submit" class="btn btn-success" style="width: auto;">
+        <button type="submit" class="btn btn-outline-secondary" style="width: auto;">
           <i class="fas fa-check-circle"></i> Salvar Registros
         </button>
       </div>

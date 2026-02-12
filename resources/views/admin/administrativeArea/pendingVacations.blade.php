@@ -39,8 +39,13 @@
           <label for="to" class="form-label fw-semibold">Até</label>
           <input type="date" name="to" id="to" value="{{ $to }}" class="form-control">
         </div>
-        <div class="col-md-4 d-flex gap-2">
-          <button type="submit" class="btn btn-primary flex-fill">
+        <div class="col-md-3">
+          <label for="employeeId" class="form-label">Funcionário (ID)</label>
+          <input type="text" name="employeeId" id="employeeId" value="{{ $employeeId }}" class="form-control"
+            placeholder="ID do Funcionário">
+        </div>
+        <div class="col-md-3 align-self-end">
+          <button type="submit" class="btn btn-primary">
             <i class="fas fa-search me-1"></i>Filtrar
           </button>
           <a href="{{ route('admin.hr.pendingVacations') }}" class="btn btn-outline-secondary flex-fill">

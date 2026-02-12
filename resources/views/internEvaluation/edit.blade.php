@@ -127,7 +127,7 @@
         </select>
       </div>
 
-      <button type="submit" class="btn btn-success w-100">Atualizar Avaliação</button>
+      <button type="submit" class="btn btn-outline-secondary w-100">Atualizar Avaliação</button>
     </form>
   </div>
 </div>

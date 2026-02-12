@@ -13,7 +13,7 @@
             <input type="text" name="internSearch" class="form-control" placeholder="Pesquisar o Nome do Estagiário" value="{{ old('internSearch') }}">
           </div>
           <div class="col-md-2">
-            <button type="submit" class="btn btn-primary w-100">Buscar</button>
+            <button type="submit" class="btn btn-outline-secondary w-100">Buscar</button>
           </div>
         </div>
       </form>
@@ -162,7 +162,7 @@
 
         <div class="row">
           <div class="col text-center">
-            <button type="submit" class="btn btn-success w-50">
+            <button type="submit" class="btn btn-outline-secondary w-50">
               Salvar Avaliação
             </button>
           </div>

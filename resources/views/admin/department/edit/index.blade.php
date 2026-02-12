@@ -28,7 +28,7 @@
         </tr>
         <tr>
           <td colspan="2">
-            <input type="submit" class="btn btn-success" value="Atualizar">
+            <input type="submit" class="btn btn-outline-secondary" value="Atualizar">
           </td>
         </tr>
       </table>

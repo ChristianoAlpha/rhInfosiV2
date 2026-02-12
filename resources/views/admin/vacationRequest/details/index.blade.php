@@ -8,7 +8,7 @@
           <span>Detalhes do Pedido de Férias</span>
           <div>
             @if($data->approvalStatus == 'Aprovado' && $data->signedPdfPath)
-              <a href="{{ route('admin.director.downloadSignedPdf', $data->id) }}" class="btn btn-success btn-sm me-2">
+              <a href="{{ route('admin.director.downloadSignedPdf', $data->id) }}"type="submit" class="btn btn-outline-secondary btn-sm me-2">
                 <i class="fas fa-file-pdf"></i> Download Guia
               </a>
             @endif

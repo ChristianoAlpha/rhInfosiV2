@@ -20,7 +20,7 @@
             @error('employeeSearch')<small class="text-danger">{{ $message }}</small>@enderror
           </div>
           <div class="col-md-4">
-            <button type="submit" class="btn btn-primary w-100">
+            <button type="submit" class="btn btn-outline-secondary w-100">
               <i class="fas fa-search"></i> Buscar
             </button>
           </div>
@@ -91,7 +91,7 @@
               accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xlsx">
           </div>
           <div class="d-grid gap-2 col-3 mx-auto mt-4">
-            <button type="submit" class="btn btn-success">Enviar Pedido</button>
+            <button type="submit" class="btn btn-outline-secondary">Enviar Pedido</button>
           </div>
         </form>
       @endisset

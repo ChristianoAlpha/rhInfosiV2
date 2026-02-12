@@ -2,45 +2,82 @@
 @section('title', 'Novo Departamento')
 @section('content')
 
-<div class="card mt-4 shadow">
-  <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
-    <span><i class="fas fa-plus-circle me-2"></i>Novo Departamento</span>
-    <a href="{{ route('admin.departments.index') }}" class="btn btn-outline-light btn-sm" title="Ver Todos"> {{-- Ver --}}
-      <i class="fa-solid fa-list"></i>
-    </a>
-  </div>  
-  <div class="card-body">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <form method="POST" action="{{ route('admin.departments.store') }}">
-          @csrf
-          
-          <!-- Título do Departamento -->
-          <div class="mb-3">
-            <div class="form-floating">
-              <input type="text" name="title" class="form-control" id="title" placeholder="" value="{{ old('title') }}">
-              <label for="title">Título do Departamento</label>
+    <!-- [ page-header ] start -->
+    <div class="page-header">
+        <div class="page-header-left d-flex align-items-center">
+            <div class="page-header-title">
+                <h5 class="m-b-10">Funcionários</h5>
             </div>
-          </div>
-
-          <!-- Descrição do Departamento -->
-          <div class="mb-3">
-            <div class="form-floating">
-              <textarea name="description" class="form-control" id="description" placeholder="" style="height: 100px;">{{ old('description') }}</textarea>
-              <label for="description">Descrição do Departamento</label>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item">Adicionar novo Departamento</li>
+            </ul>
+        </div>
+        <div class="page-header-right ms-auto">
+            <div class="page-header-right-items">
+                <div class="d-flex d-md-none">
+                    <a href="javascript:void(0)" class="page-header-right-close-toggle">
+                        <i class="feather-arrow-left me-2"></i>
+                        <span>Back</span>
+                    </a>
+                </div>
+                <div class="d-flex align-items-center gap-2 page-header-right-items-wrapper">
+                    <a href="{{ route('admin.departments.index') }}" class="btn btn-outline-secondary">
+                        <i class="feather-list me-2"></i>
+                    </a>
+                </div>
             </div>
-          </div>
-          
-          <!-- Botão de envio -->
-          <div class="d-grid gap-2 col-6 mx-auto mt-4">
-            <button type="submit" class="btn btn-success btn-lg">
-              <i class="fas fa-check-circle me-2"></i>Criar Departamento
-            </button>
-          </div>
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
-</div>
+    <!-- [ page-header ] end -->
+
+    <!-- [ Main Content ] start -->
+    <div class="main-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card stretch stretch-full">
+                    <div class="card-body lead-status">
+                        <div class="mb-5 d-flex align-items-center justify-content-between">
+                            <h5 class="fw-bold mb-0 me-4">
+                                <span class="d-block mb-2">Dados Pessoais e Institucionais :</span>
+                                <span class="fs-12 fw-normal text-muted text-truncate-1-line">Preencher todos os campos
+                                    do formulário é obrigatório</span>
+                            </h5>
+                            <a href="javascript:void(0);" class="btn btn-sm btn-light-brand">novo Funcionário</a>
+                        </div>
+                        <div class="row">
+                            <form method="POST" action="{{ route('admin.departments.store') }}">
+                                @csrf
+
+                                <!-- Título do Departamento -->
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="text" name="title" class="form-control" id="title"
+                                            placeholder="" value="{{ old('title') }}">
+                                        <label for="title">Adicionar novo Departamento</label>
+                                    </div>
+                                </div>
+
+                                <!-- Descrição do Departamento -->
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <textarea name="description" class="form-control" id="description" placeholder="" style="height: 100px;">{{ old('description') }}</textarea>
+                                        <label for="description">Descrição do Departamento</label>
+                                    </div>
+                                </div>
+
+                                <!-- Botão de envio -->
+                                <div class="d-grid gap-2 col-6 mx-auto mt-4">
+                                    <button type="submit" class="btn btn-outline-secondary btn-lg">
+                                        <i class="fas fa-check-circle me-2"></i>Criar Departamento
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection

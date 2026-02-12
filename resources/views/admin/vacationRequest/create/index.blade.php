@@ -23,7 +23,7 @@
                   @error('employeeSearch')<small class="text-danger">{{ $message }}</small>@enderror
                 </div>
                 <div class="col-4">
-                  <button type="submit" class="btn btn-primary w-100">Buscar</button>
+                  <button type="submit" class="btn btn-outline-secondary w-100">Buscar</button>
                 </div>
               </div>
             </form>
@@ -90,7 +90,7 @@
               </div>
 
               <div class="d-grid gap-2 col-3 mx-auto mt-4">
-                <button type="submit" class="btn btn-success">Enviar Pedido</button>
+                <button type="submit" class="btn btn-outline-secondary">Enviar Pedido</button>
               </div>
             </form>
           @endif

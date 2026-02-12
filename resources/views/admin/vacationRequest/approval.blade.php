@@ -48,7 +48,7 @@
               <div class="d-flex flex-column gap-1">
                 <form action="{{ route('dh.approveVacation', $vr->id) }}" method="POST">
                   @csrf
-                  <button type="submit" class="btn btn-success btn-sm">
+                  <button type="submit" class="btn btn-outline-secondary btn-sm">
                     <i class="fas fa-check-circle"></i> Aprovar
                   </button>
                 </form>
