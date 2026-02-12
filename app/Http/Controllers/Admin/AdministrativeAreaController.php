@@ -25,7 +25,7 @@ class AdministrativeAreaController extends Controller
         }
 
         $from = $request->input('from');
-        $to   = $request->input('to');
+        $to = $request->input('to');
         $employeeId = $request->input('employeeId');
 
         $query = VacationRequest::where('approvalStatus', 'Validado');
@@ -64,8 +64,10 @@ class AdministrativeAreaController extends Controller
             $count = 0;
             while ($count < $needed) {
                 $end->addDay();
-                if ($end->isWeekend()) continue;
-                if (in_array($end->toDateString(), $holidays)) continue;
+                if ($end->isWeekend())
+                    continue;
+                if (in_array($end->toDateString(), $holidays))
+                    continue;
                 $count++;
             }
             if ($end->isWeekend()) {
@@ -91,12 +93,15 @@ class AdministrativeAreaController extends Controller
             return true;
         }
 
-        if ($user->role === 'department_head') {
-            $departmentId = $user->employee->departmentId ?? $user->department_id;
+        if (in_array($user->role, ['department_head', 'employee'])) {
+            $departmentId = $user->employee->departmentId ?? $user->department_id ?? null;
             if ($departmentId) {
                 $department = Department::find($departmentId);
-                if ($department && $department->title === 'DASG') {
-                    return true;
+                if ($department) {
+                    $title = \Illuminate\Support\Str::lower($department->title);
+                    if (\Illuminate\Support\Str::contains($title, ['recursos humanos', 'rh', 'administrativa', 'administração e serviços gerais', 'dasg'])) {
+                        return true;
+                    }
                 }
             }
         }

@@ -13,9 +13,9 @@
                     @php 
                         $role = Auth::user()->role ?? null; 
                         $hasRhMenu = false;
-                        if ($role === 'department_head' && Auth::user()->department) {
+                        if (in_array($role, ['department_head', 'employee']) && Auth::user()->department) {
                             $deptTitle = Str::lower(Auth::user()->department->title);
-                            if (Str::contains($deptTitle, ['recursos humanos', 'rh', 'administrativa', 'administração e serviços gerais', 'dasg'])) {
+                            if (Str::contains($deptTitle, ['recursos humanos', 'rh', 'administrativa', 'administração e serviços gerais', 'dasg']) || Str::contains(Auth::user()->department->title, ['DASG'])) {
                                 $hasRhMenu = true;
                             }
                         }
@@ -912,7 +912,6 @@
                             </ul>
                         </li>
                     @endif
-                @endif
                 <li class="nxl-item nxl-hasmenu">
                     <a class="nxl-link" href="{{ route('profile') }}"><i
                             class="fas fa-user me-2"></i>Meu Perfil</a>
@@ -921,6 +920,7 @@
                     <a class="nxl-link" href="{{ route('new-chat.index') }}"><i
                             class="fas fa-comments me-2"></i>Chat</a>
                 </li>
+                @endif
             </ul>
         </div>
 

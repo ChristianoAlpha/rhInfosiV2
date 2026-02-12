@@ -69,13 +69,13 @@
                 <!-- Gestão de Capital Humano -->
                 <div style="white-space: nowrap;">
                     <i class="fas fa-company"></i>
-                    <em><strong>CapitalHumano</strong>-INFOSI </em>
+                    <em><strong>Capital Humano</strong>-INFOSI </em>
                 </div>
                 <!-- E-mail -->
                 <div style="white-space: nowrap;">
                     <i class="fa fa-envelope-o"></i>
                     <a href="mailto: GERAL@INFOSI.GOV.AO" style="color: #fff; text-decoration: none; margin-left: 5px;">
-                        GERAL@INFOSI.GOV.AO
+                        geral@infosi.gov.ao
                     </a>
                 </div>
                 <!-- Telefone -->
