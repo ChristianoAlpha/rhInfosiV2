@@ -24,7 +24,7 @@
                                 <option value="{{ $p->id }}">{{ $p->name }}</option>
                             @endforeach
                         </select>
-                        <button type="submit" class="btn btn-secondary" title="Pesquisar">
+                        <button type="submit" class="btn btn-outline-secondary" title="Pesquisar">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>

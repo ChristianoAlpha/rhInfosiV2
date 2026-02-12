@@ -84,7 +84,7 @@
             </div>
 
             <div class="d-grid gap-2 col-3 mx-auto mt-4">
-              <button type="submit" class="btn btn-success">Atualizar Pedido</button>
+              <button type="submit" class="btn btn-outline-secondary">Atualizar Pedido</button>
             </div>
           </form>
         </div>

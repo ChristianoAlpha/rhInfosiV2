@@ -106,7 +106,7 @@
 
 
           <div class="d-flex justify-content-center mt-4">
-            <button type="submit" class="btn btn-success btn-lg px-5">
+            <button type="submit" class="btn btn-outline-secondary btn-lg px-5">
               Atualizar Pagamento
             </button>
           </div>

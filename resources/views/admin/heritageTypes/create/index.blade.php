@@ -29,7 +29,7 @@
                         </div>
 
                             <div class="d-grid gap-2 col-4 mx-auto mt-4">
-                            <button class="btn btn-success">
+                            <buttontype="submit" class="btn btn-outline-secondary">
                                 <i class="fas fa-save me-1"></i> Salvar
                             </button>
                             <a href="{{ route('admin.heritageTypes.index') }}" class="btn btn-secondary ms-2">

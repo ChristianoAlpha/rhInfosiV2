@@ -33,7 +33,7 @@
                         </div>
 
                         <div class="d-grid gap-2 col-4 mx-auto mt-4">
-                            <button type="submit" class="btn btn-success">Salvar Tipo de Licença</button>
+                            <button type="submit" class="btn btn-outline-secondary">Salvar Tipo de Licença</button>
                         </div>
                     </form>
                 </div>

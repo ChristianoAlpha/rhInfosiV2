@@ -75,14 +75,14 @@
                         </div>
                     </div>
                     {{-- <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary w-100">
+                        <button type="submit" class="btn btn-outline-secondary w-100">
                             <i class="fas fa-search"></i> Filtrar
                         </button>
                     </div> --}}
                 </div>
                 <!-- Botão Filtrar -->
                 <div class="col-md-3 m-auto mt-3">
-                    <button type="submit" class="btn btn-primary w-100">
+                    <button type="submit" class="btn btn-outline-secondary w-100">
                         <i class="fas fa-search"></i> Filtrar
                     </button>
                 </div>

@@ -54,7 +54,7 @@
 
                         <div id="justificationMessage" class="mb-3"></div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-success" style="width: auto;">
+                            <button type="submit" class="btn btn-outline-secondary" style="width: auto;">
                                 <i class="fas fa-check-circle"></i> Registrar
                             </button>
                         </div>

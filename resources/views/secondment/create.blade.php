@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary w-100 mt-0">
+                        <button type="submit" class="btn btn-outline-secondary w-100 mt-0">
                             <i class="fas fa-search"></i> Buscar
                         </button>
                     </div>
@@ -95,7 +95,7 @@
 
                             <div class="row">
                                 <div class="d-grid gap-2 col-4 mx-auto mt-4">
-                                <button type="submit" class="btn btn-success" ><i class="fas fa-check-circle"></i> Salvar Destacamento</button>
+                                <button type="submit" class="btn btn-outline-secondary" ><i class="fas fa-check-circle"></i> Salvar Destacamento</button>
                             </div>
                             </div>
                         </div>

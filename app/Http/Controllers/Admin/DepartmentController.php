@@ -34,7 +34,7 @@ class DepartmentController extends Controller
         $data->save();
 
         return redirect()->back()
-               ->with('msg', 'Dados Submetidos com Sucesso');
+               ->with('success', 'Dados Submetidos com Sucesso');
     }
 
     public function show($id)
@@ -73,7 +73,7 @@ class DepartmentController extends Controller
         $data->save();
 
         return redirect()->back()
-               ->with('msg', 'Dados Submetidos com Sucesso');
+               ->with('success', 'Dados Submetidos com Sucesso');
     }
 
     public function employeeePdf($departmentId)

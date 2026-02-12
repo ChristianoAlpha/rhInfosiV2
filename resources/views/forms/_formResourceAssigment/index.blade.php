@@ -93,13 +93,13 @@
 </div> --}}
 @if (isset($vehicle))
     <div class="d-grid gap-2 col-md-4 mx-auto mt-4">
-        <button type="submit" class="btn btn-success btn-lg">
+        <button type="submit" class="btn btn-outline-secondary btn-lg">
             <i class="fas fa-check-circle me-2"></i>Atualizar Viatura
         </button>
     </div>
 @else
     <div class="d-grid gap-2 col-md-4 mx-auto mt-4">
-        <button type="submit" class="btn btn-success btn-lg">
+        <button type="submit" class="btn btn-outline-secondary btn-lg">
             <i class="fas fa-check-circle me-2"></i>Cadastrar Viatura
         </button>
     </div>
