@@ -26,7 +26,7 @@
                                 @enderror
                             </div>
                             <div class="col-4">
-                                <button type="submit" class="btn btn-primary w-100">Buscar</button>
+                                <button type="submit" class="btn btn-outline-secondary w-100">Buscar</button>
                             </div>
                         </div>
                     </form>
@@ -59,7 +59,7 @@
                                     <option value="Rejeitado">Rejeitado</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-success w-100">
+                            <button type="submit" class="btn btn-outline-secondary w-100">
                                 <i class="fas fa-check-circle"></i> Enviar Pedido
                             </button>
                         </form>

@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary w-100">
+                        <button type="submit" class="btn btn-outline-secondary w-100">
                             <i class="fas fa-search"></i> Buscar
                         </button>
                     </div>
@@ -75,7 +75,7 @@
                     </div>
 
                             <div class="d-grid gap-2 col-4 mx-auto mt-4">
-                                <button type="submit" class="btn btn-success">Salvar Pedido</button>
+                                <button type="submit" class="btn btn-outline-secondary">Salvar Pedido</button>
                             </div>
                 </form>
             @endisset

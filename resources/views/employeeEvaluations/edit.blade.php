@@ -52,7 +52,7 @@
 
         <div class="row mt-4">
           <div class="col text-center">
-            <button type="submit" class="btn btn-success w-50">Atualizar Avaliação</button>
+            <button type="submit" class="btn btn-outline-secondary w-50">Atualizar Avaliação</button>
           </div>
         </div>
 

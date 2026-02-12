@@ -44,7 +44,7 @@
             <textarea name="reason" id="reason" rows="3" class="form-control">{{ $data->reason }}</textarea>
           </div>
               <div class="d-grid gap-2 col-4 mx-auto mt-4">
-                <button type="submit" class="btn btn-success">Salvar Pedido</button>
+                <button type="submit" class="btn btn-outline-secondary">Salvar Pedido</button>
               </div>
         </form>
       </div>

@@ -98,7 +98,7 @@
                                     </div>
                                     @if ($item->role == 'employee')
                                         <a href="{{ route('admin.users.contract', $item->id) }}"
-                                            class="btn btn-success btn-sm" style="width: 40px" title="Gerar Contrato">
+                                           type="submit" class="btn btn-outline-secondary btn-sm" style="width: 40px" title="Gerar Contrato">
                                             <i class="fas fa-file-pdf"></i>
                                         </a>
                                     @endif

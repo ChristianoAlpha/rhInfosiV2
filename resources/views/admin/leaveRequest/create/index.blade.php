@@ -26,7 +26,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-4">
-                                    <button type="submit" class="btn btn-primary w-100">Buscar</button>
+                                    <button type="submit" class="btn btn-outline-secondary w-100">Buscar</button>
                                 </div>
                             </div>
                         </form>
@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                             <div class="d-grid gap-2 col-4 mx-auto mt-4">
-                                <button type="submit" class="btn btn-success">Salvar Pedido</button>
+                                <button type="submit" class="btn btn-outline-secondary">Salvar Pedido</button>
                             </div>
                         </form>
                     @endif

@@ -123,7 +123,7 @@
           </div>
 
           <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="submit" class="btn btn-primary btn-lg">
+            <button type="submit" class="btn btn-outline-secondary btn-lg">
               <i class="fas fa-save me-2"></i>Atualizar Administrador
             </button>
           </div>

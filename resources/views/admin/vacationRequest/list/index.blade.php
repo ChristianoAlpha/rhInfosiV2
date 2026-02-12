@@ -52,7 +52,7 @@
           </select>
         </div>
         <div class="col-md-3 d-flex align-items-end">
-          <button type="submit" class="btn btn-primary w-100">
+          <button type="submit" class="btn btn-outline-secondary w-100">
             <i class="fas fa-filter"></i> Filtrar
           </button>
         </div>
@@ -109,7 +109,7 @@
                 <td>{{ $vr->approvalComment ?? '-' }}</td>
                 <td>
                   @if($vr->approvalStatus == 'Aprovado' && $vr->signedPdfPath)
-                    <a href="{{ route('admin.director.downloadSignedPdf', $vr->id) }}" class="btn btn-success btn-sm"
+                    <a href="{{ route('admin.director.downloadSignedPdf', $vr->id) }}"type="submit" class="btn btn-outline-secondary btn-sm"
                       title="Baixar Guia de Férias">
                       <i class="fas fa-file-pdf"></i> Guia
                     </a>

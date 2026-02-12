@@ -34,7 +34,7 @@
             <label for="observations" class="form-label">Observações</label>
             <textarea name="observations" id="observations" class="form-control">{{ $retirement->observations }}</textarea>
           </div>
-          <button type="submit" class="btn btn-success w-100">
+          <button type="submit" class="btn btn-outline-secondary w-100">
             <i class="fas fa-check-circle"></i> Atualizar Pedido
           </button>
         </form>

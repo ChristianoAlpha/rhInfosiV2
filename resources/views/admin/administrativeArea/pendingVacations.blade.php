@@ -28,7 +28,7 @@
             placeholder="ID do Funcionário">
         </div>
         <div class="col-md-3 align-self-end">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-outline-secondary">
             <i class="fas fa-search me-1"></i>Filtrar
           </button>
           <a href="{{ route('admin.hr.pendingVacations') }}" class="btn btn-secondary">
@@ -68,7 +68,7 @@
                       value="{{ $req->vacationStart }}">
                 </td>
                 <td>
-                  <button type="submit" class="btn btn-primary btn-sm">
+                  <button type="submit" class="btn btn-outline-secondary btn-sm">
                     <i class="fas fa-share"></i> Encaminhar
                   </button>
                   </form>

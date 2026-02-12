@@ -40,7 +40,7 @@
                     {{-- Botão Aprovar --}}
                     <form action="{{ route('admin.director.approveVacation', $req->id) }}" method="POST" class="me-2">
                       @csrf
-                      <button type="submit" class="btn btn-success btn-sm"
+                      <button type="submit" class="btn btn-outline-secondary btn-sm"
                         onclick="return confirm('Deseja aprovar e assinar este pedido?')">
                         <i class="fas fa-check"></i> Aprovar
                       </button>

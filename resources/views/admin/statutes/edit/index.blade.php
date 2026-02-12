@@ -35,7 +35,7 @@
               @endif
             </div>
                 <div class="d-grid gap-2 col-4 mx-auto mt-4">
-                    <button type="submit" class="btn btn-success"><i class="fas fa-check-circle"></i> Atualizar Estatuto</button>
+                    <button type="submit" class="btn btn-outline-secondary"><i class="fas fa-check-circle"></i> Atualizar Estatuto</button>
             </div>
           </form>
         </div>

@@ -58,7 +58,7 @@
       @csrf
       <input type="hidden" name="chatGroupId" value="{{ $group->id }}">
       <input type="text" name="message" class="form-control me-2" placeholder="Digite sua mensagem..." required autofocus>
-      <button type="submit" class="btn btn-success">
+      <button type="submit" class="btn btn-outline-secondary">
         <i class="fa fa-paper-plane"></i> Enviar
       </button>
     </form>
