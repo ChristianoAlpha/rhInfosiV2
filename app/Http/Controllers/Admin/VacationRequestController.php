@@ -104,7 +104,8 @@ class VacationRequestController extends Controller
         $term = $request->employeeSearch;
 
         $employee = Employeee::where('employmentStatus', 'active')
-            ->where(fn($q) =>
+            ->where(
+                fn($q) =>
                 $q->where('id', $term)
                     ->orWhere('fullName', 'LIKE', "%$term%")
             )->first();
@@ -336,6 +337,14 @@ class VacationRequestController extends Controller
         if (!$vacation->signedPdfPath || !Storage::disk('public')->exists($vacation->signedPdfPath)) {
             return back()->with('error', 'O arquivo PDF não foi encontrado.');
         }
-        return Storage::disk('public')->download($vacation->signedPdfPath);
+
+        $fullPath = storage_path('app/public/' . $vacation->signedPdfPath);
+        $filename = 'Guia_Ferias_' . $vacation->id . '.pdf';
+
+        return response()->download($fullPath, $filename, [
+            'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
+            'Pragma' => 'no-cache',
+            'Expires' => 'Sun, 01 Jan 1990 00:00:00 GMT',
+        ]);
     }
 }
