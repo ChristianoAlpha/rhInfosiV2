@@ -94,7 +94,7 @@
                                 </a>
                             </div>
                             <div class="notifications-item">
-                                <img src="assets/images/avatar/2.png" alt="" class="rounded me-3 border" />
+                                <img src="{{ asset('assets/images/avatar/2.png')}}" alt="" class="rounded me-3 border" />
                                 <div class="notifications-desc">
                                     <a href="javascript:void(0);" class="font-body text-truncate-2-line"> <span class="fw-semibold text-dark">Malanie Hanvey</span> We should talk about that at lunch!</a>
                                     <div class="d-flex justify-content-between align-items-center">
@@ -115,26 +115,28 @@
                     </div>
                     <div class="dropdown nxl-h-item">
                         <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" data-bs-auto-close="outside">
-                            <img src="assets/images/avatar/1.png" alt="user-image" class="img-fluid user-avtar me-0" />
+                            <img src="{{ asset('assets/images/avatar/1.png')}}" alt="user-image" class="img-fluid user-avtar me-0" />
                         </a>
                         <div class="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-user-dropdown">
                             <div class="dropdown-header">
                                 <div class="d-flex align-items-center">
                                     <div>
-                                        <h6 class="text-dark mb-0">Alexandra Della <span class="badge bg-soft-success text-success ms-1">PRO</span></h6>
-                                        <span class="fs-12 fw-medium text-muted">alex.della@outlook.com</span>
+                                        <h6 class="text-dark mb-0">{{$userName->fullName ?? 'Menu'}} <span class="badge bg-soft-success text-success ms-1">{{$userName->position->name ?? 'admin'}}</span></h6>
+                                        <span class="fs-12 fw-medium text-muted">{{$userName->email ?? Auth::user()->email}}</span>
                                     </div>
                                 </div>
                             </div>
-                            <a href="javascript:void(0);" class="dropdown-item">
+                            <a href="{{ route('profile') }}" class="dropdown-item">
                                 <i class="feather-user"></i>
-                                <span>Profile Details</span>
+                                <span>Meu Perfil</span>
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="auth-login-minimal.html" class="dropdown-item">
-                                <i class="feather-log-out"></i>
-                                <span>Logout</span>
-                            </a>
+                            <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="feather-log-out"></i>
+                                <span>Terminar Sessão</span></a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                                
+                            </form>
                         </div>
                     </div>
                 </div>

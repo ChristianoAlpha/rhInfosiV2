@@ -4,7 +4,7 @@
             <a href="{{ route('admin.dashboard') }}" class="b-brand">
                 <!-- ========   change your logo hear   ============ -->
                 <img src="{{ asset('images/infosi/infosiLogo.png') }}" alt="INFOSI RH Logo" width="200" class="logo logo-lg" />
-                <img src="assets/images/logo-abbr.png" alt="" class="logo logo-sm" />
+                <img src="{{ asset('assets/images/infosiFavicon.png')}}" alt="" class="logo logo-sm" />
             </a>
         </div>
         <div class="navbar-content">

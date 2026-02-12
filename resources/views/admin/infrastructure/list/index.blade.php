@@ -43,7 +43,7 @@
                             <td class="text-{{ ($item->status ?? '-') == 1 ? 'success' : 'danger' }}">
                                 {{ ($item->status ?? '-') == 1 ? 'Disponível' : 'Indisponível' }}</td>
                             <td class="text-center">
-                                <div class="btn-group">
+                                <div class="dropdown">
                                     <button class="btn btn-outline-secondary dropdown-toggle" type="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         Operações

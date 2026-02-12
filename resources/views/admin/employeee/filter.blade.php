@@ -1,4 +1,4 @@
-@extends("layouts.admin.layout")
+@extends("layouts.merge.admin")
 @section("title", "Filtrar Funcionários")
 @section("content")
 
