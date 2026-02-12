@@ -107,50 +107,52 @@
         holCont = document.getElementById('holidaysContainer'),
         addBtn = document.getElementById('addHoliday');
 
-      function calcEnd() {
-        if (!startEl.value || !typeEl.value) return;
-        let needed = parseInt(typeEl.value),
-          d = new Date(startEl.value),
-          count = 0,
-          holidays = Array.from(document.querySelectorAll('.holiday-input'))
-            .map(i => i.value)
-            .filter(v => v)
-            .map(v => new Date(v).toDateString());
+      if (startEl && typeEl && endEl) {
+        function calcEnd() {
+          if (!startEl.value || !typeEl.value) return;
+          let needed = parseInt(typeEl.value),
+            d = new Date(startEl.value),
+            count = 0,
+            holidays = Array.from(document.querySelectorAll('.holiday-input'))
+              .map(i => i.value)
+              .filter(v => v)
+              .map(v => new Date(v).toDateString());
 
-        while (count < needed) {
-          d.setDate(d.getDate() + 1);
-          if (d.getDay() === 0 || d.getDay() === 6) continue;
-          if (holidays.includes(d.toDateString())) continue;
-          count++;
+          while (count < needed) {
+            d.setDate(d.getDate() + 1);
+            if (d.getDay() === 0 || d.getDay() === 6) continue;
+            if (holidays.includes(d.toDateString())) continue;
+            count++;
+          }
+          if (d.getDay() === 6) d.setDate(d.getDate() + 2);
+          if (d.getDay() === 0) d.setDate(d.getDate() + 1);
+          endEl.value = d.toISOString().slice(0, 10);
         }
-        if (d.getDay() === 6) d.setDate(d.getDate() + 2);
-        if (d.getDay() === 0) d.setDate(d.getDate() + 1);
-        endEl.value = d.toISOString().slice(0, 10);
+
+        function addHolidayField(value = '') {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'holiday-field d-flex mb-2';
+          wrapper.innerHTML = `
+                <input type="date" name="manualHolidays[]" class="form-control holiday-input" value="${value}">
+                <button type="button" class="btn btn-outline-danger btn-sm ms-2 remove-holiday">–</button>
+              `;
+          holCont.append(wrapper);
+          wrapper.querySelector('.holiday-input').addEventListener('change', calcEnd);
+          wrapper.querySelector('.remove-holiday').addEventListener('click', () => {
+            wrapper.remove();
+            calcEnd();
+          });
+        }
+
+        // Initialize listeners
+        document.querySelectorAll('.holiday-input').forEach(i => i.addEventListener('change', calcEnd));
+        if (addBtn) addBtn.addEventListener('click', () => addHolidayField());
+        startEl.addEventListener('change', calcEnd);
+        typeEl.addEventListener('change', calcEnd);
+
+        // Auto-calculate on page load if old() values exist
+        calcEnd();
       }
-
-      function addHolidayField(value = '') {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'holiday-field d-flex mb-2';
-        wrapper.innerHTML = `
-          <input type="date" name="manualHolidays[]" class="form-control holiday-input" value="${value}">
-          <button type="button" class="btn btn-outline-danger btn-sm ms-2 remove-holiday">–</button>
-        `;
-        holCont.append(wrapper);
-        wrapper.querySelector('.holiday-input').addEventListener('change', calcEnd);
-        wrapper.querySelector('.remove-holiday').addEventListener('click', () => {
-          wrapper.remove();
-          calcEnd();
-        });
-      }
-
-      // Initialize listeners(os que vão escrever de forma automatica o campo da data final)
-      document.querySelectorAll('.holiday-input').forEach(i => i.addEventListener('change', calcEnd));
-      addBtn.addEventListener('click', () => addHolidayField());
-      startEl.addEventListener('change', calcEnd);
-      typeEl.addEventListener('change', calcEnd);
-
-      // Auto-calculate on page load if old() values exist
-      calcEnd();
     </script>
   @endpush
 @endsection

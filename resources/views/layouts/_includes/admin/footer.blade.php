@@ -18,7 +18,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.2.2/circle-progress.js"
     integrity="sha512-8tHhvNIEwJiw6wQDCVob7hCrwfECKknmtZAdP8JdqZcQ6OEAf1aaErJAzTAL5tQYrcrJOhqS2P3laAuwk4+e5g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> --}}
+{{--
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script> --}}
 
 <!-- Vendors JS -->
 <script src="{{ asset('assets/vendors/js/vendors.min.js') }}"></script>
@@ -44,7 +46,7 @@
     $('.select2').select2();
 
     // Abre/fecha sidebar em mobile ao clicar no botão hamburger
-    document.querySelector('.navbar-toggler').addEventListener('click', function() {
+    document.querySelector('.navbar-toggler').addEventListener('click', function () {
         document.querySelector('.sidebar').classList.toggle('show');
     });
 
@@ -62,11 +64,11 @@
             document.querySelector('.theme-panel').classList.toggle('d-none');
         }); */
 
-    document.getElementById('skin').addEventListener('change', function(e) {
+    document.getElementById('skin').addEventListener('change', function (e) {
         document.documentElement.setAttribute('data-theme', e.target.value.toLowerCase());
     });
 
-    document.getElementById('typography').addEventListener('change', function(e) {
+    document.getElementById('typography').addEventListener('change', function (e) {
         document.body.style.fontFamily = e.target.value;
     });
 
@@ -122,7 +124,7 @@
     const navResults = document.getElementById('navbarSearchResults');
     let navTimeout = null;
 
-    navInput.addEventListener('keyup', function() {
+    navInput.addEventListener('keyup', function () {
 
         clearTimeout(navTimeout);
         const query = this.value;
@@ -154,14 +156,14 @@
     });
 
     // fechar dropdown ao clicar fora
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         if (!navInput.contains(e.target)) {
             navResults.innerHTML = '';
         }
     });
 </script>
 @yield('scripts')
-{{-- @stack('scripts') --}}
+@stack('scripts')
 
 </body>
 
