@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\VacationRequest;
+use App\Models\Admin;
 use App\Models\Department;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class AdministrativeAreaController extends Controller
 {
@@ -40,7 +42,10 @@ class AdministrativeAreaController extends Controller
 
         $pendingRequests = $query->with('employee')->orderByDesc('id')->get();
 
-        return view('admin.administrativeArea.pendingVacations', compact('pendingRequests', 'from', 'to', 'employeeId'));
+        // Carregar diretores para o select — usa Admin (tabela admins que tem coluna role)
+        $directors = Admin::where('role', 'director')->get();
+
+        return view('admin.administrativeArea.pendingVacations', compact('pendingRequests', 'from', 'to', 'employeeId', 'directors'));
     }
 
     public function forwardVacation($id, Request $request)
@@ -50,6 +55,10 @@ class AdministrativeAreaController extends Controller
         if (!$this->hasRhAccess($user)) {
             abort(403, 'Acesso negado.');
         }
+
+        $request->validate([
+            'forwarded_to_director_id' => 'required|exists:admins,id',
+        ]);
 
         $vacation = VacationRequest::findOrFail($id);
 
@@ -82,11 +91,16 @@ class AdministrativeAreaController extends Controller
 
         $vacation->approvalStatus = 'Encaminhado';
         $vacation->approvalComment = $request->input('approvalComment') ?? 'Encaminhado pela Área Administrativa';
+        $vacation->forwarded_to_director_id = $request->forwarded_to_director_id;
         $vacation->save();
 
         return redirect()->route('admin.hr.pendingVacations')->with('msg', 'Pedido encaminhado com sucesso!');
     }
 
+    /**
+     * Verifica se o utilizador tem acesso à Área Administrativa (RH).
+     * Permite: admin, hr, ou department_head/employee do DASG/RH.
+     */
     private function hasRhAccess($user)
     {
         if (in_array($user->role, ['admin', 'hr'])) {
@@ -94,14 +108,20 @@ class AdministrativeAreaController extends Controller
         }
 
         if (in_array($user->role, ['department_head', 'employee'])) {
-            $departmentId = $user->employee->departmentId ?? $user->department_id ?? null;
-            if ($departmentId) {
-                $department = Department::find($departmentId);
-                if ($department) {
-                    $title = \Illuminate\Support\Str::lower($department->title);
-                    if (\Illuminate\Support\Str::contains($title, ['recursos humanos', 'rh', 'administrativa', 'administração e serviços gerais', 'dasg'])) {
-                        return true;
-                    }
+            $department = null;
+
+            if ($user->department_id) {
+                $department = Department::find($user->department_id);
+            }
+
+            if (!$department && $user->employee && $user->employee->departmentId) {
+                $department = Department::find($user->employee->departmentId);
+            }
+
+            if ($department) {
+                $title = Str::lower($department->title);
+                if (Str::contains($title, ['recursos humanos', 'rh', 'administrativa', 'administração e serviços gerais', 'dasg'])) {
+                    return true;
                 }
             }
         }

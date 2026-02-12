@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\VacationRequest;
+use App\Models\Admin;
+use App\Models\Department;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class AdministrativeAreaController extends Controller
 {
@@ -18,7 +21,7 @@ class AdministrativeAreaController extends Controller
     public function pendingVacations(Request $request)
     {
         $user = Auth::user();
-        if (!in_array($user->role, ['admin', 'hr'])) {
+        if (!$this->hasRhAccess($user)) {
             abort(403, 'Acesso negado.');
         }
 
@@ -41,8 +44,8 @@ class AdministrativeAreaController extends Controller
 
         $pendingRequests = $query->with('employee')->orderByDesc('id')->get();
 
-        // Carregar diretores para o select via Role
-        $directors = \App\Models\User::where('role', 'director')->get();
+        // Carregar diretores para o select — usa Admin (tabela admins que tem coluna role)
+        $directors = Admin::where('role', 'director')->get();
 
         return view('administrativeArea.pendingVacations', compact('pendingRequests', 'from', 'to', 'employeeId', 'directors'));
     }
@@ -51,12 +54,12 @@ class AdministrativeAreaController extends Controller
     public function forwardVacation($id, Request $request)
     {
         $user = Auth::user();
-        if (!in_array($user->role, ['admin', 'hr'])) {
+        if (!$this->hasRhAccess($user)) {
             abort(403, 'Acesso negado.');
         }
 
         $request->validate([
-            'forwarded_to_director_id' => 'required|exists:users,id',
+            'forwarded_to_director_id' => 'required|exists:admins,id',
         ]);
 
         $vacation = VacationRequest::findOrFail($id);
@@ -93,5 +96,41 @@ class AdministrativeAreaController extends Controller
 
         return redirect()->route('admin.hr.pendingVacations')
             ->with('msg', 'Pedido de férias encaminhado para o Diretor Geral com sucesso!');
+    }
+
+    /**
+     * Verifica se o utilizador tem acesso à Área Administrativa (RH).
+     * Permite: admin, hr, ou department_head/employee do DASG/RH.
+     */
+    private function hasRhAccess($user)
+    {
+        // Admin e HR têm acesso direto
+        if (in_array($user->role, ['admin', 'hr'])) {
+            return true;
+        }
+
+        // department_head ou employee do departamento DASG/RH
+        if (in_array($user->role, ['department_head', 'employee'])) {
+            $department = null;
+
+            // Tentar via department_id direto no admin
+            if ($user->department_id) {
+                $department = Department::find($user->department_id);
+            }
+
+            // Tentar via employee->department
+            if (!$department && $user->employee && $user->employee->departmentId) {
+                $department = Department::find($user->employee->departmentId);
+            }
+
+            if ($department) {
+                $title = Str::lower($department->title);
+                if (Str::contains($title, ['recursos humanos', 'rh', 'administrativa', 'administração e serviços gerais', 'dasg'])) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

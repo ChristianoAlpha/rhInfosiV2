@@ -600,88 +600,77 @@
                         </li>
 
                         <!-- Licenças e Movimentações -->
-                        <li class="nxl-item nxl-hasmenu"
-                            style="color: #6c757d; font-weight: bold; padding: 10px 15px;">Licenças e
-                            Movimentações</li>
-                        <li class="nav-item nxl-hasmenu">
-                            <a class="nxl-link" href="javascript:void(0);" data-bs-target="#collapseLeaveRequest"
-                                aria-expanded="false" aria-controls="collapseLeaveRequest">
-                                <i class="fas fa-file-alt me-2"></i> Pedidos de Licença <i
-                                    class="fas fa-chevron-right"></i>
-                            </a>
-                            <div class="collapse" id="collapseLeaveRequest">
-                                <ul class="nxl-submenu">
-                                    <li class="nxl-item"><a class="nxl-link"
-                                            href="{{ route('admin.leaveRequests.index') }}"><i
-                                                class="fas fa-eye me-2"></i>Ver Todos</a></li>
-                                    <li class="nxl-item"><a class="nxl-link"
-                                            href="{{ route('admin.leaveRequests.create') }}"><i
-                                                class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
-                                </ul>
-                            </div>
+                        <li class="nxl-item nxl-caption">
+                            <label>Licenças e Movimentações</label>
                         </li>
                         <li class="nav-item nxl-hasmenu">
-                            <a class="nxl-link" href="javascript:void(0);" data-bs-target="#collapseMobility"
-                                aria-expanded="false" aria-controls="collapseMobility">
-                                <i class="fas fa-exchange-alt me-2"></i> Mobilidade <i
-                                    class="fas fa-chevron-right"></i>
+                            <a class="nxl-link" href="javascript:void(0);">
+                                <span class="nxl-micon"><i class="fas fa-file-alt me-2"></i></span>
+                                <span class="nxl-mtext">Pedidos de Licença </span>
+                                <span class="nxl-arrow"><i class="fas fa-chevron-right"></i></span>
                             </a>
-                            <div class="collapse" id="collapseMobility">
-                                <ul class="nxl-submenu">
-                                    <li class="nxl-item"><a class="nxl-link"
-                                            href="{{ route('admin.mobilities.index') }}"><i
-                                                class="fas fa-eye me-2"></i>Ver
-                                            Todos</a></li>
-                                    <li class="nxl-item"><a class="nxl-link"
-                                            href="{{ route('admin.mobilities.create') }}"><i
-                                                class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
-                                </ul>
-                            </div>
+                            <ul class="nxl-submenu">
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ route('admin.leaveRequests.index') }}"><i
+                                            class="fas fa-eye me-2"></i>Ver Todos</a></li>
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ route('admin.leaveRequests.create') }}"><i
+                                            class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item nxl-hasmenu">
-                            <a class="nxl-link" href="javascript:void(0);" data-bs-target="#collapseSecondment"
-                                aria-expanded="false" aria-controls="collapseSecondment">
-                                <i class="fa-solid fa-users-rays me-2"></i> Destacamento <i
-                                    class="fas fa-chevron-right"></i>
+                            <a class="nxl-link" href="javascript:void(0);">
+                                <span class="nxl-micon"><i class="fas fa-exchange-alt me-2"></i></span>
+                                <span class="nxl-mtext">Mobilidade</span>
+                                <span class="nxl-arrow"><i class="fas fa-chevron-right"></i></span>
                             </a>
-                            <div class="collapse" id="collapseSecondment">
-                                <ul class="nxl-submenu">
-                                    <li class="nxl-item"><a class="nxl-link" href="{{ url('secondment') }}"><i
-                                                class="fas fa-eye me-2"></i>Ver Todos</a></li>
-                                    <li class="nxl-item"><a class="nxl-link"
-                                            href="{{ url('secondment/create') }}"><i
-                                                class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
-                                </ul>
-                            </div>
+                            <ul class="nxl-submenu">
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ route('admin.mobilities.index') }}"><i
+                                            class="fas fa-eye me-2"></i>Ver
+                                        Todos</a></li>
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ route('admin.mobilities.create') }}"><i
+                                            class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item nxl-hasmenu">
+                            <a class="nxl-link" href="javascript:void(0);">
+                                <span class="nxl-micon"><i class="fa-solid fa-users-rays me-2"></i></span>
+                                <span class="nxl-mtext">Destacamento</span>
+                                <span class="nxl-arrow"><i class="fas fa-chevron-right"></i></span>
+                            </a>
+                            <ul class="nxl-submenu">
+                                <li class="nxl-item"><a class="nxl-link" href="{{ url('secondment') }}"><i
+                                            class="fas fa-eye me-2"></i>Ver Todos</a></li>
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ url('secondment/create') }}"><i
+                                            class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
+                            </ul>
                         </li>
 
                         <!-- Administração e Controle -->
-                        <li class="nxl-item nxl-hasmenu"
-                            style="color: #6c757d; font-weight: bold; padding: 10px 15px;">
-                            Administração
-                            e
-                            Controle</li>
+                        <li class="nxl-item nxl-caption">
+                            <label>Administração e Controle</label>
+                        </li>
                         <li class="nav-item nxl-hasmenu">
-                            <a class="nxl-link" href="javascript:void(0);" data-bs-target="#deptHeadMenu"
-                                aria-expanded="false" aria-controls="deptHeadMenu">
-                                <i class="fas fa-user-tie me-2"></i> Portal do Chefe Dept. <i
-                                    class="fas fa-chevron-right"></i>
+                            <a class="nxl-link" href="javascript:void(0);">
+                                <span class="nxl-micon"><i class="fas fa-user-tie me-2"></i></span>
+                                <span class="nxl-mtext">Portal do Chefe Dept.</span>
+                                <span class="nxl-arrow"><i class="fas fa-chevron-right"></i></span>
                             </a>
-                            <div class="collapse" id="deptHeadMenu">
-                                <ul class="nxl-submenu">
-                                    <li class="nxl-item"><a class="nxl-link" href="{{ route('dh.myEmployees') }}"><i
-                                                class="fa-solid fa-users me-2"></i>Meus Funcionários</a></li>
-                                    <li class="nxl-item"><a class="nxl-link"
-                                            href="{{ route('dh.pendingVacations') }}"><i
-                                                class="fas fa-umbrella-beach me-2"></i>Férias Pendentes</a></li>
-                                    <li class="nxl-item"><a class="nxl-link"
-                                            href="{{ route('dh.pendingLeaves') }}"><i
-                                                class="fas fa-file-alt me-2"></i>Licenças Pendentes</a></li>
-                                    <li class="nxl-item"><a class="nxl-link"
-                                            href="{{ route('dh.pendingRetirements') }}"><i
-                                                class="fas fa-user-clock me-2"></i>Pedidos de Reforma</a></li>
-                                </ul>
-                            </div>
+                            <ul class="nxl-submenu">
+                                <li class="nxl-item"><a class="nxl-link" href="{{ route('dh.myEmployees') }}"><i
+                                            class="fa-solid fa-users me-2"></i>Meus Funcionários</a></li>
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ route('dh.pendingVacations') }}"><i
+                                            class="fas fa-umbrella-beach me-2"></i>Férias Pendentes</a></li>
+                                <li class="nxl-item"><a class="nxl-link" href="{{ route('dh.pendingLeaves') }}"><i
+                                            class="fas fa-file-alt me-2"></i>Licenças Pendentes</a></li>
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ route('dh.pendingRetirements') }}"><i
+                                            class="fas fa-user-clock me-2"></i>Pedidos de Reforma</a></li>
+                            </ul>
                         </li>
 
                         <!-- Área Administrativa (RH) -->
@@ -702,9 +691,8 @@
                         </li>
 
                         <!-- Direção Geral -->
-                        <li class="nxl-item nxl-hasmenu"
-                            style="color: #6c757d; font-weight: bold; padding: 10px 15px;">Direção
-                            Geral
+                        <li class="nxl-item nxl-caption">
+                            <label>Direção Geral</label>
                         </li>
                         <li class="nav-item nxl-hasmenu">
                             <a class="nxl-link" href="javascript:void(0);">

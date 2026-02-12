@@ -495,16 +495,16 @@ Route::middleware('auth')->name('admin.')->group(function () {
 
     // inicio Administrative Area (RH) routes
     Route::prefix('area-administrativa')->group(function () {
-        Route::get('/ferias-pendentes', [\App\Http\Controllers\AdministrativeAreaController::class, 'pendingVacations'])->name('hr.pendingVacations');
-        Route::post('/encaminhar-ferias/{id}', [\App\Http\Controllers\AdministrativeAreaController::class, 'forwardVacation'])->name('hr.forwardVacation');
+        Route::get('/ferias-pendentes', [\App\Http\Controllers\Admin\AdministrativeAreaController::class, 'pendingVacations'])->name('hr.pendingVacations');
+        Route::post('/encaminhar-ferias/{id}', [\App\Http\Controllers\Admin\AdministrativeAreaController::class, 'forwardVacation'])->name('hr.forwardVacation');
     });
     //fim Administrative Area (RH) routes
 
     // inicio Director General routes
     Route::prefix('direcao-geral')->group(function () {
-        Route::get('/ferias-pendentes', [\App\Http\Controllers\DirectorGeneralController::class, 'pendingVacations'])->name('director.pendingVacations');
-        Route::post('/aprovar-ferias/{id}', [\App\Http\Controllers\DirectorGeneralController::class, 'approveVacation'])->name('director.approveVacation');
-        Route::post('/rejeitar-ferias/{id}', [\App\Http\Controllers\DirectorGeneralController::class, 'rejectVacation'])->name('director.rejectVacation');
+        Route::get('/ferias-pendentes', [\App\Http\Controllers\Admin\DirectorGeneralController::class, 'pendingVacations'])->name('director.pendingVacations');
+        Route::post('/aprovar-ferias/{id}', [\App\Http\Controllers\Admin\DirectorGeneralController::class, 'approveVacation'])->name('director.approveVacation');
+        Route::post('/rejeitar-ferias/{id}', [\App\Http\Controllers\Admin\DirectorGeneralController::class, 'rejectVacation'])->name('director.rejectVacation');
         Route::get('/download-ferias-assinada/{id}', [VacationRequestController::class, 'downloadSignedPdf'])->name('director.downloadSignedPdf');
     });
     //fim Director General routes
