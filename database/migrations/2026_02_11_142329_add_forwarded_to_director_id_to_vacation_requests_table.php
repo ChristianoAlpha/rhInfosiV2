@@ -12,23 +12,18 @@ class AddForwardedToDirectorIdToVacationRequestsTable extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::table('vacation_requests', function (Blueprint $table) {
-            $table->unsignedBigInteger('forwarded_to_director_id')->nullable()->after('approvalStatus');
-            $table->foreign('forwarded_to_director_id')->references('id')->on('users');
-        });
-    }
+{
+    Schema::table('vacation_requests', function (Blueprint $table) {
+        $table->unsignedBigInteger('forwarded_to_director_id')->nullable()->after('approvalStatus');
+        $table->foreign('forwarded_to_director_id')->references('id')->on('admins')->onDelete('set null'); // muda 'users' para 'admins'
+    });
+}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::table('vacation_requests', function (Blueprint $table) {
-            $table->dropForeign(['forwarded_to_director_id']);
-            $table->dropColumn('forwarded_to_director_id');
-        });
-    }
+public function down()
+{
+    Schema::table('vacation_requests', function (Blueprint $table) {
+        $table->dropForeign(['forwarded_to_director_id']);
+        $table->dropColumn('forwarded_to_director_id');
+    });
+}
 }
