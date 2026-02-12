@@ -127,7 +127,7 @@
     const navResults = document.getElementById('navbarSearchResults');
     let navTimeout = null;
 
-    navInput.addEventListener('keyup', function() {
+    navInput.addEventListener('keyup', function () {
 
         clearTimeout(navTimeout);
         const query = this.value;
@@ -159,7 +159,7 @@
     });
 
     // fechar dropdown ao clicar fora
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         if (!navInput.contains(e.target)) {
             navResults.innerHTML = '';
         }

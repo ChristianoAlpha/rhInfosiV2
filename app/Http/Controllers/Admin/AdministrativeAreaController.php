@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\VacationRequest;
+use App\Models\Department;
 use Carbon\Carbon;
 
 class AdministrativeAreaController extends Controller
@@ -14,11 +16,11 @@ class AdministrativeAreaController extends Controller
         $this->middleware('auth');
     }
 
-    // Lista pedidos validados pelo chefe de departamento
     public function pendingVacations(Request $request)
     {
         $user = Auth::user();
-        if (!in_array($user->role, ['admin', 'hr'])) {
+
+        if (!$this->hasRhAccess($user)) {
             abort(403, 'Acesso negado.');
         }
 
@@ -29,10 +31,7 @@ class AdministrativeAreaController extends Controller
         $query = VacationRequest::where('approvalStatus', 'Validado');
 
         if ($from && $to) {
-            $query->whereBetween('created_at', [
-                Carbon::parse($from)->startOfDay(),
-                Carbon::parse($to)->endOfDay(),
-            ]);
+            $query->whereBetween('created_at', [Carbon::parse($from)->startOfDay(), Carbon::parse($to)->endOfDay()]);
         }
 
         if ($employeeId) {
@@ -41,32 +40,23 @@ class AdministrativeAreaController extends Controller
 
         $pendingRequests = $query->with('employee')->orderByDesc('id')->get();
 
-        // Carregar diretores para o select via Role
-        $directors = \App\Models\User::where('role', 'director')->get();
-
-        return view('administrativeArea.pendingVacations', compact('pendingRequests', 'from', 'to', 'employeeId', 'directors'));
+        return view('admin.administrativeArea.pendingVacations', compact('pendingRequests', 'from', 'to', 'employeeId'));
     }
 
-    // Encaminha o pedido para o Diretor Geral
     public function forwardVacation($id, Request $request)
     {
         $user = Auth::user();
-        if (!in_array($user->role, ['admin', 'hr'])) {
+
+        if (!$this->hasRhAccess($user)) {
             abort(403, 'Acesso negado.');
         }
 
-        $request->validate([
-            'forwarded_to_director_id' => 'required|exists:users,id',
-        ]);
-
         $vacation = VacationRequest::findOrFail($id);
 
-        // Retificação de datas se fornecidas
-        if ($request->filled('vacationStart')) {
-            $vacation->vacationStart = $request->vacationStart;
+        if ($request->filled('start_date')) {
+            $vacation->vacationStart = $request->start_date;
 
-            // Recalcular data de fim baseada no tipo de férias
-            $start = Carbon::parse($request->vacationStart);
+            $start = Carbon::parse($request->start_date);
             $needed = intval(explode(' ', $vacation->vacationType)[0]);
             $holidays = $vacation->manualHolidays ?? [];
 
@@ -86,12 +76,36 @@ class AdministrativeAreaController extends Controller
             $vacation->vacationEnd = $end->toDateString();
         }
 
+        if ($request->filled('end_date')) {
+            $vacation->vacationEnd = $request->end_date;
+        }
+
         $vacation->approvalStatus = 'Encaminhado';
         $vacation->approvalComment = $request->input('approvalComment') ?? 'Encaminhado pela Área Administrativa';
-        $vacation->forwarded_to_director_id = $request->forwarded_to_director_id;
         $vacation->save();
 
-        return redirect()->route('admin.hr.pendingVacations')
-            ->with('msg', 'Pedido de férias encaminhado para o Diretor Geral com sucesso!');
+        return redirect()->route('admin.hr.pendingVacations')->with('msg', 'Pedido encaminhado com sucesso!');
+    }
+
+    private function hasRhAccess($user)
+    {
+        if (in_array($user->role, ['admin', 'hr'])) {
+            return true;
+        }
+
+        if (in_array($user->role, ['department_head', 'employee'])) {
+            $departmentId = $user->employee->departmentId ?? $user->department_id ?? null;
+            if ($departmentId) {
+                $department = Department::find($departmentId);
+                if ($department) {
+                    $title = \Illuminate\Support\Str::lower($department->title);
+                    if (\Illuminate\Support\Str::contains($title, ['recursos humanos', 'rh', 'administrativa', 'administração e serviços gerais', 'dasg'])) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }

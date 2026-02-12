@@ -143,7 +143,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-floating">
-            <input type="text" name="email" id="email" class="form-control" placeholder="nome.sobrenome apenas"
+            <input type="text" name="email" id="email" class="form-control" placeholder="Email nome.sobrenome apenas"
                 value="{{ old('email', $employee->email ?? '') }}">
             <label for="email"></label>
         </div>
