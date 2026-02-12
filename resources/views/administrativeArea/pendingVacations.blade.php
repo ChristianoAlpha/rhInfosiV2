@@ -62,8 +62,8 @@
               <th>#</th>
               <th>Funcionário</th>
               <th>Tipo</th>
-              <th>Início</th>
-              <th>Fim</th>
+              <th>Início / Fim</th>
+              <th style="min-width: 200px;">Encaminhar Para</th>
               <th>Status</th>
               <th class="text-center">Ações</th>
             </tr>
@@ -72,18 +72,47 @@
             @forelse($pendingRequests as $req)
               <tr>
                 <td><span class="fw-semibold text-muted">{{ $req->id }}</span></td>
-                <td>{{ $req->employee->fullName ?? '-' }}</td>
+                <td>
+                  <div class="d-flex flex-column">
+                    <span class="fw-bold">{{ $req->employee->fullName ?? '-' }}</span>
+                    <small class="text-muted">{{ $req->employee->department->title ?? '' }}</small>
+                  </div>
+                </td>
                 <td><span class="badge bg-secondary">{{ $req->vacationType }}</span></td>
-                <td>{{ \Carbon\Carbon::parse($req->vacationStart)->format('d/m/Y') }}</td>
-                <td>{{ \Carbon\Carbon::parse($req->vacationEnd)->format('d/m/Y') }}</td>
+                <td>
+                  <div class="d-flex flex-column">
+                    <small>Início:
+                      <strong>{{ \Carbon\Carbon::parse($req->vacationStart)->format('d/m/Y') }}</strong></small>
+                    <small class="text-muted">Fim: {{ \Carbon\Carbon::parse($req->vacationEnd)->format('d/m/Y') }}</small>
+                  </div>
+                </td>
+
+                {{-- COLUNA ENCAMINHAR PARA (SELECT) --}}
+                <td>
+                  <form action="{{ route('admin.hr.forwardVacation', $req->id) }}" method="POST"
+                    id="form-forward-{{ $req->id }}">
+                    @csrf
+                    <select name="forwarded_to_director_id" class="form-select form-select-sm" required>
+                      <option value="">-- Selecione o Diretor --</option>
+                      @foreach($directors as $director)
+                        <option value="{{ $director->id }}">
+                          {{ $director->directorName ?? ($director->employee->fullName ?? $director->email) }}
+                        </option>
+                      @endforeach
+                    </select>
+                  </form>
+                </td>
+
                 <td><span class="badge bg-info">{{ $req->approvalStatus }}</span></td>
+
+                {{-- COLUNA AÇÕES (DROPDOWN) --}}
                 <td class="text-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown"
                       aria-expanded="false">
                       <i class="fas fa-cog me-1"></i>Operações
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
+                    <ul class="dropdown-menu dropdown-menu-end shadow">
                       <li>
                         <a class="dropdown-item" href="{{ route('admin.vacationRequests.show', $req->id) }}">
                           <i class="fas fa-eye me-2 text-info"></i>Detalhes
@@ -91,17 +120,17 @@
                       </li>
                       <li>
                         <a class="dropdown-item" href="{{ route('admin.vacationRequests.edit', $req->id) }}">
-                          <i class="fas fa-edit me-2 text-warning"></i>Editar / Retificar
+                          <i class="fas fa-edit me-2 text-warning"></i>Editar
                         </a>
                       </li>
                       <li>
                         <hr class="dropdown-divider">
                       </li>
                       <li>
-                        <a class="dropdown-item text-primary" href="#" data-bs-toggle="modal"
-                          data-bs-target="#modalEncaminhar{{ $req->id }}">
-                          <i class="fas fa-share me-2"></i>Encaminhar ao Diretor
-                        </a>
+                        {{-- Button linked to the form via form attribute --}}
+                        <button type="submit" form="form-forward-{{ $req->id }}" class="dropdown-item text-primary">
+                          <i class="fas fa-share me-2"></i>Encaminhar
+                        </button>
                       </li>
                     </ul>
                   </div>
@@ -113,84 +142,6 @@
                   </form>
                 </td>
               </tr>
-
-              {{-- MODAL ENCAMINHAR --}}
-              <div class="modal fade" id="modalEncaminhar{{ $req->id }}" tabindex="-1"
-                aria-labelledby="labelEncaminhar{{ $req->id }}" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <form action="{{ route('admin.hr.forwardVacation', $req->id) }}" method="POST">
-                      @csrf
-                      <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title" id="labelEncaminhar{{ $req->id }}">
-                          <i class="fas fa-share me-2"></i>Encaminhar Pedido #{{ $req->id }}
-                        </h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                      </div>
-                      <div class="modal-body">
-                        {{-- Info do pedido --}}
-                        <div class="alert alert-light border mb-3">
-                          <div class="row">
-                            <div class="col-6">
-                              <small class="text-muted d-block">Funcionário</small>
-                              <strong>{{ $req->employee->fullName ?? '-' }}</strong>
-                            </div>
-                            <div class="col-3">
-                              <small class="text-muted d-block">Início</small>
-                              <strong>{{ \Carbon\Carbon::parse($req->vacationStart)->format('d/m/Y') }}</strong>
-                            </div>
-                            <div class="col-3">
-                              <small class="text-muted d-block">Fim</small>
-                              <strong>{{ \Carbon\Carbon::parse($req->vacationEnd)->format('d/m/Y') }}</strong>
-                            </div>
-                          </div>
-                        </div>
-
-                        {{-- Retificação de datas --}}
-                        <div class="mb-3">
-                          <label class="form-label fw-semibold">Retificar Data de Início <small
-                              class="text-muted">(opcional)</small></label>
-                          <input type="date" name="start_date" class="form-control" value="{{ $req->vacationStart }}">
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label fw-semibold">Retificar Data de Fim <small
-                              class="text-muted">(opcional)</small></label>
-                          <input type="date" name="end_date" class="form-control" value="{{ $req->vacationEnd }}">
-                        </div>
-
-                        {{-- Select Diretor --}}
-                        <div class="mb-3">
-                          <label class="form-label fw-semibold">Diretor <span class="text-danger">*</span></label>
-                          <select name="forwarded_to_director_id" class="form-select" required>
-                            <option value="">-- Selecione o Diretor --</option>
-                            @foreach($directors as $director)
-                              <option value="{{ $director->id }}">
-                                {{ $director->directorName ?? ($director->employee->fullName ?? $director->email) }}
-                              </option>
-                            @endforeach
-                          </select>
-                          <div class="form-text">Obrigatório. O pedido será encaminhado para este diretor.</div>
-                        </div>
-
-                        {{-- Comentário --}}
-                        <div class="mb-0">
-                          <label class="form-label fw-semibold">Comentário <small
-                              class="text-muted">(opcional)</small></label>
-                          <textarea name="approvalComment" class="form-control" rows="2"
-                            placeholder="Observações para o diretor..."></textarea>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">
-                          <i class="fas fa-share me-1"></i>Encaminhar
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-
             @empty
               <tr>
                 <td colspan="7" class="text-center py-4 text-muted">
