@@ -49,7 +49,7 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->description ?? '-' }}</td>
                                 <td>
-                                    <div class="btn-group">
+                                    <div class="dropdown">
                                         <button class="btn btn-outline-secondary dropdown-toggle" type="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             Operações

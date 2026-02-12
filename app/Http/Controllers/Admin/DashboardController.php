@@ -11,12 +11,15 @@ use App\Models\EmployeeType;
 use App\Models\EmployeeCategory;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index()
     {
+        //Nome do usiário logado
+        $userName = Employeee::where('id', Auth::user()->id)->first();
         // Total de funcionários (ativos + reformados, sem estagiários)
         $totalEmployees = Employeee::whereIn('employmentStatus', ['active', 'retired'])->count();
 
@@ -91,7 +94,8 @@ class DashboardController extends Controller
             'contractEmployees',
             'categoryData',
             'categoryDataJson',
-            'departmentHeads'
+            'departmentHeads',
+            'userName'
         ));
     }
 }

@@ -14,23 +14,26 @@
 <!-- [ Footer ] end -->
 </div>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.2.2/circle-progress.js"
     integrity="sha512-8tHhvNIEwJiw6wQDCVob7hCrwfECKknmtZAdP8JdqZcQ6OEAf1aaErJAzTAL5tQYrcrJOhqS2P3laAuwk4+e5g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-{{--
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    crossorigin="anonymous"></script> --}}
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> --}}
 
 <!-- Vendors JS -->
 <script src="{{ asset('assets/vendors/js/vendors.min.js') }}"></script>
 <script src="{{ asset('assets/vendors/js/apexcharts.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/js/moment.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/js/daterangepicker.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/js/circle-progress.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/js/dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/js/dataTables.bs5.min.js') }}"></script>
 <script src="{{ asset('assets/vendors/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/vendors/js/select2-active.min.js') }}"></script>
 
 <!-- Common JS -->
 <script src="{{ asset('assets/js/common-init.min.js') }}"></script>
-
+<script src="{{ asset('assets/js/leads-init.min.js') }}"></script>
 <script src="{{ asset('assets/js/dashboard-init.min.js') }}"></script>
 
 <!-- Theme Customizer -->
@@ -46,9 +49,9 @@
     $('.select2').select2();
 
     // Abre/fecha sidebar em mobile ao clicar no botão hamburger
-    document.querySelector('.navbar-toggler').addEventListener('click', function () {
+    /* document.querySelector('.navbar-toggler').addEventListener('click', function() {
         document.querySelector('.sidebar').classList.toggle('show');
-    });
+    }); */
 
     /* // Fecha sidebar se clicar fora dela (em mobile)
     document.addEventListener('click', function(e) {
@@ -64,13 +67,13 @@
             document.querySelector('.theme-panel').classList.toggle('d-none');
         }); */
 
-    document.getElementById('skin').addEventListener('change', function (e) {
-        document.documentElement.setAttribute('data-theme', e.target.value.toLowerCase());
-    });
+    /*     document.getElementById('skin').addEventListener('change', function(e) {
+            document.documentElement.setAttribute('data-theme', e.target.value.toLowerCase());
+        });
 
-    document.getElementById('typography').addEventListener('change', function (e) {
-        document.body.style.fontFamily = e.target.value;
-    });
+        document.getElementById('typography').addEventListener('change', function(e) {
+            document.body.style.fontFamily = e.target.value;
+        }); */
 
     const nationalitySelect = document.getElementById('nationality');
     if (nationalitySelect) {
@@ -107,19 +110,19 @@
 
 
     // Modal de Deleção
-    document.addEventListener('click', e => {
-        const btn = e.target.closest('.delete-btn');
-        if (btn) {
-            e.preventDefault();
-            const url = btn.dataset.url;
-            showModal('delete', 'Confirmar Exclusão', 'Tem certeza?', `
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <a href="${url}" class="btn btn-danger">Deletar</a>
-                `);
-        }
-    });
+    /*     document.addEventListener('click', e => {
+            const btn = e.target.closest('.delete-btn');
+            if (btn) {
+                e.preventDefault();
+                const url = btn.dataset.url;
+                showModal('delete', 'Confirmar Exclusão', 'Tem certeza?', `
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <a href="${url}" class="btn btn-danger">Deletar</a>
+                    `);
+            }
+        }); */
 
-    // Pesquisa dinamica NavBar
+    /* // Pesquisa dinamica NavBar
     const navInput = document.getElementById('navbarEmployeeSearch');
     const navResults = document.getElementById('navbarSearchResults');
     let navTimeout = null;
@@ -160,7 +163,7 @@
         if (!navInput.contains(e.target)) {
             navResults.innerHTML = '';
         }
-    });
+    }); */
 </script>
 @yield('scripts')
 @stack('scripts')

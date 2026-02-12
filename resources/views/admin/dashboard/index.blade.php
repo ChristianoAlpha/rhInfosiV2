@@ -3,17 +3,42 @@
 @section('title', 'Dashboard Gestão de Capital Humano')
 
 @section('content')
+    <!-- [ page-header ] start -->
+    <div class="page-header">
+        <div class="page-header-left d-flex align-items-center">
+            <div class="page-header-title">
+                <h5 class="m-b-10">Painel de Controle</h5>
+            </div>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+                <li class="breadcrumb-item">Bem-vindo{{', '. Auth::user()->email ?? '-' }}</li>
+            </ul>
+        </div>
+        <div class="page-header-right ms-auto">
+            <div class="page-header-right-items">
+                <div class="d-flex d-md-none">
+                    <a href="javascript:void(0)" class="page-header-right-close-toggle">
+                        <i class="feather-arrow-left me-2"></i>
+                        <span>Back</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ page-header ] end -->
+
     <!-- [ Main Content ] start -->
     <div class="main-content">
         <div class="row">
-            <h1 class="mt-4">Painel de Controle </h1>
+
+            {{-- <h1 class="mt-4">Painel de Controle </h1>
             <!-- <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active"> Painel de Controle </li>
-                    </ol>
-                     -->
+                            <li class="breadcrumb-item active"> Painel de Controle </li>
+                        </ol>
+                         -->
 
             <p>Bem-vindo, {{ Auth::user()->employee->fullName ?? Auth::user()->email }}</p>
-
+ --}}
             @if (Auth::user()->role === 'admin' || Auth::user()->role === 'director')
                 <!-- Total de Funcionários -->
                 <div class="col-xxl-3 col-md-6">

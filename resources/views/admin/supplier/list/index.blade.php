@@ -33,7 +33,7 @@
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->site }}</td>
                             <td class="text-center">
-                                <div class="btn-group">
+                                <div class="dropdown">
                                     <button class="btn btn-outline-secondary dropdown-toggle" type="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         Operações
