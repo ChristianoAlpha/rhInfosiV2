@@ -15,7 +15,7 @@
                         $hasRhMenu = false;
                         if ($role === 'department_head' && Auth::user()->department) {
                             $deptTitle = Str::lower(Auth::user()->department->title);
-                            if (Str::contains($deptTitle, ['recursos humanos', 'rh', 'administrativa'])) {
+                            if (Str::contains($deptTitle, ['recursos humanos', 'rh', 'administrativa', 'administração e serviços gerais', 'dasg'])) {
                                 $hasRhMenu = true;
                             }
                         }
@@ -685,21 +685,20 @@
                         </li>
 
                         <!-- Área Administrativa (RH) -->
-                        <li class="nxl-item nxl-hasmenu"
-                            style="color: #6c757d; font-weight: bold; padding: 10px 15px;">Área
-                            Administrativa (RH)</li>
-                        <li class="nav-item nxl-hasmenu">
-                            <a class="nxl-link" href="javascript:void(0);" data-bs-target="#hrMenu"
-                                aria-expanded="false" aria-controls="hrMenu">
-                                <i class="fas fa-user-cog me-2"></i> Gestão RH <i class="fas fa-chevron-right"></i>
+                        <li class="nxl-item nxl-caption">
+                            <label>Área Administrativa (RH)</label>
+                        </li>
+                        <li class="nxl-item nxl-hasmenu">
+                            <a class="nxl-link" href="javascript:void(0);">
+                                <span class="nxl-micon"><i class="fas fa-user-cog"></i></span>
+                                <span class="nxl-mtext">Gestão RH</span>
+                                <span class="nxl-arrow"><i class="fas fa-chevron-right"></i></span>
                             </a>
-                            <div class="collapse" id="hrMenu">
-                                <ul class="nxl-submenu">
-                                    <li class="nxl-item"><a class="nxl-link"
-                                            href="{{ route('admin.hr.pendingVacations') }}"><i
-                                                class="fas fa-umbrella-beach me-2"></i>Férias para Encaminhar</a></li>
-                                </ul>
-                            </div>
+                            <ul class="nxl-submenu">
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ route('admin.hr.pendingVacations') }}"><i
+                                            class="fas fa-umbrella-beach me-2"></i>Férias para Encaminhar</a></li>
+                            </ul>
                         </li>
 
                         <!-- Direção Geral -->
@@ -708,18 +707,16 @@
                             Geral
                         </li>
                         <li class="nav-item nxl-hasmenu">
-                            <a class="nxl-micon" href="javascript:void(0);" data-bs-target="#directorMenu"
-                                aria-expanded="false" aria-controls="directorMenu">
-                                <i class="fas fa-user-tie me-2"></i> Portal Direção <i
-                                    class="fas fa-chevron-right"></i>
+                            <a class="nxl-link" href="javascript:void(0);">
+                                <span class="nxl-micon"><i class="fas fa-user-tie"></i></span>
+                                <span class="nxl-mtext">Portal Direção</span>
+                                <span class="nxl-arrow"><i class="fas fa-chevron-right"></i></span>
                             </a>
-                            <div class="collapse" id="directorMenu">
-                                <ul class="nxl-submenu">
-                                    <li class="nxl-item"><a class="nxl-micon"
-                                            href="{{ route('admin.director.pendingVacations') }}"><i
-                                                class="fas fa-check-double me-2"></i>Aprovação de Férias</a></li>
-                                </ul>
-                            </div>
+                            <ul class="nxl-submenu">
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ route('admin.director.pendingVacations') }}"><i
+                                            class="fas fa-check-double me-2"></i>Aprovação de Férias</a></li>
+                            </ul>
                         </li>
                     @elseif($role === 'department_head')
                         <!-- Gestão de Pessoas -->
@@ -916,6 +913,10 @@
                         </li>
                     @endif
                 @endif
+                <li class="nxl-item nxl-hasmenu">
+                    <a class="nxl-link" href="{{ route('profile') }}"><i
+                            class="fas fa-user me-2"></i>Meu Perfil</a>
+                </li>
                 <li class="nxl-item nxl-hasmenu">
                     <a class="nxl-link" href="{{ route('new-chat.index') }}"><i
                             class="fas fa-comments me-2"></i>Chat</a>
