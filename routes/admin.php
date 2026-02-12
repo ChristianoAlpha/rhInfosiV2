@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminAuthController;
+use app\Http\Controllers\Admin\AdministrativeAreaController;
 use App\Http\Controllers\Admin\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\EmployeeeController;
@@ -495,8 +496,8 @@ Route::middleware('auth')->name('admin.')->group(function () {
 
     // inicio Administrative Area (RH) routes
     Route::prefix('area-administrativa')->group(function () {
-        Route::get('/ferias-pendentes', [App\Http\Controllers\AdministrativeAreaController::class, 'pendingVacations'])->name('hr.pendingVacations');
-        Route::post('/encaminhar-ferias/{id}', [App\Http\Controllers\AdministrativeAreaController::class, 'forwardVacation'])->name('hr.forwardVacation');
+        Route::get('/ferias-pendentes', [AdministrativeAreaController::class, 'pendingVacations'])->name('hr.pendingVacations');
+        Route::post('/encaminhar-ferias/{id}', [AdministrativeAreaController::class, 'forwardVacation'])->name('hr.forwardVacation');
     });
     //fim Administrative Area (RH) routes
 

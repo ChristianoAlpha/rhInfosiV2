@@ -169,7 +169,7 @@ class VacationRequestController extends Controller
             'approvalComment' => null,
         ]);
 
-        return redirect()->route('admin.vacationRequest.index')
+        return redirect()->route('admin.vacationRequests.index')
             ->with('msg', 'Pedido de férias registrado com sucesso!');
     }
 

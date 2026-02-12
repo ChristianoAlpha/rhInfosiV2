@@ -874,10 +874,10 @@
                             </a>
                             <ul class="nxl-submenu">
                                 <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ url('vacationRequest') }}"><i class="fas fa-eye me-2"></i>Ver
+                                        href="{{ route('admin.vacationRequests.index') }}"><i class="fas fa-eye me-2"></i>Ver
                                         Todos</a></li>
                                 <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ url('vacationRequest/create') }}"><i
+                                        href="{{ route('admin.vacationRequests.create') }}"><i
                                             class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
                             </ul>
                         </li>
