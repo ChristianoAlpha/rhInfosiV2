@@ -29,7 +29,8 @@
             </div>
         </div>
     </div>
-    <!-- [ page-header ] end --><!-- [ Main Content ] start -->
+    <!-- [ page-header ] end -->
+    <!-- [ Main Content ] start -->
     <div class="main-content">
         <div class="row">
             <div class="col-lg-12">
