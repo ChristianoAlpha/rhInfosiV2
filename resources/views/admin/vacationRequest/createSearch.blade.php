@@ -128,8 +128,8 @@
         const w = document.createElement('div');
         w.className = 'holiday-field d-flex mb-2';
         w.innerHTML = `
-          <input type="date" name="manualHolidays[]" class="form-control holiday-input" value="${v}">
-          <button type="button" class="btn btn-outline-danger btn-sm ms-2 remove-holiday">–</button>`;
+              <input type="date" name="manualHolidays[]" class="form-control holiday-input" value="${v}">
+              <button type="button" class="btn btn-outline-danger btn-sm ms-2 remove-holiday">–</button>`;
         holCont.append(w);
         w.querySelector('.holiday-input').addEventListener('change', calcEnd);
         w.querySelector('.remove-holiday').addEventListener('click', () => {
@@ -141,6 +141,9 @@
       addBtn.addEventListener('click', () => addHolidayField());
       startEl.addEventListener('change', calcEnd);
       typeEl.addEventListener('change', calcEnd);
+
+      // Auto-calculate on page load if old() values exist
+      calcEnd();
     </script>
   @endpush
 @endsection
