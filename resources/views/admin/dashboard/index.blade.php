@@ -11,7 +11,7 @@
             </div>
             <ul class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-                <li class="breadcrumb-item">Bem-vindo{{', '. Auth::user()->email ?? '-' }}</li>
+                <li class="breadcrumb-item">Bem-vindo{{ ', ' . Auth::user()->email ?? '-' }}</li>
             </ul>
         </div>
         <div class="page-header-right ms-auto">
@@ -31,14 +31,6 @@
     <div class="main-content">
         <div class="row">
 
-            {{-- <h1 class="mt-4">Painel de Controle </h1>
-            <!-- <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active"> Painel de Controle </li>
-                        </ol>
-                         -->
-
-            <p>Bem-vindo, {{ Auth::user()->employee->fullName ?? Auth::user()->email }}</p>
- --}}
             @if (Auth::user()->role === 'admin' || Auth::user()->role === 'director')
                 <!-- Total de Funcionários -->
                 <div class="col-xxl-3 col-md-6">
@@ -327,7 +319,7 @@
                 </div>
 
                 <!-- Tabela de Chefes de Departamento -->
-                <div class="col-xxl-8">
+                <div class="col-xxl-12">
                     <div class="card stretch stretch-full">
                         <div class="card-header">
                             <h5 class="card-title">Chefes de Departamento</h5>
@@ -406,57 +398,55 @@
                             </ul>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Gráficos de Círculo -->
-                    <div class="col-xxl-4">
-                        <div class="card stretch stretch-full">
-                            <div class="card-body">
-                                <div class="hstack justify-content-between mb-4 pb-0">
-                                    <div>
-                                        <h5 class="mb-1">Distribuição de Funcionários</h5>
-                                        <span class="fs-12 text-muted">Percentagem por Tipo de Contracto</span>
-                                    </div>
-                                    <a href="{{ route('admin.employeee.index') }}" class="btn btn-light-brand">Ver
-                                        Todos</a>
+                <!-- Gráficos de Círculo -->
+                <div class="col-xxl-12">
+                    <div class="card stretch stretch-full">
+                        <div class="card-body">
+                            <div class="hstack justify-content-between mb-4 pb-0">
+                                <div>
+                                    <h5 class="mb-1">Distribuição de Funcionários</h5>
+                                    <span class="fs-12 text-muted">Percentagem por Tipo de Contracto</span>
                                 </div>
-                                <div class="row g-4">
-                                    <div class="col-md-6">
-                                        <div
-                                            class="card-body border border-dashed border-gray-5 rounded-3 position-relative">
-                                            <div class="hstack justify-content-between gap-4">
-                                                <div>
-                                                    <h6 class="fs-14 text-truncate-1-line">Efectivos</h6>
-                                                    <div class="fs-12 text-muted"><span
-                                                            class="text-dark fw-medium">Total:</span>
-                                                        {{ $permanentEmployees }}</div>
-                                                </div>
-                                                <div class="employee-progress-permanent"
-                                                    data-value="{{ $activeEmployees > 0 ? round(($permanentEmployees / $activeEmployees) * 100) / 100 : 0 }}">
-                                                </div>
+                                <a href="{{ route('admin.employeee.index') }}" class="btn btn-light-brand">Ver
+                                    Todos</a>
+                            </div>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="card-body border border-dashed border-gray-5 rounded-3 position-relative">
+                                        <div class="hstack justify-content-between gap-4">
+                                            <div>
+                                                <h6 class="fs-14 text-truncate-1-line">Efectivos</h6>
+                                                <div class="fs-12 text-muted"><span
+                                                        class="text-dark fw-medium">Total:</span>
+                                                    {{ $permanentEmployees }}</div>
                                             </div>
-                                            <div class="badge bg-gray-200 text-dark project-mini-card-badge">
-                                                {{ $activeEmployees > 0 ? round(($permanentEmployees / $activeEmployees) * 100) : 0 }}%
+                                            <div class="employee-progress-permanent"
+                                                data-value="{{ $activeEmployees > 0 ? round(($permanentEmployees / $activeEmployees) * 100) / 100 : 0 }}">
                                             </div>
                                         </div>
+                                        <div class="badge bg-gray-200 text-dark project-mini-card-badge">
+                                            {{ $activeEmployees > 0 ? round(($permanentEmployees / $activeEmployees) * 100) : 0 }}%
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div
-                                            class="card-body border border-dashed border-gray-5 rounded-3 position-relative">
-                                            <div class="hstack justify-content-between gap-4">
-                                                <div>
-                                                    <h6 class="fs-14 text-truncate-1-line">Contratados</h6>
-                                                    <div class="fs-12 text-muted"><span
-                                                            class="text-dark fw-medium">Total:</span>
-                                                        {{ $contractEmployees }}
-                                                    </div>
-                                                </div>
-                                                <div class="employee-progress-contract"
-                                                    data-value="{{ $activeEmployees > 0 ? round(($contractEmployees / $activeEmployees) * 100) / 100 : 0 }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card-body border border-dashed border-gray-5 rounded-3 position-relative">
+                                        <div class="hstack justify-content-between gap-4">
+                                            <div>
+                                                <h6 class="fs-14 text-truncate-1-line">Contratados</h6>
+                                                <div class="fs-12 text-muted"><span
+                                                        class="text-dark fw-medium">Total:</span>
+                                                    {{ $contractEmployees }}
                                                 </div>
                                             </div>
-                                            <div class="badge bg-gray-200 text-dark project-mini-card-badge">
-                                                {{ $activeEmployees > 0 ? round(($contractEmployees / $activeEmployees) * 100) : 0 }}%
+                                            <div class="employee-progress-contract"
+                                                data-value="{{ $activeEmployees > 0 ? round(($contractEmployees / $activeEmployees) * 100) / 100 : 0 }}">
                                             </div>
+                                        </div>
+                                        <div class="badge bg-gray-200 text-dark project-mini-card-badge">
+                                            {{ $activeEmployees > 0 ? round(($contractEmployees / $activeEmployees) * 100) : 0 }}%
                                         </div>
                                     </div>
                                 </div>

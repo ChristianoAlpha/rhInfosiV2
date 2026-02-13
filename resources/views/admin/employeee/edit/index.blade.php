@@ -15,12 +15,6 @@
         @method("PUT")
 
         @include("forms._formEmployeee.index", ['employee' => $employee])
-
-        {{-- <div class="d-grid gap-2 col-6 mx-auto mt-4">
-          <button type="submit" class="btn btn-outline-secondary btn-lg">
-            <i class="fas fa-save2 me-2"></i>Atualizar Funcionário
-          </button>
-        </div> --}}
       </form>
     </div>
   </div>

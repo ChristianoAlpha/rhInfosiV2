@@ -1,28 +1,56 @@
 @extends('layouts.merge.admin')
-@section('title', 'Ver Tipo de Funcionário')
+@section('title', 'Detalhes de Vínculo')
 @section('content')
 
-<div class="card my-4 shadow">
-  <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
-    <span><i class="fas fa-eye me-2"></i>Ver Tipo de Funcionário</span>
-    <a href="{{ route('admin.employeeTypes.index') }}" class="btn btn-outline-light btn-sm" title="Ver Todos">
-      <i class="fa-solid fa-list"></i>
-    </a>
-  </div>
-  <div class="card-body">
-    <div class="table-responsive">
-      <table class="table table-bordered">
-        <tr>
-          <th>Nome</th>
-          <td>{{ $data->name }}</td>
-        </tr>
-        <tr>
-          <th>Descrição</th>
-          <td>{{ $data->description ?? '-' }}</td>
-        </tr>
-      </table>
+    <!-- [ page-header ] start -->
+    <div class="page-header">
+        <div class="page-header-left d-flex align-items-center">
+            <div class="page-header-title">
+                <h5 class="m-b-10">Vínculos</h5>
+            </div>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item">Detalhes do Vínculo</li>
+            </ul>
+        </div>
+        <div class="page-header-right ms-auto">
+            <div class="page-header-right-items">
+                <div class="d-flex d-md-none">
+                    <a href="javascript:void(0)" class="page-header-right-close-toggle">
+                        <i class="feather-arrow-left me-2"></i>
+                        <span>Back</span>
+                    </a>
+                </div>
+                <div class="d-flex align-items-center gap-2 page-header-right-items-wrapper">
+                    <a href="{{ route('admin.employeeTypes.index') }}" class="btn btn-outline-secondary">
+                        <i class="feather-list me-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+    <!-- [ page-header ] end -->
+    <div class="main-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card stretch stretch-full">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                            <tr>
+                                <th>Nome</th>
+                                <td>{{ $data->name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Descrição</th>
+                                <td>{{ $data->description ?? '-' }}</td>
+                            </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection

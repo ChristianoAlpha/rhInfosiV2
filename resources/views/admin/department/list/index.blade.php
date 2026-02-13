@@ -22,15 +22,6 @@
                     </a>
                 </div>
                 <div class="d-flex align-items-center gap-2 page-header-right-items-wrapper">
-
-                    {{-- <a href="{{ route('admin.employeee.pdfAll') }}" class="btn btn-outline-secondary">
-                        <i class="bi bi-filetype-pdf me-3"></i>
-                        <span>PDF</span>
-                    </a>
-                    <a href="{{ route('admin.employeee.filter') }}" class="btn btn-outline-secondary">
-                        <i class="feather-filter me-2"></i>
-                        <span>Filtrar</span>
-                    </a> --}}
                     <a href="{{ route('admin.departments.create') }}" class="btn btn-outline-secondary">
                         <i class="feather-plus me-2"></i>
                         <span>Novo</span>
@@ -54,7 +45,7 @@
                                 <form action="{{ route('admin.departments.employeee') }}" method="GET"
                                     class="d-inline-flex">
                                     <div class="input-group w-auto">
-                                        <select name="department" class="form-select"  required>
+                                        <select name="department" class="form-select" required>
                                             <option value=""> Selecione o Departamento </option>
                                             @foreach ($data as $d)
                                                 <option value="{{ $d->id }}">{{ $d->title }}</option>
@@ -85,10 +76,10 @@
                                                 <td>{{ $item->description ?? '-' }}</td>
                                                 <td>
                                                     <div class="dropdown">
-                                                        <button class="btn btn-outline-secondary dropdown-toggle"
-                                                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            Operações
-                                                        </button>
+                                                        <a href="javascript:void(0)" class="avatar-text avatar-md"
+                                                            data-bs-toggle="dropdown" data-bs-offset="0,21">
+                                                            <i class="feather feather-more-horizontal"></i>
+                                                        </a>
                                                         <ul class="dropdown-menu">
                                                             <li>
                                                                 <a href="{{ route('admin.departments.show', $item->id) }}"

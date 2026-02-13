@@ -3,7 +3,7 @@
     <div class="col-md-6">
         <div class="form-floating">
             <select name="departmentId" id="depart" class="form-select"
-                {{ isset($employee->departmentId) ? 'disabled' : '' }}>
+                {{ isset($employee->departmentId) ? 'readonly' : '' }}>
 
                 <option value="">Selecione</option>
 
@@ -21,7 +21,7 @@
     <div class="col-md-6">
         <div class="form-floating">
             <select name="positionId" id="positionId" class="form-select"
-                {{ isset($employee->positionId) ? 'disabled' : '' }}>
+                {{ isset($employee->positionId) ? 'readonly' : '' }}>
                 <option value="" selected>Selecione</option>
                 @foreach ($positions as $item)
                     <option value="{{ $item->id }}"
@@ -143,7 +143,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-floating">
-            <input type="text" name="email" id="email" class="form-control" placeholder="Email nome.sobrenome apenas"
+            <input type="text" name="email" id="email" class="form-control" placeholder="Email"
                 value="{{ old('email', $employee->email ?? '') }}">
             <label for="email"></label>
         </div>

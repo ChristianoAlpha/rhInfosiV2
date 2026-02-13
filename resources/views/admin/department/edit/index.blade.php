@@ -2,38 +2,61 @@
 @section('title', 'Atualizar departamento')
 @section('content')
 
-<div class="card mt-4 mt-4">
-  <div class="card-header">
-    <i class="fas fa-table me-1"></i>
-    Atualizar departamento
+    <!-- [ page-header ] start -->
+    <div class="page-header">
+        <div class="page-header-left d-flex align-items-center">
+            <div class="page-header-title">
+                <h5 class="m-b-10">Departamentos</h5>
+            </div>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item">Adicionar novo Departamento</li>
+            </ul>
+        </div>
+        <div class="page-header-right ms-auto">
+            <div class="page-header-right-items">
+                <div class="d-flex d-md-none">
+                    <a href="javascript:void(0)" class="page-header-right-close-toggle">
+                        <i class="feather-arrow-left me-2"></i>
+                        <span>Back</span>
+                    </a>
+                </div>
+                <div class="d-flex align-items-center gap-2 page-header-right-items-wrapper">
+                    <a href="{{ route('admin.departments.index') }}" class="btn btn-outline-secondary">
+                        <i class="feather-list me-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ page-header ] end -->
+    <!-- [ Main Content ] start -->
+    <div class="main-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card stretch stretch-full">
+                    <div class="card-body lead-status">
+                        <div class="mb-5 d-flex align-items-center justify-content-between">
+                            <h5 class="fw-bold mb-0 me-4">
+                                <span class="d-block mb-2">Dados Pessoais e Institucionais :</span>
+                                <span class="fs-12 fw-normal text-muted text-truncate-1-line">Preencher todos os campos
+                                    do formulário é obrigatório</span>
+                            </h5>
+                            <a href="javascript:void(0);" class="btn btn-sm btn-light-brand">Editar Departamento</a>
+                        </div>
+                        <div class="row">
+                            <form method="POST" action="{{ route('admin.departments.update', $data->id) }}">
+                                @method('PUT')
+                                @csrf
+                                
+                                @include('forms._formDepartment.index')
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ route('admin.departments.index') }}" class="float-end btn btn-sm btn-info"><i class="fa-solid fa-list"></i></a>
-  </div>
-
-    <form method="POST" action="{{ route('admin.departments.update', $data->id) }}"> 
-      @method('PUT')
-      @csrf
-      <table class="table table-bordered">
-        <tr>
-          <th>Title</th>
-          <td>
-            <input type="text" value="{{ $data->title }}" name="title" class="form-control">
-          </td>
-        </tr>
-        <tr>
-          <th>Descrição</th>
-          <td>
-            <textarea name="description" class="form-control" rows="3">{{ $data->description }}</textarea>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <input type="submit" class="btn btn-outline-secondary" value="Atualizar">
-          </td>
-        </tr>
-      </table>
-    </form>
-  </div>
-</div>
 
 @endsection

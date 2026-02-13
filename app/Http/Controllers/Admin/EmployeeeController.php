@@ -54,9 +54,9 @@ class EmployeeeController extends Controller
         }
 
         // Ordena os registros e obtém os resultados
-        $data = $query->orderByDesc('id')->get();
+        $response['data'] = $query->orderByDesc('id')->get();
 
-        return view('admin.employeee.list.index', ['data' => $data]);
+        return view('admin.employeee.list.index', $response);
     }
 
     public function create()
@@ -95,7 +95,7 @@ class EmployeeeController extends Controller
             ],
             'nationality' => 'required',
             'gender' => 'required',
-            'email' => 'required|unique:employeees,email|regex:/^[a-zA-Z0-9._%+-]+$/',
+            'email' => ['required', 'email:rfc,dns', 'max:255', 'unique:employeees,email'],
             'iban' => ['nullable', 'string', 'max:25', 'regex:/^AO06[0-9]{21}$/',],
             'employeeTypeId' => 'required|exists:employee_types,id',
             'employeeCategoryId' => 'required|exists:employee_categories,id',
@@ -124,7 +124,7 @@ class EmployeeeController extends Controller
         $data->birth_date = $request->birth_date;
         $data->nationality = $request->nationality;
         $data->gender = $request->gender;
-        $data->email = $request->email . '@infosi.gov.ao';
+        $data->email = $request->email /* . '@infosi.gov.ao' */;
         $data->iban = $request->iban;
         $data->employeeTypeId = $request->employeeTypeId;
         $data->employeeCategoryId = $request->employeeCategoryId;
@@ -158,8 +158,8 @@ class EmployeeeController extends Controller
 
     public function show($id)
     {
-        $data = Employeee::findOrFail($id);
-        return view('admin.employeee.details.index', compact('data'));
+        $response['data'] = Employeee::findOrFail($id);
+        return view('admin.employeee.details.index', $response);
     }
 
 
@@ -210,8 +210,8 @@ class EmployeeeController extends Controller
             'mobile' => 'required',
             'bi' => 'required|string|max:16|unique:employeees,bi,' . $id,
             'biPhoto' => 'nullable|file|mimes:pdf,jpeg,png,jpg',
-            'birth_date' => ['required', 'date', 'date_format:Y-m-d', 'before_or_equal:' . Carbon::now()->subYears(18)->format('Y-m-d'), 'after_or_equal:'  . Carbon::now()->subYears(120)->format('Y-m-d')],
-            /* 'email'              => 'required|unique:employeees,email,' . $id . '|regex:/^[a-zA-Z0-9._%+-]+$/', */
+            'birth_date' => ['required', 'date_format:Y-m-d', 'before_or_equal:-18 years', 'after_or_equal:-120 years'],
+            'email' => ['required', 'email:rfc,dns', 'max:255', 'unique:employeees,email,' . $id],
             'iban' => ['nullable', 'string', 'max:25', 'regex:/^AO06[0-9]{21}$/',],
             'employeeTypeId'     => 'required|exists:employee_types,id',
             'employeeCategoryId' => 'required|exists:employee_categories,id',
@@ -241,7 +241,7 @@ class EmployeeeController extends Controller
         $data->iban            = $request->iban;
         $data->employeeTypeId  = $request->employeeTypeId;
         $data->employeeCategoryId = $request->employeeCategoryId;
-        /* $data->positionId      = $request->positionId; */
+        $data->positionId      = $request->positionId;
         $data->specialtyId     = $request->specialtyId;
         $data->academicLevel   = $request->academicLevel; // Adicionado
         $data->courseId        = $request->courseId; // Adicionado
@@ -259,40 +259,9 @@ class EmployeeeController extends Controller
             $data->biPhoto = $biName;
         }
 
-        /* $data->save(); */
-
-        /* ====================== histórico de atualização ====================== */
-
-        //verificar oque foi alterado
-        /*  $verify = Employeee::find($id);
-        if ($verify->departmentId != $request->departmentId) {
-            $departmentName = Department::find($request->departmentId)->title ?? 'N/A';
-            $historyMessage['department'] = 'Departamento alterado de ' . $verify->department->title . ' para ' . $departmentName;
-        }
-        if ($verify->positionId != $request->positionId) {
-            $positionName = Position::find($request->positionId);
-            $historyMessage['position'] = 'Cargo alterado de ' . $verify->position->name . ' para ' . $positionName;
-        }
-        if ($verify->specialtyId != $request->specialtyId) {
-            $specialtyName = Specialty::find($request->specialtyId)->name ?? 'N/A';
-            $historyMessage['specialty'] = 'Especialidade alterada de ' . $verify->specialty->name . ' para ' . $specialtyName;
-        }
-        if ($verify->employeeTypeId != $request->employeeTypeId) {
-            $employeeTypeName = EmployeeType::find($request->employeeTypeId)->name ?? 'N/A';
-            $historyMessage['employeeType'] = 'Tipo de funcionário alterado de ' . $verify->employeeType->name . ' para ' . $employeeTypeName;
-        } */
-
         $data->save();
 
-        /* $data->employeeHistories()->create([
-            'operation' => 'Atualização',
-            'old_value' => json_encode($verify->getChanges()),
-            'new_value' => json_encode($data->getChanges()),
-            'description' => 'Dados do funcionário atualizados. ' . (!empty($historyMessage) ? implode('; ', $historyMessage) : ''),
-        ]);
- */
-        return redirect()->route('admin.employeee.edit', $id)
-            ->with('msg', 'Dados atualizados com sucesso');
+        return redirect()->route('admin.employeee.edit', $id)->with('msg', 'Dados atualizados com sucesso');
     }
 
     public function destroy($id)
@@ -310,15 +279,6 @@ class EmployeeeController extends Controller
         // Passa sempre $employee (null ou modelo) para a view
         return view('admin.employeee.myProfile', compact('employee'));
     }
-
-    /* public function employeeHistory($id)
-    {
-        $employee = Employeee::findOrFail($id);
-        $history = EmployeeHistory::with('employee')->where('employee_id', $employee->id)->get();
-
-        return view('admin.employeee.history', compact('employee', 'history'));
-    } */
-
 
     public function filterByDate(Request $request)
     {
