@@ -335,16 +335,18 @@ class VacationRequestController extends Controller
     {
         $vacation = VacationRequest::findOrFail($id);
         if (!$vacation->signedPdfPath || !Storage::disk('public')->exists($vacation->signedPdfPath)) {
-            return back()->with('error', 'O arquivo PDF não foi encontrado.');
+            return back()->with('error', 'O ficheiro PDF não foi encontrado.');
         }
 
         $fullPath = storage_path('app/public/' . $vacation->signedPdfPath);
         $filename = 'Guia_Ferias_' . $vacation->id . '.pdf';
 
-        return response()->download($fullPath, $filename, [
+        // Stream preview no navegador (inline) em vez de forçar download
+        return response()->file($fullPath, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . $filename . '"',
             'Cache-Control' => 'no-cache, no-store, max-age=0, must-revalidate',
             'Pragma' => 'no-cache',
-            'Expires' => 'Sun, 01 Jan 1990 00:00:00 GMT',
         ]);
     }
 }

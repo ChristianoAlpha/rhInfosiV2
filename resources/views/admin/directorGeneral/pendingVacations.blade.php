@@ -1,5 +1,5 @@
 @extends('layouts.merge.admin')
-@section('title', 'Pedidos de Férias - Direção Geral')
+@section('title', 'Pedidos de Férias - Direcção Geral')
 @section('content')
 
   <div class="card mb-4 shadow-sm">
@@ -36,17 +36,37 @@
         </div>
       @endif
 
+      {{-- FILTRO POR DATAS --}}
+      <form method="GET" action="{{ route('admin.director.pendingVacations') }}" class="row g-3 mb-4 align-items-end">
+        <div class="col-md-4">
+          <label for="from" class="form-label fw-semibold">De</label>
+          <input type="date" name="from" id="from" value="{{ $from ?? '' }}" class="form-control">
+        </div>
+        <div class="col-md-4">
+          <label for="to" class="form-label fw-semibold">Até</label>
+          <input type="date" name="to" id="to" value="{{ $to ?? '' }}" class="form-control">
+        </div>
+        <div class="col-md-4 d-flex gap-2">
+          <button type="submit" class="btn btn-outline-secondary flex-fill">
+            <i class="fas fa-search me-1"></i>Filtrar
+          </button>
+          <a href="{{ route('admin.director.pendingVacations') }}" class="btn btn-secondary flex-fill">
+            <i class="fas fa-sync me-1"></i>Limpar
+          </a>
+        </div>
+      </form>
+
       {{-- TABELA --}}
       <div class="table-responsive">
         <table class="table table-striped table-hover align-middle">
           <thead class="table-light">
             <tr>
-              <th>ID</th>
+              <th>#</th>
               <th>Funcionário</th>
               <th>Tipo</th>
               <th>Início / Fim</th>
               <th>Status</th>
-              <th class="text-center">Ações</th>
+              <th class="text-center">Operações</th>
             </tr>
           </thead>
           <tbody>
@@ -69,7 +89,7 @@
                 </td>
                 <td><span class="badge bg-warning text-dark">{{ $req->approvalStatus }}</span></td>
 
-                {{-- COLUNA AÇÕES (DROPDOWN OPERAÇÕES) --}}
+                {{-- DROPDOWN OPERAÇÕES --}}
                 <td class="text-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown"
@@ -105,7 +125,7 @@
               {{-- MODAL APROVAR --}}
               <div class="modal fade" id="approveModal-{{ $req->id }}" tabindex="-1"
                 aria-labelledby="approveModalLabel-{{ $req->id }}" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <form action="{{ route('admin.director.approveVacation', $req->id) }}" method="POST">
                       @csrf
@@ -140,8 +160,8 @@
                             placeholder="Observação ao aprovar..."></textarea>
                         </div>
                         <div class="alert alert-info mb-0">
-                          <i class="fas fa-info-circle me-2"></i>Ao aprovar, a Guia de Férias será gerada e assinada
-                          automaticamente.
+                          <i class="fas fa-info-circle me-2"></i>Ao aprovar, a Guia de Férias será gerada e aberta
+                          automaticamente para pré-visualização.
                         </div>
                       </div>
                       <div class="modal-footer">
@@ -158,7 +178,7 @@
               {{-- MODAL REJEITAR --}}
               <div class="modal fade" id="rejectModal-{{ $req->id }}" tabindex="-1"
                 aria-labelledby="rejectModalLabel-{{ $req->id }}" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <form action="{{ route('admin.director.rejectVacation', $req->id) }}" method="POST">
                       @csrf
@@ -179,7 +199,11 @@
                             Motivo da Rejeição <span class="text-danger">*</span>
                           </label>
                           <textarea name="rejectionReason" id="rejectionReason-{{ $req->id }}" class="form-control" rows="3"
-                            required placeholder="Explique o porquê da recusa..."></textarea>
+                            required minlength="5" placeholder="Indique o motivo da recusa..."></textarea>
+                        </div>
+                        <div class="alert alert-warning mb-0">
+                          <i class="fas fa-exclamation-triangle me-2"></i>O pedido será marcado como «Recusado» e o
+                          funcionário será notificado.
                         </div>
                       </div>
                       <div class="modal-footer">
@@ -197,7 +221,7 @@
               <tr>
                 <td colspan="6" class="text-center py-4 text-muted">
                   <i class="fas fa-inbox fa-2x mb-2 d-block"></i>
-                  Nenhum pedido aguardando decisão final.
+                  Nenhum pedido a aguardar decisão final.
                 </td>
               </tr>
             @endforelse

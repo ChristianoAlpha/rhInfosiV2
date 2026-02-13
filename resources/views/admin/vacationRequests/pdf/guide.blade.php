@@ -25,13 +25,26 @@
             top: 35%;
             left: 50%;
             transform: translate(-50%, -50%);
-            opacity: 0.06;
+            opacity: 0.05;
             z-index: -1;
             text-align: center;
         }
 
         .watermark img {
-            width: 320px;
+            width: 340px;
+        }
+
+        /* ── Background pattern sutil ── */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.015;
+            z-index: -2;
+            background-image: radial-gradient(circle, #1a5276 1px, transparent 1px);
+            background-size: 20px 20px;
         }
 
         /* ── Header ── */
@@ -87,6 +100,7 @@
             font-weight: bold;
             font-size: 12pt;
             margin-bottom: 25px;
+            text-decoration: underline;
         }
 
         .content .body-text {
@@ -95,19 +109,20 @@
         }
 
         .content .emission-date {
-            margin-top: 30px;
+            margin-top: 35px;
+            text-indent: 40px;
         }
 
-        /* ── Signature block ── */
+        /* ── Signature block (posição baixa, próximo à data de emissão) ── */
         .signature-block {
-            margin-top: 50px;
+            margin-top: 40px;
             text-align: center;
         }
 
         .signature-block .signer-title {
             font-weight: bold;
             font-size: 10.5pt;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .signature-block .signature-img {
@@ -119,6 +134,23 @@
             height: auto;
         }
 
+        .signature-block .stamp-area {
+            display: inline-block;
+            position: relative;
+        }
+
+        .signature-block .stamp-area::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -10px;
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgba(200, 0, 0, 0.15);
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
         .signature-block .signer-name {
             font-weight: bold;
             font-size: 11pt;
@@ -127,7 +159,7 @@
             border-top: 1px solid #333;
             display: inline-block;
             padding-top: 4px;
-            min-width: 250px;
+            min-width: 260px;
         }
 
         /* ── Footer ── */
@@ -137,9 +169,9 @@
             left: 0;
             width: 100%;
             text-align: center;
-            font-size: 8pt;
+            font-size: 7.5pt;
             color: #555;
-            border-top: 1px solid #ccc;
+            border-top: 1.5px solid #1a5276;
             padding-top: 5px;
         }
 
@@ -151,10 +183,18 @@
         .footer p {
             margin: 1px 0;
         }
+
+        .footer .footer-ministry {
+            font-size: 6.5pt;
+            color: #888;
+        }
     </style>
 </head>
 
 <body>
+
+    {{-- Background pattern sutil --}}
+    <div class="bg-pattern"></div>
 
     {{-- Marca d'água central --}}
     <div class="watermark">
@@ -170,7 +210,7 @@
         <hr>
     </div>
 
-    {{-- ═══════════ GABINETE (dinâmico por diretor) ═══════════ --}}
+    {{-- ═══════════ GABINETE (dinâmico por director) ═══════════ --}}
     <div class="gabinete">
         <h4>{{ $headerTitle }}</h4>
     </div>
@@ -200,18 +240,21 @@
             Luanda, {{ $emissionDate->format('d \d\e F \d\e Y') }}.
         </p>
 
-        {{-- ═══════════ ASSINATURA (próximo à data) ═══════════ --}}
+        {{-- ═══════════ ASSINATURA (baixa, próximo à data de emissão) ═══════════ --}}
         <div class="signature-block">
             <p class="signer-title">{{ $signerTitle }}</p>
 
-            @if($signatureImage)
-                <div class="signature-img">
-                    <img src="{{ $signatureImage }}" alt="Assinatura">
-                </div>
-            @else
-                <div style="height: 60px;"></div>
-            @endif
+            <div class="stamp-area">
+                @if($signatureImage)
+                    <div class="signature-img">
+                        <img src="{{ $signatureImage }}" alt="Assinatura">
+                    </div>
+                @else
+                    <div style="height: 60px;"></div>
+                @endif
+            </div>
 
+            <br>
             <p class="signer-name">{{ strtoupper($directorName) }}</p>
         </div>
 
@@ -223,6 +266,7 @@
         <p><strong>Instituto Nacional de Fomento da Sociedade de Informação</strong></p>
         <p>Rua 17 de Setembro nº 59, Cidade Alta, Luanda — Angola</p>
         <p>Caixa Postal: 1412 | Tel.: +244 222 693 503 | Geral@infosi.gov.ao | www.infosi.gov.ao</p>
+        <p class="footer-ministry">Ministério das Telecomunicações, Tecnologias de Informação e Comunicação Social</p>
     </div>
 
 </body>
