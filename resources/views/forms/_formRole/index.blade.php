@@ -2,7 +2,7 @@
     <div class="form-floating">
         <input type="text" name="name" class="form-control" id="name" placeholder=""
             value="{{ old('name', $role->name ?? '') }}">
-        <label for="name">Função</label>
+        <label for="name">Adicionar nova Função</label>
     </div>
 </div>
 

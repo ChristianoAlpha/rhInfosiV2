@@ -10,11 +10,11 @@
     </span>
     <div>
       <!-- Botão para gerar PDF para essa especialidade -->
-      <a href="{{ route('specialties.pdf', ['specialtyId' => $specialty->id]) }}" 
+      <a href="{{ route('admin.specialties.pdf', ['specialtyId' => $specialty->id]) }}" 
          class="btn btn-outline-light btn-sm" title="Baixar PDF" target="_blank" rel="noopener noreferrer">
         <i class="fas fa-file-earmark-pdf"></i> Baixar PDF
       </a>
-      <a href="{{ route('specialties.index') }}" class="btn btn-outline-light btn-sm" title="Voltar">
+      <a href="{{ route('admin.specialties.index') }}" class="btn btn-outline-light btn-sm" title="Voltar">
         <i class="fas fa-arrow-left"></i> Voltar
       </a>
     </div>

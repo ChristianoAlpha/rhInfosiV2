@@ -43,35 +43,13 @@
                                 <span class="fs-12 fw-normal text-muted text-truncate-1-line">Preencher todos os campos
                                     do formulário é obrigatório</span>
                             </h5>
-                            <a href="javascript:void(0);" class="btn btn-sm btn-light-brand">novo Funcionário</a>
+                            <a href="javascript:void(0);" class="btn btn-sm btn-light-brand">Novo Departamento</a>
                         </div>
                         <div class="row">
                             <form method="POST" action="{{ route('admin.departments.store') }}">
                                 @csrf
 
-                                <!-- Título do Departamento -->
-                                <div class="mb-3">
-                                    <div class="form-floating">
-                                        <input type="text" name="title" class="form-control" id="title"
-                                            placeholder="" value="{{ old('title') }}">
-                                        <label for="title">Adicionar novo Departamento</label>
-                                    </div>
-                                </div>
-
-                                <!-- Descrição do Departamento -->
-                                <div class="mb-3">
-                                    <div class="form-floating">
-                                        <textarea name="description" class="form-control" id="description" placeholder="" style="height: 100px;">{{ old('description') }}</textarea>
-                                        <label for="description">Descrição do Departamento</label>
-                                    </div>
-                                </div>
-
-                                <!-- Botão de envio -->
-                                <div class="d-grid gap-2 col-6 mx-auto mt-4">
-                                    <button type="submit" class="btn btn-outline-secondary btn-lg">
-                                        <i class="fas fa-check-circle me-2"></i>Criar Departamento
-                                    </button>
-                                </div>
+                                @include('forms._formDepartment.index')
                             </form>
                         </div>
                     </div>

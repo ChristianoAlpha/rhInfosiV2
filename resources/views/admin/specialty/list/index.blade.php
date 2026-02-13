@@ -2,87 +2,111 @@
 @section('title', 'Lista de Especialidades')
 @section('content')
 
-    <div class="card mt-4 mt-4 shadow">
-        <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
-            <span>
-                <i class="fas fa-card-list me-2"></i>Todas as Especialidades
-            </span>
-            <a href="{{ route('admin.specialties.create') }}" class="btn btn-outline-light btn-sm" title="Nova Especialidade">
-                Nova
-                <i class="fas fa-plus-circle"></i>
-            </a>
-        </div>
-        <div class="card-body">
-            <!-- Filtro para listar funcionários por Especialidade -->
-            <div class="mt-4">
-                <p class="mb-3 small text-muted">Listar funcionários por especialidade:</p>
-                <form action="{{ route('admin.specialties.employeee.filter') }}" method="GET" class="d-inline-flex">
-                    <div class="input-group w-auto">
-                        <!-- Utilizando a mesma coleção de especialidades ($data) para o filtro -->
-                        <select name="specialty" class="form-select" style="max-width: 250px;" required>
-                            <option value="">Selecione a Especialidade</option>
-                            @foreach ($data as $d)
-                                <option value="{{ $d->id }}">{{ $d->name }}</option>
-                            @endforeach
-                        </select>
-                        <button type="submit" class="btn btn-outline-secondary" title="Pesquisar">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-            </div><br>
-            <!-- Tabela de Especialidades -->
-            <div class="table-responsive">
-                <table id="datatablesSimple" class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Descrição</th>
-                            <th style="width: 58px">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data as $item)
-                            <tr>
-                                <td>{{ $item->id }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->description ?? '-' }}</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Operações
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a href="{{ route('admin.specialties.show', $item->id) }}"
-                                                    class="dropdown-item">
-                                                    <i class="fas fa-eye"></i> Detalhes
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('admin.specialties.edit', $item->id) }}"
-                                                    class="dropdown-item">
-                                                    <i class="fas fa-pencil"></i>Editar
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('admin.specialties.destroy', $item->id) }}"
-                                                    class="dropdown-item">
-                                                    <i class="fas fa-trash"></i>Deletar
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+    <!-- [ page-header ] start -->
+    <div class="page-header">
+        <div class="page-header-left d-flex align-items-center">
+            <div class="page-header-title">
+                <h5 class="m-b-10">Especialidades</h5>
             </div>
-
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">Todas as Especialidades</li>
+            </ul>
+        </div>
+        <div class="page-header-right ms-auto">
+            <div class="page-header-right-items">
+                <div class="d-flex d-md-none">
+                    <a href="javascript:void(0)" class="page-header-right-close-toggle">
+                        <i class="feather-arrow-left me-2"></i>
+                        <span>Back</span>
+                    </a>
+                </div>
+                <div class="d-flex align-items-center gap-2 page-header-right-items-wrapper">
+                    <a href="{{ route('admin.specialties.create') }}" class="btn btn-outline-secondary">
+                        <i class="feather-plus me-2"></i>
+                        <span>Novo</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
+    <!-- [ page-header ] end -->
 
-@endsection
+
+    <div class="main-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card stretch stretch-full">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <!-- Filtro para listar funcionários por Especialidade -->
+                            <div class="mt-4">
+                                <p class="mb-3 small text-muted">Listar funcionários por especialidade:</p>
+                                <form action="{{ route('admin.specialties.employeee.filter') }}" method="GET"
+                                    class="d-inline-flex">
+                                    <div class="input-group w-auto">
+                                        <!-- Utilizando a mesma coleção de especialidades ($data) para o filtro -->
+                                        <select name="specialty" class="form-select" style="max-width: 250px;" required>
+                                            <option value="">Selecione a Especialidade</option>
+                                            @foreach ($data as $d)
+                                                <option value="{{ $d->id }}">{{ $d->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <button type="submit" class="btn btn-outline-secondary" title="Pesquisar">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <table id="leadList" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                        <th>Descrição</th>
+                                        <th style="width: 58px">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($data as $item)
+                                        <tr>
+                                            <td>{{ $item->id }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->description ?? '-' }}</td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <a href="javascript:void(0)" class="avatar-text avatar-md"
+                                                        data-bs-toggle="dropdown" data-bs-offset="0,21">
+                                                        <i class="feather feather-more-horizontal"></i>
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a href="{{ route('admin.specialties.show', $item->id) }}"
+                                                                class="dropdown-item">
+                                                                <i class="fas fa-eye"></i> Detalhes
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{ route('admin.specialties.edit', $item->id) }}"
+                                                                class="dropdown-item">
+                                                                <i class="fas fa-pencil"></i>Editar
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{ route('admin.specialties.destroy', $item->id) }}"
+                                                                class="dropdown-item">
+                                                                <i class="fas fa-trash"></i>Deletar
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                @endsection
