@@ -64,7 +64,7 @@ class DirectorGeneralController extends Controller
         }
 
         $vacation->approvalStatus = 'Aprovado';
-        $vacation->approvalComment = $request->input('approvalComment') ?? 'Aprovado pelo Diretor';
+        $vacation->approvalComment = $request->input('approvalComment') ?? 'Aprovado pelo Director';
 
         // --- DINÂMICO: Dados do diretor que aprova ---
         $directorName = $user->directorName ?? $user->name ?? 'Director';
@@ -161,10 +161,10 @@ class DirectorGeneralController extends Controller
         $vacation = VacationRequest::findOrFail($id);
         $vacation->approvalStatus = 'Recusado';
         $vacation->rejectionReason = $request->rejectionReason;
-        $vacation->approvalComment = 'Recusado pelo Diretor Geral: ' . $request->rejectionReason;
+        $vacation->approvalComment = 'Recusado pelo Director: ' . $request->rejectionReason;
         $vacation->save();
 
         return redirect()->route('admin.director.pendingVacations')
-            ->with('msg', 'Pedido de férias recusado.');
+            ->with('success', 'Pedido de férias recusado com sucesso.');
     }
 }

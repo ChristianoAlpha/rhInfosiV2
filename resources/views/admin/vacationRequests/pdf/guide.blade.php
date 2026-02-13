@@ -34,17 +34,22 @@
             width: 340px;
         }
 
-        /* ── Background pattern sutil ── */
-        .bg-pattern {
+        /* ── Background binário sutil (101010...) ── */
+        .bg-binary {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.015;
+            opacity: 0.025;
             z-index: -2;
-            background-image: radial-gradient(circle, #1a5276 1px, transparent 1px);
-            background-size: 20px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 7pt;
+            line-height: 1.1;
+            color: #1a5276;
+            overflow: hidden;
+            word-wrap: break-word;
+            letter-spacing: 2px;
         }
 
         /* ── Header ── */
@@ -127,6 +132,7 @@
 
         .signature-block .signature-img {
             margin: 5px auto;
+            position: relative;
         }
 
         .signature-block .signature-img img {
@@ -134,21 +140,39 @@
             height: auto;
         }
 
-        .signature-block .stamp-area {
+        /* ── Carimbo / Selo sobre assinatura ── */
+        .stamp-area {
             display: inline-block;
             position: relative;
         }
 
-        .signature-block .stamp-area::after {
-            content: '';
+        .stamp-overlay {
             position: absolute;
             top: 50%;
-            left: -10px;
-            width: 80px;
-            height: 80px;
-            border: 2px solid rgba(200, 0, 0, 0.15);
-            border-radius: 50%;
+            left: -15px;
+            width: 90px;
+            height: 90px;
             transform: translateY(-50%);
+            border: 3px solid rgba(180, 0, 0, 0.25);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .stamp-overlay-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            border: 1.5px solid rgba(180, 0, 0, 0.20);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 70px;
+            font-size: 7pt;
+            font-weight: bold;
+            color: rgba(180, 0, 0, 0.30);
+            letter-spacing: 1px;
         }
 
         .signature-block .signer-name {
@@ -175,9 +199,14 @@
             padding-top: 5px;
         }
 
-        .footer img {
-            width: 90px;
+        .footer-logos {
             margin-bottom: 3px;
+        }
+
+        .footer-logos img {
+            width: 80px;
+            margin: 0 10px;
+            vertical-align: middle;
         }
 
         .footer p {
@@ -188,13 +217,23 @@
             font-size: 6.5pt;
             color: #888;
         }
+
+        .footer .angotic-text {
+            font-size: 6pt;
+            color: #999;
+            font-style: italic;
+        }
     </style>
 </head>
 
 <body>
 
-    {{-- Background pattern sutil --}}
-    <div class="bg-pattern"></div>
+    {{-- Background binário sutil (bolhas 101010...) --}}
+    <div class="bg-binary">
+        @for ($i = 0; $i < 120; $i++)
+            10101010 01010101 11001100 00110011 10101010 01010101 11001100 00110011 10101010 01010101
+        @endfor
+    </div>
 
     {{-- Marca d'água central --}}
     <div class="watermark">
@@ -252,6 +291,11 @@
                 @else
                     <div style="height: 60px;"></div>
                 @endif
+
+                {{-- Carimbo / selo sobre a assinatura --}}
+                <div class="stamp-overlay">
+                    <div class="stamp-overlay-inner">INFOSI</div>
+                </div>
             </div>
 
             <br>
@@ -262,11 +306,14 @@
 
     {{-- ═══════════ FOOTER ═══════════ --}}
     <div class="footer">
-        <img src="{{ public_path('images/infosi/infosiH.png') }}" alt="INFOSI">
+        <div class="footer-logos">
+            <img src="{{ public_path('images/infosi/infosiH.png') }}" alt="INFOSI">
+        </div>
         <p><strong>Instituto Nacional de Fomento da Sociedade de Informação</strong></p>
         <p>Rua 17 de Setembro nº 59, Cidade Alta, Luanda — Angola</p>
         <p>Caixa Postal: 1412 | Tel.: +244 222 693 503 | Geral@infosi.gov.ao | www.infosi.gov.ao</p>
         <p class="footer-ministry">Ministério das Telecomunicações, Tecnologias de Informação e Comunicação Social</p>
+        <p class="angotic-text">ANGOTIC — 50 Anos ao Serviço da Sociedade da Informação</p>
     </div>
 
 </body>

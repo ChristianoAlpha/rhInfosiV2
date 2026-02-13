@@ -108,13 +108,17 @@
             </div>
 
             {{-- 2. Validação / Rejeição do Chefe de Departamento --}}
-            @if($data->approvalComment && !str_starts_with($data->approvalComment, 'Recusado pelo Diretor'))
+            @if($data->approvalComment && !str_starts_with($data->approvalComment, 'Recusado pelo Director'))
               <div class="d-flex mb-3">
                 <div class="flex-shrink-0 me-3">
                   <span class="badge bg-info rounded-pill p-2"><i class="fas fa-user-tie"></i></span>
                 </div>
                 <div class="flex-grow-1">
-                  <p class="mb-0 fw-bold">Parecer do Chefe de Departamento</p>
+                  <p class="mb-0 fw-bold">Parecer do Chefe de Departamento
+                    @if($data->employee->department && $data->employee->department->head)
+                      <small class="text-muted fw-normal">({{ $data->employee->department->head->fullName ?? '' }})</small>
+                    @endif
+                  </p>
                   <p class="mb-0 text-muted">{{ $data->approvalComment }}</p>
                 </div>
               </div>
@@ -128,7 +132,7 @@
                 </div>
                 <div class="flex-grow-1">
                   <p class="mb-0 fw-bold">Encaminhado pela Área Administrativa (RH)</p>
-                  <small class="text-muted">Enviado ao director para decisão final</small>
+                  <small class="text-muted">Enviado ao Director para decisão final</small>
                 </div>
               </div>
             @endif
