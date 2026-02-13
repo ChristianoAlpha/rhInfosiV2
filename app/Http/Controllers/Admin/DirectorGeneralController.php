@@ -64,28 +64,45 @@ class DirectorGeneralController extends Controller
         }
 
         $vacation->approvalStatus = 'Aprovado';
-        $vacation->approvalComment = $request->input('approvalComment') ?? 'Aprovado pelo Diretor Geral';
+        $vacation->approvalComment = $request->input('approvalComment') ?? 'Aprovado pelo Diretor';
 
-        // Identificar o prefixo e cargo com base no utilizador logado (Director)
-        $directorName = $user->name;
-        $prefix = 'DG-INFOSI'; // Default
-        $headerTitle = 'GABINETE DO DIRECTOR GERAL';
-        $signerTitle = 'O DIRECTOR GERAL';
+        // --- DINÂMICO: Dados do diretor que aprova ---
+        $directorName = $user->directorName ?? $user->name ?? 'Director';
+        $directorType = $user->directorType ?? 'directorGeneral';
 
-        // Lógica baseada no nome do Diretor
-        if (str_contains($directorName, 'Marcos Cary')) {
-            $prefix = 'DGAAT-INFOSI';
-            $headerTitle = 'GABINETE DO DIRECTOR GERAL ADJUNTO PARA ÁREA TÉCNICA';
-            $signerTitle = 'O DIRECTOR GERAL ADJUNTO PARA ÁREA TÉCNICA';
-        } elseif (str_contains($directorName, 'Rita Patrícia')) {
-            $prefix = 'DGAA-INFOSI';
-            $headerTitle = 'GABINETE DA DIRECTORA GERAL ADJUNTA PARA ÁREA ADMINISTRATIVA E FINANCEIRA';
-            $signerTitle = 'A DIRECTORA GERAL ADJUNTA PARA ÁREA ADMINISTRATIVA E FINANCEIRA';
-        } elseif (str_contains($directorName, 'André Mpumba')) {
-            $prefix = 'DG-INFOSI';
-            $headerTitle = 'GABINETE DO DIRECTOR GERAL';
-            $signerTitle = 'O DIRECTOR GERAL';
-        }
+        // Mapa de configuração por directorType (valores do banco)
+        $configMap = [
+            'directorGeneral' => [
+                'prefix' => 'DG-INFOSI',
+                'headerTitle' => 'GABINETE DO DIRECTOR GERAL',
+                'signerTitle' => 'O DIRECTOR GERAL',
+                'signatureFile' => 'DG.png',
+            ],
+            'directorTechnical' => [
+                'prefix' => 'DGAAT-INFOSI',
+                'headerTitle' => 'GABINETE DO DIRECTOR GERAL ADJUNTO PARA ÁREA TÉCNICA',
+                'signerTitle' => 'O DIRECTOR GERAL ADJUNTO PARA ÁREA TÉCNICA',
+                'signatureFile' => 'DGAAT.png',
+            ],
+            'directorAdministrative' => [
+                'prefix' => 'DGAA-INFOSI',
+                'headerTitle' => 'GABINETE DA DIRECTORA GERAL ADJUNTA PARA ÁREA ADMINISTRATIVA E FINANCEIRA',
+                'signerTitle' => 'A DIRECTORA GERAL ADJUNTA PARA ÁREA ADMINISTRATIVA E FINANCEIRA',
+                'signatureFile' => 'DGAA.png',
+            ],
+        ];
+
+        $config = $configMap[$directorType] ?? $configMap['directorGeneral'];
+        $prefix = $config['prefix'];
+        $headerTitle = $config['headerTitle'];
+        $signerTitle = $config['signerTitle'];
+
+        // Assinatura digital (imagem estática por tipo)
+        $signaturePath = public_path('images/signatures/' . $config['signatureFile']);
+        $signatureImage = file_exists($signaturePath) ? $signaturePath : null;
+
+        // Extrair dias de férias do vacationType ("22 dias úteis" → 22)
+        $vacationDays = intval($vacation->vacationType);
 
         // Contar aprovações deste diretor neste ano para gerar sequencial
         $year = Carbon::now()->year;
@@ -105,6 +122,8 @@ class DirectorGeneralController extends Controller
             'headerTitle' => $headerTitle,
             'signerTitle' => $signerTitle,
             'directorName' => $directorName,
+            'signatureImage' => $signatureImage,
+            'vacationDays' => $vacationDays,
             'approvalDate' => Carbon::now(),
             'emissionDate' => Carbon::now(),
         ];
@@ -112,17 +131,19 @@ class DirectorGeneralController extends Controller
         $pdf = PDF::loadView('admin.vacationRequests.pdf.guide', $data)
             ->setPaper('a4', 'portrait');
 
+        // Nome do arquivo
         $safeName = preg_replace('/[^A-Za-z0-9_\-]/', '_', $vacation->employee->fullName);
         $fileName = 'Guia_Ferias_' . $sequence . '_' . $safeName . '_' . $year . '.pdf';
         $path = 'vacation_guides/' . $fileName;
 
+        // Salvar no storage public
         Storage::disk('public')->put($path, $pdf->output());
 
         $vacation->signedPdfPath = $path;
         $vacation->save();
 
-        return redirect()->route('admin.director.pendingVacations')
-            ->with('msg', 'Pedido de férias aprovado e Guia gerada com sucesso! (' . $sequenceNumber . ')');
+        // Stream preview no navegador (em vez de redirect)
+        return $pdf->stream($fileName);
     }
 
     // Rejeição pelo Diretor Geral
