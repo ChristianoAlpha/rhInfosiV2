@@ -8,11 +8,13 @@
           <span>Detalhes do Pedido de Férias</span>
           <div>
             @if($data->approvalStatus == 'Aprovado' && $data->signedPdfPath)
-              <a href="{{ route('admin.director.downloadSignedPdf', $data->id) }}"type="submit" class="btn btn-outline-secondary btn-sm me-2">
+              <a href="{{ route('admin.director.downloadSignedPdf', $data->id) }}" type="submit"
+                class="btn btn-outline-secondary btn-sm me-2">
                 <i class="fas fa-file-pdf"></i> Download Guia
               </a>
             @endif
-            <a href="{{ route('admin.vacationRequests.index') }}" class="btn btn-outline-light btn-sm" title="Voltar">
+            <a href="{{ url()->previous() ?: route('admin.hr.pendingVacations') }}" class="btn btn-outline-light btn-sm"
+              title="Voltar">
               <i class="fas fa-arrow-left"></i> Voltar
             </a>
           </div>
