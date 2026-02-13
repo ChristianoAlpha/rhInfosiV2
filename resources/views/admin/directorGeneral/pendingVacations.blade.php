@@ -64,7 +64,7 @@
                 </td>
                 <td><span class="badge bg-warning text-dark">{{ $req->approvalStatus }}</span></td>
 
-                {{-- DROPDOWN OPERAÇÕES --}}
+                {{-- DROPDOWN OPERAÇÕES — usa globalModal via JS --}}
                 <td class="text-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown"
@@ -81,14 +81,14 @@
                         <hr class="dropdown-divider">
                       </li>
                       <li>
-                        <button type="button" class="dropdown-item text-success" data-bs-toggle="modal"
-                          data-bs-target="#approveModal-{{ $req->id }}">
+                        <button type="button" class="dropdown-item text-success"
+                          onclick="openApproveModal({{ $req->id }}, '{{ addslashes($req->employee->fullName ?? '-') }}', '{{ \Carbon\Carbon::parse($req->vacationStart)->format('d/m/Y') }}', '{{ \Carbon\Carbon::parse($req->vacationEnd)->format('d/m/Y') }}', '{{ $req->vacationType }}')">
                           <i class="fas fa-check-circle me-2"></i>Aprovar
                         </button>
                       </li>
                       <li>
-                        <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal"
-                          data-bs-target="#rejectModal-{{ $req->id }}">
+                        <button type="button" class="dropdown-item text-danger"
+                          onclick="openRejectModal({{ $req->id }}, '{{ addslashes($req->employee->fullName ?? '-') }}')">
                           <i class="fas fa-times-circle me-2"></i>Rejeitar
                         </button>
                       </li>
@@ -96,102 +96,6 @@
                   </div>
                 </td>
               </tr>
-
-              {{-- MODAL APROVAR --}}
-              <div class="modal fade" id="approveModal-{{ $req->id }}" tabindex="-1"
-                aria-labelledby="approveModalLabel-{{ $req->id }}" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <form action="{{ route('admin.director.approveVacation', $req->id) }}" method="POST">
-                      @csrf
-                      <div class="modal-header bg-success text-white">
-                        <h5 class="modal-title" id="approveModalLabel-{{ $req->id }}">
-                          <i class="fas fa-check-circle me-2"></i>Aprovar Pedido #{{ $req->id }}
-                        </h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                          aria-label="Fechar"></button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="mb-3">
-                          <label class="form-label fw-semibold text-muted">Funcionário</label>
-                          <p class="mb-0 fw-bold">{{ $req->employee->fullName ?? '-' }}</p>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label fw-semibold text-muted">Período</label>
-                          <p class="mb-0">
-                            {{ \Carbon\Carbon::parse($req->vacationStart)->format('d/m/Y') }} até
-                            {{ \Carbon\Carbon::parse($req->vacationEnd)->format('d/m/Y') }}
-                          </p>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label fw-semibold text-muted">Tipo</label>
-                          <p class="mb-0"><span class="badge bg-secondary">{{ $req->vacationType }}</span></p>
-                        </div>
-                        <hr>
-                        <div class="mb-3">
-                          <label for="approvalComment-{{ $req->id }}" class="form-label fw-semibold">Comentário
-                            (opcional)</label>
-                          <textarea name="approvalComment" id="approvalComment-{{ $req->id }}" class="form-control" rows="2"
-                            placeholder="Observação ao aprovar..."></textarea>
-                        </div>
-                        <div class="alert alert-info mb-0">
-                          <i class="fas fa-info-circle me-2"></i>Ao aprovar, a Guia de Férias será gerada e aberta
-                          automaticamente para pré-visualização.
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success">
-                          <i class="fas fa-check me-1"></i>Confirmar Aprovação
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-
-              {{-- MODAL REJEITAR --}}
-              <div class="modal fade" id="rejectModal-{{ $req->id }}" tabindex="-1"
-                aria-labelledby="rejectModalLabel-{{ $req->id }}" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <form action="{{ route('admin.director.rejectVacation', $req->id) }}" method="POST">
-                      @csrf
-                      <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title" id="rejectModalLabel-{{ $req->id }}">
-                          <i class="fas fa-times-circle me-2"></i>Rejeitar Pedido #{{ $req->id }}
-                        </h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                          aria-label="Fechar"></button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="mb-3">
-                          <label class="form-label fw-semibold text-muted">Funcionário</label>
-                          <p class="mb-0 fw-bold">{{ $req->employee->fullName ?? '-' }}</p>
-                        </div>
-                        <div class="mb-3">
-                          <label for="rejectionReason-{{ $req->id }}" class="form-label fw-semibold">
-                            Motivo da Rejeição <span class="text-danger">*</span>
-                          </label>
-                          <textarea name="rejectionReason" id="rejectionReason-{{ $req->id }}" class="form-control" rows="3"
-                            required minlength="5" placeholder="Indique o motivo da recusa..."></textarea>
-                        </div>
-                        <div class="alert alert-warning mb-0">
-                          <i class="fas fa-exclamation-triangle me-2"></i>O pedido será marcado como «Recusado» e o
-                          funcionário será notificado.
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-danger">
-                          <i class="fas fa-times me-1"></i>Confirmar Rejeição
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-
             @empty
               <tr>
                 <td colspan="6" class="text-center py-4 text-muted">
@@ -207,4 +111,103 @@
     </div>
   </div>
 
+  {{-- Forms ocultos para submit --}}
+  <form id="approveForm" method="POST" style="display:none;">
+    @csrf
+    <input type="hidden" name="approvalComment" id="approveCommentInput">
+  </form>
+  <form id="rejectForm" method="POST" style="display:none;">
+    @csrf
+    <input type="hidden" name="rejectionReason" id="rejectReasonInput">
+  </form>
+
+@endsection
+
+@section('scripts')
+  <script>
+    /**
+     * Aprovar — usa globalModal existente (sem modal Bootstrap extra)
+     */
+    function openApproveModal(id, empName, dateStart, dateEnd, vacType) {
+      var bodyHtml = '' +
+        '<div class="mb-3">' +
+        '<label class="form-label fw-semibold text-muted">Funcionário</label>' +
+        '<p class="mb-0 fw-bold">' + empName + '</p>' +
+        '</div>' +
+        '<div class="mb-3">' +
+        '<label class="form-label fw-semibold text-muted">Período</label>' +
+        '<p class="mb-0">' + dateStart + ' até ' + dateEnd + '</p>' +
+        '</div>' +
+        '<div class="mb-3">' +
+        '<label class="form-label fw-semibold text-muted">Tipo</label>' +
+        '<p class="mb-0"><span class="badge bg-secondary">' + vacType + '</span></p>' +
+        '</div>' +
+        '<hr>' +
+        '<div class="mb-3">' +
+        '<label for="approveComment" class="form-label fw-semibold">Comentário (opcional)</label>' +
+        '<textarea id="approveComment" class="form-control" rows="2" placeholder="Observação ao aprovar..."></textarea>' +
+        '</div>' +
+        '<div class="alert alert-info mb-0">' +
+        '<i class="fas fa-info-circle me-2"></i>Ao aprovar, a Guia de Férias será gerada e aberta automaticamente para pré-visualização.' +
+        '</div>';
+
+      var footerHtml = '' +
+        '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>' +
+        '<button type="button" class="btn btn-success" onclick="submitApprove(' + id + ')">' +
+        '<i class="fas fa-check me-1"></i>Confirmar Aprovação' +
+        '</button>';
+
+      showModal('success', 'Confirmar Aprovação — Pedido #' + id, bodyHtml, footerHtml);
+    }
+
+    function submitApprove(id) {
+      var comment = document.getElementById('approveComment') ? document.getElementById('approveComment').value : '';
+      document.getElementById('approveCommentInput').value = comment;
+      var form = document.getElementById('approveForm');
+      form.action = '{{ url("admin/direcao-geral/aprovar-ferias") }}/' + id;
+      form.submit();
+    }
+
+    /**
+     * Rejeitar — usa globalModal existente (sem modal Bootstrap extra)
+     */
+    function openRejectModal(id, empName) {
+      var bodyHtml = '' +
+        '<div class="mb-3">' +
+        '<label class="form-label fw-semibold text-muted">Funcionário</label>' +
+        '<p class="mb-0 fw-bold">' + empName + '</p>' +
+        '</div>' +
+        '<div class="mb-3">' +
+        '<label for="rejectReason" class="form-label fw-semibold">' +
+        'Motivo da Rejeição <span class="text-danger">*</span>' +
+        '</label>' +
+        '<textarea id="rejectReason" class="form-control" rows="3" placeholder="Indique o motivo da recusa (mín. 5 caracteres)..."></textarea>' +
+        '<div id="rejectError" class="text-danger small mt-1" style="display:none;">O motivo deve ter pelo menos 5 caracteres.</div>' +
+        '</div>' +
+        '<div class="alert alert-warning mb-0">' +
+        '<i class="fas fa-exclamation-triangle me-2"></i>O pedido será marcado como «Recusado» e o funcionário será notificado.' +
+        '</div>';
+
+      var footerHtml = '' +
+        '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>' +
+        '<button type="button" class="btn btn-danger" onclick="submitReject(' + id + ')">' +
+        '<i class="fas fa-times me-1"></i>Confirmar Rejeição' +
+        '</button>';
+
+      showModal('error', 'Confirmar Rejeição — Pedido #' + id, bodyHtml, footerHtml);
+    }
+
+    function submitReject(id) {
+      var reason = document.getElementById('rejectReason') ? document.getElementById('rejectReason').value : '';
+      if (!reason || reason.trim().length < 5) {
+        document.getElementById('rejectError').style.display = 'block';
+        document.getElementById('rejectReason').classList.add('is-invalid');
+        return;
+      }
+      document.getElementById('rejectReasonInput').value = reason;
+      var form = document.getElementById('rejectForm');
+      form.action = '{{ url("admin/direcao-geral/rejeitar-ferias") }}/' + id;
+      form.submit();
+    }
+  </script>
 @endsection
