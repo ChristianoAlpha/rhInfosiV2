@@ -673,28 +673,11 @@
                             </ul>
                         </li>
 
-                        <!-- Área Administrativa (RH) -->
-                        <li class="nxl-item nxl-caption">
-                            <label>Área Administrativa (RH)</label>
-                        </li>
-                        <li class="nxl-item nxl-hasmenu">
-                            <a class="nxl-link" href="javascript:void(0);">
-                                <span class="nxl-micon"><i class="fas fa-user-cog"></i></span>
-                                <span class="nxl-mtext">Gestão RH</span>
-                                <span class="nxl-arrow"><i class="fas fa-chevron-right"></i></span>
-                            </a>
-                            <ul class="nxl-submenu">
-                                <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ route('admin.hr.pendingVacations') }}"><i
-                                            class="fas fa-umbrella-beach me-2"></i>Férias para Encaminhar</a></li>
-                            </ul>
-                        </li>
-
                         <!-- Direção Geral -->
                         <li class="nxl-item nxl-caption">
                             <label>Direção Geral</label>
                         </li>
-                        <li class="nav-item nxl-hasmenu">
+                        <li class="nxl-item nxl-hasmenu">
                             <a class="nxl-link" href="javascript:void(0);">
                                 <span class="nxl-micon"><i class="fas fa-user-tie"></i></span>
                                 <span class="nxl-mtext">Portal Direção</span>

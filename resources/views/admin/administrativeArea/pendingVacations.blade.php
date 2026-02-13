@@ -29,7 +29,7 @@
         </div>
       @endif
 
-      {{-- FILTROS --}}
+      {{-- FILTROS (sem campo ID funcionário) --}}
       <form method="GET" action="{{ route('admin.hr.pendingVacations') }}" class="row g-3 mb-4 align-items-end">
         <div class="col-md-4">
           <label for="from" class="form-label fw-semibold">De</label>
@@ -39,13 +39,8 @@
           <label for="to" class="form-label fw-semibold">Até</label>
           <input type="date" name="to" id="to" value="{{ $to }}" class="form-control">
         </div>
-        <div class="col-md-3">
-          <label for="employeeId" class="form-label">Funcionário (ID)</label>
-          <input type="text" name="employeeId" id="employeeId" value="{{ $employeeId }}" class="form-control"
-            placeholder="ID do Funcionário">
-        </div>
-        <div class="col-md-3 align-self-end">
-          <button type="submit" class="btn btn-primary">
+        <div class="col-md-4 d-flex gap-2">
+          <button type="submit" class="btn btn-primary flex-fill">
             <i class="fas fa-search me-1"></i>Filtrar
           </button>
           <a href="{{ route('admin.hr.pendingVacations') }}" class="btn btn-outline-secondary flex-fill">
@@ -63,8 +58,8 @@
               <th>Funcionário</th>
               <th>Tipo</th>
               <th>Início / Fim</th>
-              <th style="min-width: 200px;">Encaminhar Para</th>
               <th>Status</th>
+              <th>Encaminhar para</th>
               <th class="text-center">Ações</th>
             </tr>
           </thead>
@@ -86,26 +81,29 @@
                     <small class="text-muted">Fim: {{ \Carbon\Carbon::parse($req->vacationEnd)->format('d/m/Y') }}</small>
                   </div>
                 </td>
+                <td><span class="badge bg-info">{{ $req->approvalStatus }}</span></td>
 
-                {{-- COLUNA ENCAMINHAR PARA (SELECT) --}}
+                {{-- ENCAMINHAR INLINE (select + botão direto) --}}
                 <td>
                   <form action="{{ route('admin.hr.forwardVacation', $req->id) }}" method="POST"
-                    id="form-forward-{{ $req->id }}">
+                    class="d-flex align-items-center gap-2" id="forwardForm-{{ $req->id }}">
                     @csrf
-                    <select name="forwarded_to_director_id" class="form-select form-select-sm" required>
-                      <option value="">-- Selecione o Diretor --</option>
+                    <select name="forwarded_to_director_id" class="form-select form-select-sm" required
+                      style="min-width: 180px;">
+                      <option value="">-- Diretor --</option>
                       @foreach($directors as $director)
                         <option value="{{ $director->id }}">
                           {{ $director->directorName ?? ($director->employee->fullName ?? $director->email) }}
                         </option>
                       @endforeach
                     </select>
+                    <button type="submit" class="btn btn-sm btn-primary" title="Encaminhar">
+                      <i class="fas fa-paper-plane"></i>
+                    </button>
                   </form>
                 </td>
 
-                <td><span class="badge bg-info">{{ $req->approvalStatus }}</span></td>
-
-                {{-- COLUNA AÇÕES (DROPDOWN) --}}
+                {{-- DROPDOWN AÇÕES --}}
                 <td class="text-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown"
@@ -120,17 +118,8 @@
                       </li>
                       <li>
                         <a class="dropdown-item" href="{{ route('admin.vacationRequests.edit', $req->id) }}">
-                          <i class="fas fa-edit me-2 text-warning"></i>Editar
+                          <i class="fas fa-edit me-2 text-warning"></i>Editar / Retificar
                         </a>
-                      </li>
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-                      <li>
-                        {{-- Button linked to the form via form attribute --}}
-                        <button type="submit" form="form-forward-{{ $req->id }}" class="dropdown-item text-primary">
-                          <i class="fas fa-share me-2"></i>Encaminhar
-                        </button>
                       </li>
                     </ul>
                   </div>

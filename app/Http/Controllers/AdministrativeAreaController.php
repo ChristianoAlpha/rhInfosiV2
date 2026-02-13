@@ -44,7 +44,7 @@ class AdministrativeAreaController extends Controller
 
         $pendingRequests = $query->with('employee')->orderByDesc('id')->get();
 
-        // Carregar diretores para o select — usa Admin (tabela admins que tem coluna role)
+        // Carregar Directores para o select — usa Admin (tabela admins que tem coluna role)
         $directors = Admin::where('role', 'director')->with('employee')->get();
 
         return view('administrativeArea.pendingVacations', compact('pendingRequests', 'from', 'to', 'employeeId', 'directors'));
