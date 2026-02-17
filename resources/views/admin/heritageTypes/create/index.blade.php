@@ -2,43 +2,56 @@
 @section('title', 'Novo Tipo de Património')
 
 @section('content')
-    <div class="card mt-4 shadow">
-        <div class="card-header bg-primary text-white">
-            <i class="fas fa-plus-circle me-2"></i> Cadastrar Novo Tipo de Património
+    <!-- [ page-header ] start -->
+    <div class="page-header">
+        <div class="page-header-left d-flex align-items-center">
+            <div class="page-header-title">
+                <h5 class="m-b-10">Tipos de Património</h5>
+            </div>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item">Adicionar novo Tipo de Património</li>
+            </ul>
         </div>
-        <div class="card-body">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <form action="{{ route('admin.heritageTypes.store') }}" method="POST">
-                        @csrf
-
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input type="text" name="name" id="name" class="form-control" placeholder=""
-                                    value="{{ old('name') }}" required>
-                                <label for="name">Nome do Tipo</label>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <textarea name="description" id="description" class="form-control" placeholder=""
-                                    style="height: 100px;">{{ old('description') }}</textarea>
-                                <label for="description">Descrição (opcional)</label>
-                            </div>
-                        </div>
-
-                            <div class="d-grid gap-2 col-4 mx-auto mt-4">
-                            <buttontype="submit" class="btn btn-outline-secondary">
-                                <i class="fas fa-save me-1"></i> Salvar
-                            </button>
-                            <a href="{{ route('admin.heritageTypes.index') }}" class="btn btn-secondary ms-2">
-                                Cancelar
-                            </a>
-                        </div>
-                    </form>
+        <div class="page-header-right ms-auto">
+            <div class="page-header-right-items">
+                <div class="d-flex d-md-none">
+                    <a href="javascript:void(0)" class="page-header-right-close-toggle">
+                        <i class="feather-arrow-left me-2"></i>
+                        <span>Back</span>
+                    </a>
+                </div>
+                <div class="d-flex align-items-center gap-2 page-header-right-items-wrapper">
+                    <a href="{{ route('admin.heritageTypes.index') }}" class="btn btn-outline-secondary">
+                        <i class="feather-list me-2"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-@endsection
+    <!-- [ page-header ] end -->
+    <!-- [ Main Content ] start -->
+    <div class="main-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card stretch stretch-full">
+                    <div class="card-body lead-status">
+                        <div class="mb-5 d-flex align-items-center justify-content-between">
+                            <h5 class="fw-bold mb-0 me-4">
+                                <span class="d-block mb-2">Adicionar Novo Tipo de Património :</span>
+                                <span class="fs-12 fw-normal text-muted text-truncate-1-line">Preencher todos os campos
+                                    do formulário é obrigatório</span>
+                            </h5>
+                            <a href="javascript:void(0);" class="btn btn-sm btn-light-brand">Adicionar Tipo de Património</a>
+                        </div>
+                        <div class="row">
+                            <form action="{{ route('admin.heritageTypes.store') }}" method="POST">
+                                @csrf
+
+                                @include('forms._formHeritageType.index')
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endsection
