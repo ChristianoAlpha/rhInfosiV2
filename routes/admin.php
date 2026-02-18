@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\MobilityController;
 use App\Http\Controllers\Admin\PositionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SalaryPaymentController;
+use App\Http\Controllers\Admin\SecondmentController;
 use App\Http\Controllers\Admin\SpecialtyController;
 use App\Http\Controllers\Admin\StatuteController;
 use App\Http\Controllers\Admin\VacationRequestController;
@@ -346,6 +347,23 @@ Route::middleware('auth')->name('admin.')->group(function () {
     Route::get('/pdf', [MobilityController::class, 'pdfAll'])->name('mobilities.pdfAll');
     Route::get('/search-employee', [MobilityController::class, 'searchEmployee'])->name('mobilities.searchEmployee');
     // fim Mobilidade (Mobility)
+
+    // inicio Destacamento (Secondment)
+    Route::prefix('destacamento')->group(function () {
+
+        Route::get('/listar', [SecondmentController::class, 'index'])->name('secondments.index');
+        Route::get('/criar', [SecondmentController::class, 'create'])->name('secondments.create');
+        Route::post('/salvar', [SecondmentController::class, 'store'])->name('secondments.store');
+        Route::get('/detalhes/{id}', [SecondmentController::class, 'show'])->name('secondments.show');
+        Route::get('/editar/{id}/edit', [SecondmentController::class, ' edit'])->name('secondments.edit');
+        Route::put('/atualizar/{id}', [SecondmentController::class, 'update'])->name('secondments.update');
+        Route::delete('/apagar/{id}', [SecondmentController::class, 'destroy'])->name('secondments.destroy');
+
+        //filtros e pdf
+        Route::get("secondment/searchEmployee", [SecondmentController::class, "searchEmployee"])->name("secondments.searchEmployee");
+        Route::get("secondment/pdf", [SecondmentController::class, "pdfAll"])->name("secondments.pdfAll");
+    });
+    // fim Destacamento (Secondment)
 
     // inicio Trabalhos extras(ExtraJobs)
     Route::prefix('trabalhos-extras')->group(function () {
