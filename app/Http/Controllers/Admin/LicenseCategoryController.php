@@ -39,7 +39,7 @@ class LicenseCategoryController extends Controller
 
         return redirect()
             ->route('admin.licenseCategories.index')
-            ->with('msg', 'Categoria criada com sucesso.');
+            ->with('success', 'Categoria criada com sucesso.');
     }
 
     /**
@@ -64,7 +64,7 @@ class LicenseCategoryController extends Controller
 
         return redirect()
             ->route('admin.licenseCategories.index')
-            ->with('msg', 'Categoria atualizada com sucesso.');
+            ->with('success', 'Categoria atualizada com sucesso.');
     }
 
     /**
@@ -74,6 +74,6 @@ class LicenseCategoryController extends Controller
     {
         $licenseCategory->delete();
 
-        return redirect()->back()->with('msg', 'Categoria removida.');
+        return redirect()->back()->with('success', 'Categoria removida.');
     }
 }

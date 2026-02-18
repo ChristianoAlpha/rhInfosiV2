@@ -100,7 +100,7 @@ class SecondmentController extends Controller
             ->send(new NewSecondmentNotification($employee, $data['institution'], $data['causeOfTransfer'] ?? ''));
 
         return redirect()->route('admin.secondments.index')
-                         ->with('msg', 'Destacamento registrado com sucesso e e-mail enviado!');
+                         ->with('success', 'Destacamento registrado com sucesso e e-mail enviado!');
     }
 
     /**
@@ -155,7 +155,7 @@ class SecondmentController extends Controller
         ]);
 
         return redirect()->route('admin.secondments.edit', $id)
-                         ->with('msg', 'Destacamento atualizado com sucesso!');
+                         ->with('success', 'Destacamento atualizado com sucesso!');
     }
 
     /**

@@ -67,7 +67,7 @@ class ResourceAssignmentController extends Controller
         ]);
 
         if ($data) {
-            return redirect()->route('admin.resourceAssignments.index')->with('msg', 'Recurso atribuído com sucesso.');
+            return redirect()->route('admin.resourceAssignments.index')->with('success', 'Recurso atribuído com sucesso.');
         } else {
             return redirect()->back()->with('err', 'Erro ao atribuir recurso. Tente novamente mais tarde.');
         }
@@ -99,13 +99,13 @@ class ResourceAssignmentController extends Controller
             'end_date'    => $request->end_date,
             'notes'       => $request->notes,
         ]);
-        return redirect()->route('admin.resourceAssignments.index')->with('msg', 'Atribuição de recurso atualizada com sucesso.');
+        return redirect()->route('admin.resourceAssignments.index')->with('success', 'Atribuição de recurso atualizada com sucesso.');
     }
 
     public function destroy(ResourceAssignment $resourceAssignment)
     {
         $resourceAssignment->delete();
-        return redirect()->route('admin.resourceAssignment.index')->with('msg', 'Recurso atribuído excluído com sucesso.');
+        return redirect()->route('admin.resourceAssignment.index')->with('success', 'Recurso atribuído excluído com sucesso.');
     }
 
     //Imprimir a lista de todos os recursos atribuídos em PDF

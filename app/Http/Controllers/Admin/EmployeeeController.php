@@ -107,6 +107,7 @@ class EmployeeeController extends Controller
             'photo' => 'nullable|image',
             'entry_date' => 'required|date|date_format:Y-m-d', //adicionado
             'processNumber' => 'required|string|unique:employeees',
+            'driverLicense' => 'nullable|string|max:255', // Adicionado
         ], [
             'fullName.regex'               => 'O nome só pode conter letras e espaços.',
             'birth_date.before_or_equal'   => 'A idade minima permitida é 18 anos.',
@@ -135,6 +136,7 @@ class EmployeeeController extends Controller
         $data->employmentStatus = 'active';
         $data->entry_date =  $request->entry_date; //adicionado
         $data->processNumber =  $request->processNumber; //adicionado
+        $data->driverLicense = $request->driverLicense; // Adicionado
         $data->roleId = $request->roleId;
 
         if ($request->hasFile('photo')) {
@@ -220,6 +222,7 @@ class EmployeeeController extends Controller
             'academicLevel'      => 'nullable|string|max:255', // Adicionado
             'courseId'           => 'nullable|exists:courses,id', // Adicionado
             'processNumber'      => 'required|string|unique:employeees,processNumber,' . $id,
+            'driverLicense'      => 'nullable|string|max:255',
         ], [
             'fullName.regex'               => 'O nome só pode conter letras e espaços.',
             'birth_date.before_or_equal'   => 'Você deve ter no mínimo 18 anos.',
@@ -246,6 +249,7 @@ class EmployeeeController extends Controller
         $data->academicLevel   = $request->academicLevel; // Adicionado
         $data->courseId        = $request->courseId; // Adicionado
         $data->processNumber  =  $request->processNumber; //adicionado
+        $data->driverLicense  = $request->driverLicense; // Adicionado
 
         if ($request->hasFile('photo')) {
             $photoName = time() . '_' . $request->file('photo')->getClientOriginalName();
@@ -261,7 +265,7 @@ class EmployeeeController extends Controller
 
         $data->save();
 
-        return redirect()->route('admin.employeee.edit', $id)->with('msg', 'Dados atualizados com sucesso');
+        return redirect()->route('admin.employeee.edit', $id)->with('success', 'Dados atualizados com sucesso');
     }
 
     public function destroy($id)

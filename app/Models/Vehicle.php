@@ -26,13 +26,8 @@ class Vehicle extends Model
         return $this->hasMany(Maintenance::class, 'vehicleId');
     }
 
-    public function drivers()
+    public function employees()
     {
-        return $this->belongsToMany(
-            Driver::class,
-            'vehicle_driver',
-            'vehicleId',
-            'driverId'
-        )->withPivot('startDate', 'endDate')->withTimestamps();
+        return $this->hasMany(Employeee::class, 'vehicleId');
     }
 }

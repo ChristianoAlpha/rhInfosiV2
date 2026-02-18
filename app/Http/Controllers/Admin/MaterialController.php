@@ -50,7 +50,7 @@ class MaterialController extends Controller
 
         return redirect()
             ->route('admin.materials.index')
-            ->with('msg', 'Material cadastrado com sucesso.');
+            ->with('success', 'Material cadastrado com sucesso.');
     }
 
     public function show($id)
@@ -96,7 +96,7 @@ class MaterialController extends Controller
 
         $material->update($data);
 
-        return redirect()->back()->with('msg', 'Material atualizado com sucesso.');
+        return redirect()->back()->with('success', 'Material atualizado com sucesso.');
     }
 
     public function destroy($id)
@@ -104,6 +104,6 @@ class MaterialController extends Controller
         $material = Material::findOrFail($id);
         $material->delete();
 
-        return redirect()->back()->with('msg', 'Material removido com sucesso.');
+        return redirect()->back()->with('success', 'Material removido com sucesso.');
     }
 }

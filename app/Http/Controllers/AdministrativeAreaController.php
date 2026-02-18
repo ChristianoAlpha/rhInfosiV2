@@ -95,7 +95,7 @@ class AdministrativeAreaController extends Controller
         $vacation->save();
 
         return redirect()->route('admin.hr.pendingVacations')
-            ->with('msg', 'Pedido de férias encaminhado para o Diretor Geral com sucesso!');
+            ->with('success', 'Pedido de férias encaminhado para o Diretor Geral com sucesso!');
     }
 
     /**

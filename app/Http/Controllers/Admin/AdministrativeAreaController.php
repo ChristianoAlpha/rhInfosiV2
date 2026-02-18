@@ -94,7 +94,7 @@ class AdministrativeAreaController extends Controller
         $vacation->forwarded_to_director_id = $request->forwarded_to_director_id;
         $vacation->save();
 
-        return redirect()->route('admin.hr.pendingVacations')->with('msg', 'Pedido encaminhado com sucesso!');
+        return redirect()->route('admin.hr.pendingVacations')->with('success', 'Pedido encaminhado com sucesso!');
     }
 
     /**

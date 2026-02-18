@@ -28,7 +28,7 @@ class HeritageTypeController extends Controller
 
         HeritageType::create($request->all());
 
-        return redirect()->route('admin.heritageTypes.index')->with('msg', 'Tipo de Património criado com sucesso!');
+        return redirect()->route('admin.heritageTypes.index')->with('success', 'Tipo de Património criado com sucesso!');
     }
 
     public function show($id)
@@ -51,7 +51,7 @@ class HeritageTypeController extends Controller
 
         $heritageType->update($request->all());
 
-        return redirect()->route('admin.heritageTypes.index')->with('msg', 'Tipo de Património atualizado com sucesso!');
+        return redirect()->route('admin.heritageTypes.index')->with('success', 'Tipo de Património atualizado com sucesso!');
     }
 
     public function destroy(HeritageType $heritageType)
@@ -62,6 +62,6 @@ class HeritageTypeController extends Controller
 
         $heritageType->delete();
 
-        return redirect()->back()->with('msg', 'Tipo de Património removido com sucesso!');
+        return redirect()->back()->with('success', 'Tipo de Património removido com sucesso!');
     }
 }

@@ -41,7 +41,7 @@ class EmployeeEvaluationController extends Controller
 
         return redirect()
                ->route('employeeEvaluations.index')
-               ->with('msg','Avaliação criada com sucesso!');
+               ->with('success','Avaliação criada com sucesso!');
     }
 
     public function show(EmployeeEvaluation $employeeEvaluation)
@@ -75,7 +75,7 @@ class EmployeeEvaluationController extends Controller
 
         return redirect()
                ->route('employeeEvaluations.index')
-               ->with('msg','Avaliação atualizada com sucesso!');
+               ->with('success','Avaliação atualizada com sucesso!');
     }
 
     public function destroy(EmployeeEvaluation $employeeEvaluation)
@@ -83,7 +83,7 @@ class EmployeeEvaluationController extends Controller
         $employeeEvaluation->delete();
         return redirect()
                ->route('employeeEvaluations.index')
-               ->with('msg','Avaliação removida com sucesso!');
+               ->with('success','Avaliação removida com sucesso!');
     }
 
     public function pdf(EmployeeEvaluation $employeeEvaluation)

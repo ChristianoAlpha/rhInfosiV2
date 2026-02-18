@@ -29,7 +29,7 @@ class LeaveTypeController extends Controller
         LeaveType::create($request->only('name', 'description'));
 
         return redirect()->route('admin.leaveTypes.index')
-                         ->with('msg', 'Tipo de licença criado com sucesso!');
+                         ->with('success', 'Tipo de licença criado com sucesso!');
     }
 
     public function show($id)
@@ -54,12 +54,12 @@ class LeaveTypeController extends Controller
         $data = LeaveType::findOrFail($id);
         $data->update($request->only('name', 'description'));
 
-        return redirect()->back()->with('msg', 'Tipo de licença atualizado com sucesso!');
+        return redirect()->back()->with('success', 'Tipo de licença atualizado com sucesso!');
     }
 
     public function destroy($id)
     {
         LeaveType::destroy($id);
-        return redirect()->back()->with('msg', 'Tipo de licença removido com sucesso!');
+        return redirect()->back()->with('success', 'Tipo de licença removido com sucesso!');
     }
 }

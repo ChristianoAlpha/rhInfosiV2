@@ -34,7 +34,7 @@ class EmployeeTypeController extends Controller
         $employeeType->description = $request->description;
         $employeeType->save();
 
-        return redirect()->back()->with('msg', 'Tipo de Funcionário cadastrado com sucesso!');
+        return redirect()->back()->with('success', 'Tipo de Funcionário cadastrado com sucesso!');
     }
 
     // Exibe os detalhes de um tipo de funcionário específico
@@ -64,13 +64,13 @@ class EmployeeTypeController extends Controller
         $employeeType->description = $request->description;
         $employeeType->save();
 
-        return redirect()->back()->with('msg', 'Tipo de Funcionário atualizado com sucesso!');
+        return redirect()->back()->with('success', 'Tipo de Funcionário atualizado com sucesso!');
     }
 
     // Remove um tipo de funcionário do banco de dados
     public function destroy($id)
     {
         EmployeeType::destroy($id);
-        return redirect()->back()->with('msg', 'Tipo de Funcionário removido com sucesso!');
+        return redirect()->back()->with('success', 'Tipo de Funcionário removido com sucesso!');
     }
 }

@@ -34,7 +34,7 @@ class SpecialtyController extends Controller
         $data->description = $request->description;
         $data->save();
 
-        return redirect()->back()->with('msg', 'Especialidade criada!');
+        return redirect()->back()->with('success', 'Especialidade criada!');
     }
 
     public function show($id)
@@ -64,7 +64,7 @@ class SpecialtyController extends Controller
         $data->save();
 
         // Aqui fizemos a correção: usei o route helper para apontar para /specialties/{id}/edit
-        return redirect()->back()->with('msg', 'Especialidade atualizada!');
+        return redirect()->back()->with('success', 'Especialidade atualizada!');
     }
 
     public function employeee(Request $request)
@@ -86,6 +86,6 @@ class SpecialtyController extends Controller
     public function destroy($id)
     {
         Specialty::where('id', $id)->delete();
-        return redirect()->back()->with('msg', 'Especialidade apagada!');
+        return redirect()->back()->with('success', 'Especialidade apagada!');
     }
 }

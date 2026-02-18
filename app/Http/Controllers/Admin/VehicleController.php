@@ -54,7 +54,7 @@ class VehicleController extends Controller
             $vehicle->drivers()->attach($request->driverId, ['startDate' => now()]);
         } */
 
-        return redirect()->route('admin.vehicles.index')->with('msg', 'Viatura cadastrada com sucesso.');
+        return redirect()->route('admin.vehicles.index')->with('success', 'Viatura cadastrada com sucesso.');
     }
 
     public function show(Vehicle $vehicle)
@@ -91,14 +91,14 @@ class VehicleController extends Controller
             $vehicle->drivers()->attach($request->driverId, ['startDate' => now()]);
         } */
 
-        return redirect()->route('admin.vehicles.edit', $vehicle)->with('msg', 'Viatura atualizada com sucesso.');
+        return redirect()->route('admin.vehicles.edit', $vehicle)->with('success', 'Viatura atualizada com sucesso.');
     }
 
     public function destroy(Vehicle $vehicle)
     {
         $vehicle->drivers()->detach();
         $vehicle->delete();
-        return redirect()->route('admin.vehicles.index')->with('msg', 'Viatura excluída com sucesso.');
+        return redirect()->route('admin.vehicles.index')->with('success', 'Viatura excluída com sucesso.');
     }
 
     // PDFs (similar a outros; adicione filtros se quiser)

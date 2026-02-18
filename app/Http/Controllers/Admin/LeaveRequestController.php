@@ -131,7 +131,7 @@ class LeaveRequestController extends Controller
         LeaveRequest::create($data);
 
         return redirect()->route('admin.leaveRequests.index')
-                         ->with('msg', 'Pedido de licença registrado com sucesso!');
+                         ->with('success', 'Pedido de licença registrado com sucesso!');
     }
 
     public function show($id)
@@ -159,7 +159,7 @@ class LeaveRequestController extends Controller
         $leaveRequest = LeaveRequest::findOrFail($id);
         $leaveRequest->update($request->all());
         return redirect()->route('admin.leaveRequests.index')
-                         ->with('msg', 'Pedido de licença atualizado com sucesso!');
+                         ->with('success', 'Pedido de licença atualizado com sucesso!');
     }
 
     public function destroy($id)
