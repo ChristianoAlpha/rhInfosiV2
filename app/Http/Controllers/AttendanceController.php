@@ -78,7 +78,7 @@ class AttendanceController extends Controller
         AttendanceRecord::create($request->all());
 
         return redirect()->route('attendance.index')
-            ->with('msg', $flashMessage ?? 'Registro de presença salvo com sucesso.');
+            ->with('success', $flashMessage ?? 'Registro de presença salvo com sucesso.');
     }
 
     /**
@@ -272,7 +272,7 @@ class AttendanceController extends Controller
         }
 
         return redirect()->route('attendance.index')
-            ->with('msg', 'Registros de presença salvos com sucesso.');
+            ->with('success', 'Registros de presença salvos com sucesso.');
     }
 
     /**

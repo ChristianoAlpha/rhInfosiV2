@@ -101,7 +101,7 @@ class MobilityController extends Controller
         Mail::to($employee->email)->send(new NewMobilityNotification($employee, $oldDepartment, $newDepartment, $request->causeOfMobility));
 
         return redirect()->route('admin.mobilities.index')
-                         ->with('msg', 'Mobilidade registrada com sucesso e e-mail enviado!');
+                         ->with('success', 'Mobilidade registrada com sucesso e e-mail enviado!');
     }
 
     public function pdfAll()

@@ -33,7 +33,7 @@ class PositionController extends Controller
         $data->description = $request->description;
         $data->save();
 
-        return redirect()->back()->with('msg', 'Cargo criado!');
+        return redirect()->back()->with('success', 'Cargo criado!');
     }
 
     public function show($id)
@@ -62,7 +62,7 @@ class PositionController extends Controller
         $data->description = $request->description;
         $data->save();
 
-        return redirect()->back()->with('msg', 'Cargo atualizado!');
+        return redirect()->back()->with('success', 'Cargo atualizado!');
     }
 
     public function pdf($positionId)
@@ -91,6 +91,6 @@ class PositionController extends Controller
     public function destroy($id)
     {
         Position::where('id', $id)->delete();
-        return redirect()->back()->with('msg', 'Cargo excluído!');
+        return redirect()->back()->with('success', 'Cargo excluído!');
     }
 }

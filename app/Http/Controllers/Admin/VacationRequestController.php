@@ -171,7 +171,7 @@ class VacationRequestController extends Controller
         ]);
 
         return redirect()->route('admin.vacationRequests.index')
-            ->with('msg', 'Pedido de férias registrado com sucesso!');
+            ->with('success', 'Pedido de férias registrado com sucesso!');
     }
 
     public function show($id)
@@ -240,7 +240,7 @@ class VacationRequestController extends Controller
             'originalFileName' => $orig,
         ]);
 
-        return redirect()->back()->with('msg', 'Pedido de férias atualizado com sucesso!');
+        return redirect()->back()->with('success', 'Pedido de férias atualizado com sucesso!');
     }
 
     public function destroy($id)
@@ -250,7 +250,7 @@ class VacationRequestController extends Controller
             Storage::disk('public')->delete($vac->supportDocument);
         }
         $vac->delete();
-        return redirect()->back()->with('msg', 'Pedido de férias removido.');
+        return redirect()->back()->with('success', 'Pedido de férias removido.');
     }
 
     public function pdfAll(Request $request)
@@ -328,7 +328,7 @@ class VacationRequestController extends Controller
         $vac->save();
         //registra no histórico do funcionário
         $history = 1;
-        return back()->with('msg', 'Status atualizado com sucesso!');
+        return back()->with('success', 'Status atualizado com sucesso!');
     }
 
     public function downloadSignedPdf($id)

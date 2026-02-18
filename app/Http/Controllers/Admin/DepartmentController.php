@@ -88,6 +88,6 @@ class DepartmentController extends Controller
     {
         Department::where('id', $id)->delete();
         return redirect()->back()
-               ->with('msg', 'Departamento excluído com sucesso');
+               ->with('success', 'Departamento excluído com sucesso');
     }
 }

@@ -3,19 +3,29 @@
         <div class="m-header">
             <a href="{{ route('admin.dashboard') }}" class="b-brand">
                 <!-- ========   change your logo hear   ============ -->
-                <img src="{{ asset('images/infosi/infosiLogo.png') }}" alt="INFOSI RH Logo" width="200" class="logo logo-lg" />
-                <img src="{{ asset('assets/images/infosiFavicon.png')}}" alt="" class="logo logo-sm" />
+                <img src="{{ asset('images/infosi/infosiLogo.png') }}" alt="INFOSI RH Logo" width="200"
+                    class="logo logo-lg" />
+                <img src="{{ asset('assets/images/infosiFavicon.png') }}" alt="" class="logo logo-sm" />
             </a>
         </div>
         <div class="navbar-content">
             <ul class="nxl-navbar">
                 @if (Auth::check())
-                    @php 
-                        $role = Auth::user()->role ?? null; 
+                    @php
+                        $role = Auth::user()->role ?? null;
                         $hasRhMenu = false;
                         if (in_array($role, ['department_head', 'employee']) && Auth::user()->department) {
                             $deptTitle = Str::lower(Auth::user()->department->title);
-                            if (Str::contains($deptTitle, ['recursos humanos', 'rh', 'administrativa', 'administração e serviços gerais', 'dasg']) || Str::contains(Auth::user()->department->title, ['DASG'])) {
+                            if (
+                                Str::contains($deptTitle, [
+                                    'recursos humanos',
+                                    'rh',
+                                    'administrativa',
+                                    'administração e serviços gerais',
+                                    'dasg',
+                                ]) ||
+                                Str::contains(Auth::user()->department->title, ['DASG'])
+                            ) {
                                 $hasRhMenu = true;
                             }
                         }
@@ -305,9 +315,11 @@
                                 <span class="nxl-arrow"><i class="fas fa-chevron-right"></i></span>
                             </a>
                             <ul class="nxl-submenu">
-                                <li class="nxl-item"><a class="nxl-link" href="{{ url('secondment') }}"><i
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ route('admin.secondments.index') }}"><i
                                             class="fas fa-eye me-2"></i>Ver Todos</a></li>
-                                <li class="nxl-item"><a class="nxl-link" href="{{ url('secondment/create') }}"><i
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ route('admin.secondments.create') }}"><i
                                             class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
                             </ul>
                         </li>
@@ -365,8 +377,8 @@
                                         href="{{ route('admin.suppliers.index') }}"><i class="fas fa-eye me-2"></i>
                                         Lista</a></li>
                                 <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ route('admin.suppliers.create') }}"><i
-                                            class="fas fa-plus me-2"></i> Novo</a></li>
+                                        href="{{ route('admin.suppliers.create') }}"><i class="fas fa-plus me-2"></i>
+                                        Novo</a></li>
                             </ul>
                         </li>
 
@@ -433,8 +445,8 @@
                             </a>
                             <ul class="nxl-submenu">
                                 <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ route('admin.vehicles.index') }}"><i
-                                            class="fas fa-eye me-2"></i>Ver Todos</a></li>
+                                        href="{{ route('admin.vehicles.index') }}"><i class="fas fa-eye me-2"></i>Ver
+                                        Todos</a></li>
                                 <li class="nxl-item"><a class="nxl-link"
                                         href="{{ route('admin.vehicles.create') }}"><i
                                             class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
@@ -483,8 +495,8 @@
                             </a>
                             <ul class="nxl-submenu">
                                 <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ route('admin.statutes.index') }}"><i
-                                            class="fas fa-eye me-2"></i>Ver Todos</a></li>
+                                        href="{{ route('admin.statutes.index') }}"><i class="fas fa-eye me-2"></i>Ver
+                                        Todos</a></li>
                                 <li class="nxl-item"><a class="nxl-link"
                                         href="{{ route('admin.statutes.create') }}"><i
                                             class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
@@ -563,7 +575,8 @@
                         </li>
                         <li class="nxl-item nxl-hasmenu">
                             <a class="nxl-link" href="{{ route('internEvaluation.index') }}"><i
-                                    class="fas fa-clipboard-check me-2"></i> <span class="nxl-mtext">Avaliações de Estagiários</span></a>
+                                    class="fas fa-clipboard-check me-2"></i> <span class="nxl-mtext">Avaliações de
+                                    Estagiários</span></a>
                         </li>
                         <li class="nxl-item nxl-hasmenu">
                             <a class="nxl-link" href="javascript:void(0);">
@@ -591,7 +604,8 @@
                                 <li class="nxl-item"><a class="nxl-link"
                                         href="{{ route('admin.vacationRequests.departmentSummary') }}">Férias
                                         por Departamento</a></li>
-                                <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.vacationRequests.index') }}"><i
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ route('admin.vacationRequests.index') }}"><i
                                             class="fas fa-eye me-2"></i>Ver Todos</a></li>
                                 <li class="nxl-item"><a class="nxl-link"
                                         href="{{ route('admin.vacationRequests.create') }}"><i
@@ -643,8 +657,7 @@
                             <ul class="nxl-submenu">
                                 <li class="nxl-item"><a class="nxl-link" href="{{ url('secondment') }}"><i
                                             class="fas fa-eye me-2"></i>Ver Todos</a></li>
-                                <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ url('secondment/create') }}"><i
+                                <li class="nxl-item"><a class="nxl-link" href="{{ url('secondment/create') }}"><i
                                             class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
                             </ul>
                         </li>
@@ -704,7 +717,8 @@
                                 <li class="nxl-item"><a class="nxl-link"
                                         href="{{ route('admin.vacationRequests.departmentSummary') }}">Férias
                                         por Departamento</a></li>
-                                <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.vacationRequests.index') }}"><i
+                                <li class="nxl-item"><a class="nxl-link"
+                                        href="{{ route('admin.vacationRequests.index') }}"><i
                                             class="fas fa-eye me-2"></i>Ver Todos</a></li>
                                 <li class="nxl-item"><a class="nxl-link"
                                         href="{{ route('admin.vacationRequests.create') }}"><i
@@ -773,20 +787,22 @@
                                 <span class="nxl-arrow"><i class="fas fa-chevron-right"></i></span>
                             </a>
                             <ul class="nxl-submenu">
-                                <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ route('dh.myEmployees') }}"><i class="fa-solid fa-users me-2"></i>Meus
+                                <li class="nxl-item"><a class="nxl-link" href="{{ route('dh.myEmployees') }}"><i
+                                            class="fa-solid fa-users me-2"></i>Meus
                                         Funcionários</a>
                                 </li>
                                 <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ route('dh.pendingVacations') }}"><i class="fas fa-umbrella-beach me-2"></i>Férias
+                                        href="{{ route('dh.pendingVacations') }}"><i
+                                            class="fas fa-umbrella-beach me-2"></i>Férias
+                                        Pendentes</a>
+                                </li>
+                                <li class="nxl-item"><a class="nxl-link" href="{{ route('dh.pendingLeaves') }}"><i
+                                            class="fas fa-file-alt me-2"></i>Licenças
                                         Pendentes</a>
                                 </li>
                                 <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ route('dh.pendingLeaves') }}"><i class="fas fa-file-alt me-2"></i>Licenças
-                                        Pendentes</a>
-                                </li>
-                                <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ route('dh.pendingRetirements') }}"><i class="fas fa-user-clock me-2"></i>Pedidos de
+                                        href="{{ route('dh.pendingRetirements') }}"><i
+                                            class="fas fa-user-clock me-2"></i>Pedidos de
                                         Reforma</a></li>
                             </ul>
                         </li>
@@ -797,11 +813,10 @@
                                 <span class="nxl-arrow"><i class="fas fa-chevron-right"></i></span>
                             </a>
                             <ul class="nxl-submenu">
-                                <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ route('attendance.index') }}"><i class="fas fa-eye me-2"></i>
+                                <li class="nxl-item"><a class="nxl-link" href="{{ route('attendance.index') }}"><i
+                                            class="fas fa-eye me-2"></i>
                                         Ver Registros</a></li>
-                                <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ route('attendance.create') }}"><i
+                                <li class="nxl-item"><a class="nxl-link" href="{{ route('attendance.create') }}"><i
                                             class="fas fa-plus me-2"></i>Registrar Presença</a></li>
                                 <li class="nxl-item"><a class="nxl-link"
                                         href="{{ route('attendance.dashboard') }}"><i
@@ -810,25 +825,24 @@
                             </ul>
                         </li>
 
-                        @if($hasRhMenu)
-                        <!-- Área Administrativa (RH) -->
-                        <li class="nxl-item nxl-caption">
-                            <label>Área Administrativa (RH)</label>
-                        </li>
-                        <li class="nxl-item nxl-hasmenu">
-                            <a class="nxl-link" href="javascript:void(0);">
-                                <span class="nxl-micon"><i class="fas fa-user-cog"></i></span>
-                                <span class="nxl-mtext">Gestão RH</span>
-                                <span class="nxl-arrow"><i class="fas fa-chevron-right"></i></span>
-                            </a>
-                            <ul class="nxl-submenu">
-                                <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ route('admin.hr.pendingVacations') }}"><i
-                                            class="fas fa-umbrella-beach me-2"></i>Férias para Encaminhar</a></li>
-                            </ul>
-                        </li>
+                        @if ($hasRhMenu)
+                            <!-- Área Administrativa (RH) -->
+                            <li class="nxl-item nxl-caption">
+                                <label>Área Administrativa (RH)</label>
+                            </li>
+                            <li class="nxl-item nxl-hasmenu">
+                                <a class="nxl-link" href="javascript:void(0);">
+                                    <span class="nxl-micon"><i class="fas fa-user-cog"></i></span>
+                                    <span class="nxl-mtext">Gestão RH</span>
+                                    <span class="nxl-arrow"><i class="fas fa-chevron-right"></i></span>
+                                </a>
+                                <ul class="nxl-submenu">
+                                    <li class="nxl-item"><a class="nxl-link"
+                                            href="{{ route('admin.hr.pendingVacations') }}"><i
+                                                class="fas fa-umbrella-beach me-2"></i>Férias para Encaminhar</a></li>
+                                </ul>
+                            </li>
                         @endif
-
                     @elseif($role === 'employee')
                         <!-- Gestão de Pessoas -->
                         <li class="nxl-item nxl-caption">
@@ -842,7 +856,8 @@
                             </a>
                             <ul class="nxl-submenu">
                                 <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ route('admin.vacationRequests.index') }}"><i class="fas fa-eye me-2"></i>Ver
+                                        href="{{ route('admin.vacationRequests.index') }}"><i
+                                            class="fas fa-eye me-2"></i>Ver
                                         Todos</a></li>
                                 <li class="nxl-item"><a class="nxl-link"
                                         href="{{ route('admin.vacationRequests.create') }}"><i
@@ -858,8 +873,7 @@
                             <ul class="nxl-submenu">
                                 <li class="nxl-item"><a class="nxl-link" href="{{ url('retirements') }}"><i
                                             class="fas fa-eye me-2"></i>Ver Todos</a></li>
-                                <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ url('retirements/create') }}"><i
+                                <li class="nxl-item"><a class="nxl-link" href="{{ url('retirements/create') }}"><i
                                             class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
                             </ul>
                         </li>
@@ -877,20 +891,19 @@
                             <ul class="nxl-submenu">
                                 <li class="nxl-item"><a class="nxl-link" href="{{ url('leaveRequest') }}"><i
                                             class="fas fa-eye me-2"></i>Ver Todos</a></li>
-                                <li class="nxl-item"><a class="nxl-link"
-                                        href="{{ url('leaveRequest/create') }}"><i
+                                <li class="nxl-item"><a class="nxl-link" href="{{ url('leaveRequest/create') }}"><i
                                             class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
                             </ul>
                         </li>
                     @endif
-                <li class="nxl-item nxl-hasmenu">
-                    <a class="nxl-link" href="{{ route('profile') }}"><i
-                            class="fas fa-user me-2"></i>Meu Perfil</a>
-                </li>
-                <li class="nxl-item nxl-hasmenu">
-                    <a class="nxl-link" href="{{ route('new-chat.index') }}"><i
-                            class="fas fa-comments me-2"></i>Chat</a>
-                </li>
+                    <li class="nxl-item nxl-hasmenu">
+                        <a class="nxl-link" href="{{ route('profile') }}"><i class="fas fa-user me-2"></i>Meu
+                            Perfil</a>
+                    </li>
+                    <li class="nxl-item nxl-hasmenu">
+                        <a class="nxl-link" href="{{ route('new-chat.index') }}"><i
+                                class="fas fa-comments me-2"></i>Chat</a>
+                    </li>
                 @endif
             </ul>
         </div>

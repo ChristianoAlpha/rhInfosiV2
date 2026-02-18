@@ -149,7 +149,7 @@ class RetirementController extends Controller
         }
 
         return redirect()->route('admin.retirements.index')
-                         ->with('msg', 'Pedido de reforma registrado com sucesso.');
+                         ->with('success', 'Pedido de reforma registrado com sucesso.');
     }
 
     /**
@@ -196,7 +196,7 @@ class RetirementController extends Controller
         }
 
         return redirect()->route('admin.retirements.index')
-                         ->with('msg', 'Pedido de reforma atualizado com sucesso.');
+                         ->with('success', 'Pedido de reforma atualizado com sucesso.');
     }
 
     /**
@@ -217,7 +217,7 @@ class RetirementController extends Controller
         }
 
         return redirect()->route('admin.retirements.index')
-                         ->with('msg', 'Pedido de reforma removido com sucesso.');
+                         ->with('success', 'Pedido de reforma removido com sucesso.');
     }
 
     /**

@@ -14,6 +14,9 @@
 <!-- [ Footer ] end -->
 </div>
 
+<!-- Scripts do alerts -->
+<script src="{{ asset('assets/vendors/js/sweetalert2.all.min.js') }}"></script>
+<script src="{{ asset('assets/js/alerts.js') }}"></script>
 <!-- Vendors JS -->
 <script src="{{ asset('assets/vendors/js/vendors.min.js') }}"></script>
 <script src="{{ asset('assets/vendors/js/apexcharts.min.js') }}"></script>
@@ -34,9 +37,7 @@
 <script src="{{ asset('assets/js/theme-customizer-init.min.js') }}"></script>
 <script src="https://unpkg.com/feather-icons"></script>
 
-<!-- start Modal Dinâmica Única -->
-@include('extra._alerts.index')
-<!-- end Modal Dinâmica Única -->
+
 
 <script>
     //select2

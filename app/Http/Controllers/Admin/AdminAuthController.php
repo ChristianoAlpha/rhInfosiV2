@@ -154,7 +154,7 @@ class AdminAuthController extends Controller
             }
         }
 
-        return redirect()->route('admin.users.index')->with('msg', 'Administrador criado com sucesso!');
+        return redirect()->route('admin.users.index')->with('success', 'Administrador criado com sucesso!');
     }
 
     public function show($id)
@@ -225,7 +225,7 @@ class AdminAuthController extends Controller
             }
         }
 
-        return redirect()->route('admin.users.edit', $id)->with('msg', 'Administrador atualizado com sucesso!');
+        return redirect()->route('admin.users.edit', $id)->with('success', 'Administrador atualizado com sucesso!');
     }
 
     public function destroy($id)
@@ -240,7 +240,7 @@ class AdminAuthController extends Controller
         $admin->delete();
 
         return redirect()->route('admin.users.index')
-            ->with('msg', 'Administrador removido com sucesso.');
+            ->with('success', 'Administrador removido com sucesso.');
     }
 
     public function login(Request $request)

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Secondment;
 use App\Models\Employeee;
@@ -27,7 +28,7 @@ class SecondmentController extends Controller
 
     $data = $query->orderBy('created_at','desc')->get();
 
-    return view('secondment.index', compact('data'));
+    return view('admin.secondment.list.index', compact('data'));
 }
 
 
@@ -36,7 +37,7 @@ class SecondmentController extends Controller
      */
     public function create()
     {
-        return view('secondment.create');
+        return view('admin.secondment.create.index');
     }
 
     /**
@@ -59,7 +60,7 @@ class SecondmentController extends Controller
                              ->withInput();
         }
 
-        return view('secondment.create', compact('employee'));
+        return view('admin.secondment.create.index', compact('employee'));
     }
 
     /**
@@ -98,8 +99,8 @@ class SecondmentController extends Controller
         Mail::to($employee->email)
             ->send(new NewSecondmentNotification($employee, $data['institution'], $data['causeOfTransfer'] ?? ''));
 
-        return redirect()->route('secondment.index')
-                         ->with('msg', 'Destacamento registrado com sucesso e e-mail enviado!');
+        return redirect()->route('admin.secondments.index')
+                         ->with('success', 'Destacamento registrado com sucesso e e-mail enviado!');
     }
 
     /**
@@ -108,7 +109,7 @@ class SecondmentController extends Controller
     public function show($id)
     {
         $data = Secondment::with('employee')->findOrFail($id);
-        return view('secondment.show', compact('data'));
+        return view('admin.secondment.details.index', compact('data'));
     }
 
     /**
@@ -117,7 +118,7 @@ class SecondmentController extends Controller
     public function edit($id)
     {
         $data = Secondment::findOrFail($id);
-        return view('secondment.edit', compact('data'));
+        return view('admin.secondment.edit.index', compact('data'));
     }
 
     /**
@@ -153,8 +154,8 @@ class SecondmentController extends Controller
             'originalFileName' => $data['originalFileName'],
         ]);
 
-        return redirect()->route('secondment.edit', $id)
-                         ->with('msg', 'Destacamento atualizado com sucesso!');
+        return redirect()->route('admin.secondments.edit', $id)
+                         ->with('success', 'Destacamento atualizado com sucesso!');
     }
 
     /**
@@ -163,7 +164,7 @@ class SecondmentController extends Controller
     public function destroy($id)
     {
         Secondment::destroy($id);
-        return redirect()->route('secondment.index');
+        return redirect()->route('admin.secondments.index');
     }
 
     /**
@@ -172,7 +173,7 @@ class SecondmentController extends Controller
     public function pdfAll()
     {
         $allSecondments = Secondment::with('employee')->get();
-        $pdf = PDF::loadView('secondment.secondment_pdf', compact('allSecondments'))
+        $pdf = PDF::loadView('admin.secondment.secondment_pdf', compact('allSecondments'))
                   ->setPaper('a3', 'portrait');
 
         return $pdf->stream('RelatorioDestacamentos.pdf');

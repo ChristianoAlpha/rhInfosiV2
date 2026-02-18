@@ -228,10 +228,9 @@
             <input type="file" name="biPhoto" id="biPhoto" class="form-control">
             <label for="biPhoto">Cópia do BI / Passaporte</label>
         </div>
-        @isset ($employee->biPhoto)
+        @isset($employee->biPhoto)
             <small class="text-success">Arquivo atual: <a
-                    href="{{ asset('frontend/images/biPhotos/' . $employee->biPhoto) }}"
-                    target="_blank">Ver</a></small>
+                    href="{{ asset('frontend/images/biPhotos/' . $employee->biPhoto) }}" target="_blank">Ver</a></small>
         @endisset
     </div>
 
@@ -252,6 +251,13 @@
         </div>
 
     </div>
+    <div class="col-md-12">
+        <div class="form-floating" id="driveLicenseWrapper" style="display:none;">
+            <input type="file" name="driveLicense" id="driveLicense" class="form-control ">
+            <label for="driveLicense">Carta de Condução</label>
+        </div>
+
+    </div>
 </div>
 
 
@@ -269,3 +275,29 @@
     @endif
 
 </div>
+
+{{-- script da carta de condução --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const roleSelect = document.getElementById('roleId');
+        const driveLicenseField = document.getElementById('driveLicenseWrapper');
+
+        function toggleDriveLicense() {
+            // pega o texto da opção selecionada
+            const selectedText = roleSelect.options[roleSelect.selectedIndex].text.trim().toLowerCase();
+
+            if (selectedText === 'motorista') {
+                driveLicenseField.style.display = 'block';
+            } else {
+                driveLicenseField.style.display = 'none';
+            }
+        }
+
+        // executa ao mudar
+        roleSelect.addEventListener('change', toggleDriveLicense);
+
+        // executa ao carregar página (modo edição)
+        toggleDriveLicense();
+    });
+</script>

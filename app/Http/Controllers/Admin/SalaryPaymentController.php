@@ -160,14 +160,14 @@ class SalaryPaymentController extends Controller
         }
 
         return redirect()->route('admin.salaryPayments.index')
-            ->with('msg', 'Pagamento de salário atualizado com sucesso.');
+            ->with('success', 'Pagamento de salário atualizado com sucesso.');
     }
 
     public function destroy($id)
     {
         SalaryPayment::destroy($id);
         return redirect()->route('admin.salaryPayments.index')
-            ->with('msg', 'Pagamento de salário removido com sucesso.');
+            ->with('success', 'Pagamento de salário removido com sucesso.');
     }
 
     public function pdfAll()

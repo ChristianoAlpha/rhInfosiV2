@@ -285,7 +285,7 @@ class HeritageController extends Controller
 
         $heritage->maintenances()->create($request->all());
 
-        return redirect()->route('admin.heritages.show', $heritage)->with('msg', 'Manutenção registada com sucesso!');
+        return redirect()->route('admin.heritages.show', $heritage)->with('success', 'Manutenção registada com sucesso!');
     }
  */
     /*  public function editMaintenance(Heritage $heritage, HeritageMaintenance $maintenance)
@@ -304,13 +304,13 @@ class HeritageController extends Controller
 
         $maintenance->update($request->all());
 
-        return redirect()->route('admin.heritages.show', $heritage)->with('msg', 'Manutenção atualizada com sucesso!');
+        return redirect()->route('admin.heritages.show', $heritage)->with('success', 'Manutenção atualizada com sucesso!');
     }
     
     public function destroyMaintenance(Heritage $heritage, HeritageMaintenance $maintenance)
     {
         $maintenance->delete();
-        return redirect()->route('admin.heritages.show', $heritage)->with('msg', 'Manutenção removida com sucesso!');
+        return redirect()->route('admin.heritages.show', $heritage)->with('success', 'Manutenção removida com sucesso!');
     } */
 
     // Transferência - CRUD Completo
@@ -338,7 +338,7 @@ class HeritageController extends Controller
             'ResponsibleName' => $request->TransferredToName,
         ]);
 
-        return redirect()->route('admin.heritages.show', $heritage)->with('msg', 'Transferência registada com sucesso!');
+        return redirect()->route('admin.heritages.show', $heritage)->with('success', 'Transferência registada com sucesso!');
     } */
 
     /* public function editTransfer(Heritage $heritage, HeritageTransfer $transfer)
@@ -365,13 +365,13 @@ class HeritageController extends Controller
             'ResponsibleName' => $request->TransferredToName,
         ]);
 
-        return redirect()->route('admin.heritages.show', $heritage)->with('msg', 'Transferência atualizada com sucesso!');
+        return redirect()->route('admin.heritages.show', $heritage)->with('success', 'Transferência atualizada com sucesso!');
     }
     
     public function destroyTransfer(Heritage $heritage, HeritageTransfer $transfer)
     {
         $transfer->delete();
-        return redirect()->route('admin.heritages.show', $heritage)->with('msg', 'Transferência removida com sucesso!');
+        return redirect()->route('admin.heritages.show', $heritage)->with('success', 'Transferência removida com sucesso!');
     }
 
     // Relatórios

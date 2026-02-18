@@ -93,15 +93,6 @@ class Employeee extends Authenticatable implements CanResetPasswordContract
         ->withTimestamps();
     }
 
-
-     //Relaçionamento(vinculo) entre Employeee e Driver.
-    // Por um funcionário poder ser um motorista, então a relação é de um para muitos.
-
-    public function drivers()
-    {
-        return $this->hasMany(Driver::class, "employeeId");
-    }
-
     //relacionamento employeee com mobilety
     public function mobilities()
     {
@@ -114,19 +105,10 @@ class Employeee extends Authenticatable implements CanResetPasswordContract
         return $this->hasMany(SalaryPayment::class, 'employeeId');
     }
 
-
-     // Veículos que este funcionário conduziu (através de Driver e pivot).
-
-    public function vehicles()
+    //relacionamento com vehicle
+    public function vehicle()
     {
-        return $this->hasManyThrough(
-            Vehicle::class,
-            Driver::class,
-            "employeeId", // FK em drivers
-            "id",         // PK em vehicles
-            "id",         // FK local employeees.id
-            "id"          // PK em drivers.id
-        );
+        return $this->belongsTo(Vehicle::class, 'vehicleId');
     }
 
     /* relação função -> funcionario */

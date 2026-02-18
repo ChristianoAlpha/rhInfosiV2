@@ -78,7 +78,7 @@ class MaintenanceController extends Controller
             'lastMaintenanceDate' => $data['date'],
         ]);
 
-        return redirect()->route('admin.maintenances.index')->with('msg', 'Manutenção registrada com sucesso.');
+        return redirect()->route('admin.maintenances.index')->with('success', 'Manutenção registrada com sucesso.');
     }
 
     public function show($id)
@@ -146,7 +146,7 @@ class MaintenanceController extends Controller
             'nextMaintenanceDate' => $data['nextMaintenanceDate'],
         ]);
 
-        return redirect()->back()->with('msg', 'Manutenção atualizada com sucesso.');
+        return redirect()->back()->with('success', 'Manutenção atualizada com sucesso.');
     }
 
     public function destroy($id)
@@ -159,7 +159,7 @@ class MaintenanceController extends Controller
             unlink(public_path('frontend/docs/maintenance/post/' . $maintenance->invoice_post));
         }
         $maintenance->delete();
-        return redirect()->route('maintenance.index')->with('msg', 'Manutenção excluída com sucesso.');
+        return redirect()->route('maintenance.index')->with('success', 'Manutenção excluída com sucesso.');
     }
 
     public function exportFilteredPDF(Request $request)

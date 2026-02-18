@@ -167,7 +167,7 @@ class ExtraJobController extends Controller
         }
 
         return redirect()->route('admin.extras.index')
-                         ->with('msg','Trabalho Extra criado com sucesso.');
+                         ->with('success','Trabalho Extra criado com sucesso.');
     }
 
     public function show($id)
@@ -268,14 +268,14 @@ class ExtraJobController extends Controller
         }
 
         return redirect()->route('admin.extras.index')
-                         ->with('msg','Trabalho Extra atualizado.');
+                         ->with('success','Trabalho Extra atualizado.');
     }
 
     public function destroy($id)
     {
         ExtraJob::destroy($id);
         return redirect()->route('admin.extraWork.index')
-                         ->with('msg','Trabalho Extra removido.');
+                         ->with('success','Trabalho Extra removido.');
     }
 
     public function pdfAll()

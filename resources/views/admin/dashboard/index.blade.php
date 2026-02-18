@@ -118,13 +118,13 @@
                                         <h3 class="fs-13 fw-semibold ">Funcionários Destacados</h3>
                                     </div>
                                 </div>
-                                <a href="{{ route('secondment.index') }}" class="">
+                                <a href="{{ route('admin.secondments.index') }}" class="">
                                     <i data-feather="more-vertical"></i>
                                 </a>
                             </div>
                             <div class="pt-4">
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <a href="{{ route('secondment.index') }}"
+                                    <a href="{{ route('admin.secondments.index') }}"
                                         class="fs-12 fw-medium text-muted text-truncate-1-line">Ver Detalhes</a>
                                     <div class="w-100 text-end">
                                         <span class="fs-12 text-dark">{{ $highlightedEmployees }}</span>
@@ -262,13 +262,13 @@
                                         <h3 class="fs-13 fw-semibold ">Funcionários Em Licença</h3>
                                     </div>
                                 </div>
-                                <a href="{{ route('secondment.index') }}" class="">
+                                <a href="{{ route('admin.secondments.index') }}" class="">
                                     <i data-feather="more-vertical"></i>
                                 </a>
                             </div>
                             <div class="pt-4">
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <a href="{{ route('secondment.index') }}"
+                                    <a href="{{ route('admin.secondments.index') }}"
                                         class="fs-12 fw-medium text-muted text-truncate-1-line">Ver Detalhes</a>
                                     <div class="w-100 text-end">
                                         <span class="fs-12 text-dark">N/A</span>
@@ -422,9 +422,10 @@
                                                         class="text-dark fw-medium">Total:</span>
                                                     {{ $permanentEmployees }}</div>
                                             </div>
-                                            <div class="employee-progress-permanent"
+                                            {{-- <div class="employee-progress-permanent"
                                                 data-value="{{ $activeEmployees > 0 ? round(($permanentEmployees / $activeEmployees) * 100) / 100 : 0 }}">
-                                            </div>
+                                            </div> --}}
+                                            <div class="project-progress-1"></div>
                                         </div>
                                         <div class="badge bg-gray-200 text-dark project-mini-card-badge">
                                             {{ $activeEmployees > 0 ? round(($permanentEmployees / $activeEmployees) * 100) : 0 }}%
@@ -441,9 +442,10 @@
                                                     {{ $contractEmployees }}
                                                 </div>
                                             </div>
-                                            <div class="employee-progress-contract"
+                                            {{-- <div class="employee-progress-contract"
                                                 data-value="{{ $activeEmployees > 0 ? round(($contractEmployees / $activeEmployees) * 100) / 100 : 0 }}">
-                                            </div>
+                                            </div> --}}
+                                            <div class="project-progress-2"></div>
                                         </div>
                                         <div class="badge bg-gray-200 text-dark project-mini-card-badge">
                                             {{ $activeEmployees > 0 ? round(($contractEmployees / $activeEmployees) * 100) : 0 }}%
@@ -483,104 +485,19 @@
             @endif
         </div>
     </div>
+    <script>
+        var effectivePercentage = {{ $effectivePercentage }};
+        var contractPercentage = {{ $contractPercentage }};
+    </script>
 @endsection
 
 @section('scripts')
     @if (Auth::user()->role === 'admin' || Auth::user()->role === 'director')
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-                // substituir ícones se existir
-                if (typeof feather !== 'undefined' && feather.replace) {
-                    feather.replace();
-                }
-
+                
                 // Blade → JS
                 var categoryData = {!! $categoryDataJson !!} || [];
-                var totalEmployees = {{ $totalEmployees }};
-                var activeEmployees = {{ $activeEmployees }};
-                var permanentEmployees = {{ $permanentEmployees }};
-                var contractEmployees = {{ $contractEmployees }};
-
-                // circle-progress (fallback SVG se plugin não existir)
-                var valPerm =
-                    {{ $activeEmployees > 0 ? round(($permanentEmployees / $activeEmployees) * 100) / 100 : 0 }};
-                var valContr =
-                    {{ $activeEmployees > 0 ? round(($contractEmployees / $activeEmployees) * 100) / 100 : 0 }};
-
-                function createDonut(el, value, color) {
-                    el.innerHTML = '';
-                    var size = 80,
-                        stroke = 6;
-                    var radius = (size - stroke) / 2;
-                    var circumference = 2 * Math.PI * radius;
-                    var svgNS = "http://www.w3.org/2000/svg";
-                    var svg = document.createElementNS(svgNS, "svg");
-                    svg.setAttribute("width", size);
-                    svg.setAttribute("height", size);
-                    svg.setAttribute("viewBox", "0 0 " + size + " " + size);
-
-                    var bg = document.createElementNS(svgNS, "circle");
-                    bg.setAttribute("cx", size / 2);
-                    bg.setAttribute("cy", size / 2);
-                    bg.setAttribute("r", radius);
-                    bg.setAttribute("stroke-width", stroke);
-                    bg.setAttribute("fill", "none");
-                    bg.setAttribute("stroke", "#e9ecef");
-                    svg.appendChild(bg);
-
-                    var fg = document.createElementNS(svgNS, "circle");
-                    fg.setAttribute("cx", size / 2);
-                    fg.setAttribute("cy", size / 2);
-                    fg.setAttribute("r", radius);
-                    fg.setAttribute("stroke-width", stroke);
-                    fg.setAttribute("fill", "none");
-                    fg.setAttribute("stroke-linecap", "round");
-                    fg.setAttribute("transform", "rotate(-90 " + (size / 2) + " " + (size / 2) + ")");
-                    fg.setAttribute("stroke", color);
-                    fg.setAttribute("stroke-dasharray", circumference);
-                    fg.setAttribute("stroke-dashoffset", circumference * (1 - value));
-                    svg.appendChild(fg);
-
-                    var text = document.createElementNS(svgNS, "text");
-                    text.setAttribute("x", "50%");
-                    text.setAttribute("y", "50%");
-                    text.setAttribute("dominant-baseline", "middle");
-                    text.setAttribute("text-anchor", "middle");
-                    text.setAttribute("font-size", "12");
-                    text.setAttribute("fill", "#333");
-                    text.textContent = Math.round(value * 100) + '%';
-                    svg.appendChild(text);
-
-                    el.appendChild(svg);
-                }
-
-                try {
-                    var elPerm = document.querySelector('.employee-progress-permanent');
-                    var elContr = document.querySelector('.employee-progress-contract');
-                    if (window.jQuery && jQuery.fn && typeof jQuery.fn.circleProgress === 'function') {
-                        if (elPerm) $('.employee-progress-permanent').circleProgress({
-                            value: valPerm,
-                            size: 80,
-                            thickness: 6,
-                            fill: {
-                                gradient: ['#007bff']
-                            }
-                        });
-                        if (elContr) $('.employee-progress-contract').circleProgress({
-                            value: valContr,
-                            size: 80,
-                            thickness: 6,
-                            fill: {
-                                gradient: ['#28a745']
-                            }
-                        });
-                    } else {
-                        if (elPerm) createDonut(elPerm, valPerm, '#007bff');
-                        if (elContr) createDonut(elContr, valContr, '#28a745');
-                    }
-                } catch (err) {
-                    console.error('circle-progress fallback error', err);
-                }
 
                 // ---------- APEXCHARTS: UNICO GRÁFICO PARA TODAS AS CATEGORIAS ----------
                 try {

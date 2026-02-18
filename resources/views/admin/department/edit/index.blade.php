@@ -10,7 +10,7 @@
             </div>
             <ul class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item">Adicionar novo Departamento</li>
+                <li class="breadcrumb-item">Editar Departamento</li>
             </ul>
         </div>
         <div class="page-header-right ms-auto">
@@ -38,7 +38,7 @@
                     <div class="card-body lead-status">
                         <div class="mb-5 d-flex align-items-center justify-content-between">
                             <h5 class="fw-bold mb-0 me-4">
-                                <span class="d-block mb-2">Dados Pessoais e Institucionais :</span>
+                                <span class="d-block mb-2">Editar Departamento :</span>
                                 <span class="fs-12 fw-normal text-muted text-truncate-1-line">Preencher todos os campos
                                     do formulário é obrigatório</span>
                             </h5>

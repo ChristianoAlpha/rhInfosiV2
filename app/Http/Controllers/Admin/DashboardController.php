@@ -19,40 +19,40 @@ class DashboardController extends Controller
     public function index()
     {
         //Nome do usiário logado
-        $userName = Employeee::where('id', Auth::user()->id)->first();
+        $response['userName'] = Employeee::where('id', Auth::user()->id)->first();
         // Total de funcionários (ativos + reformados, sem estagiários)
-        $totalEmployees = Employeee::whereIn('employmentStatus', ['active', 'retired'])->count();
+        $response['totalEmployees'] = Employeee::whereIn('employmentStatus', ['active', 'retired'])->count();
 
         // Ativos: Exclui os destacados
-        $activeEmployees = Employeee::where('employmentStatus', 'active')
+        $response['activeEmployees'] = Employeee::where('employmentStatus', 'active')
             ->whereDoesntHave('secondments')
             ->count();
 
         // Só reformados
-        $retiredEmployees = Employeee::where('employmentStatus', 'retired')->count();
+        $response['retiredEmployees'] = Employeee::where('employmentStatus', 'retired')->count();
 
         // Destacados: Apenas funcionários que ainda estão 'active'
-        $highlightedEmployees = Secondment::whereHas('employee', function($q) {
+        $response['highlightedEmployees'] = Secondment::whereHas('employee', function($q) {
                 $q->where('employmentStatus', 'active');
             })
             ->distinct('employeeId')
             ->count('employeeId');
 
         // Total de estagiários
-        $totalInterns = Intern::count();
+        $response['totalInterns'] = Intern::count();
 
         // Funcionários efetivos e contratados (apenas nos ativos não destacados)
         $permanentType = EmployeeType::where('name', 'Efetivo')->first();
         $contractType = EmployeeType::where('name', 'Contratado')->first();
 
-        $permanentEmployees = $permanentType
+        $response['permanentEmployees'] = $permanentType
             ? Employeee::where('employmentStatus', 'active')
                 ->whereDoesntHave('secondments')
                 ->where('employeeTypeId', $permanentType->id)
                 ->count()
             : 0;
 
-        $contractEmployees = $contractType
+        $response['contractEmployees'] = $contractType
             ? Employeee::where('employmentStatus', 'active')
                 ->whereDoesntHave('secondments')
                 ->where('employeeTypeId', $contractType->id)
@@ -79,23 +79,19 @@ class DashboardController extends Controller
             ->with('employee.department')
             ->get();
 
-        $departmentHeads = $admins->map->employee->filter();
+        $response['departmentHeads'] = $admins->map->employee->filter();
 
         // Passar dados a JS em JSON (valores re-indexados)
-        $categoryDataJson = $categoryData->toJson();
+        $response['categoryDataJson'] = $categoryData->toJson();
 
-        return view('admin.dashboard.index', compact(
-            'totalEmployees',
-            'activeEmployees',
-            'retiredEmployees',
-            'highlightedEmployees',
-            'totalInterns',
-            'permanentEmployees',
-            'contractEmployees',
-            'categoryData',
-            'categoryDataJson',
-            'departmentHeads',
-            'userName'
-        ));
+        $response['effectivePercentage'] = $response['activeEmployees'] > 0
+            ? round(($response['permanentEmployees'] / $response['activeEmployees']) * 100, 2)
+            : 0;
+
+        $response['contractPercentage'] = $response['activeEmployees'] > 0
+            ? round(($response['contractEmployees'] / $response['activeEmployees']) * 100, 2)
+            : 0;
+
+        return view('admin.dashboard.index', $response);
     }
 }
