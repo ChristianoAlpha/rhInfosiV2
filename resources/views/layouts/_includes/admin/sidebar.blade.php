@@ -40,10 +40,12 @@
                                 class="fas fa-tachometer-alt me-2"></i>
                             Painel de Controle</a>
                     </li>
-                    <li class="nxl-item nxl-hasmenu">
-                        <a class="nxl-link" href="{{ route('frontend.index') }}" target="_blank"><i
-                                class="fas fa-globe me-2"></i> SITE</a>
-                    </li>
+                    {{-- @can('isAdmin') --}}
+                        <li class="nxl-item nxl-hasmenu">
+                            <a class="nxl-link" href="{{ route('frontend.index') }}" target="_blank"><i
+                                    class="fas fa-globe me-2"></i> SITE</a>
+                        </li>
+                   {{--  @endcan --}}
 
                     @if ($role === 'admin' || $role === 'hr')
                         <!-- Estrutura Organizacional -->

@@ -101,10 +101,10 @@
                                             </td>
                                             <td>
                                                 <div class="dropdown">
-                                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Operações
-                                                    </button>
+                                                    <a href="javascript:void(0)" class="avatar-text avatar-md"
+                                                        data-bs-toggle="dropdown" data-bs-offset="0,21">
+                                                        <i class="feather feather-more-horizontal"></i>
+                                                    </a>
                                                     <ul class="dropdown-menu">
                                                         <li>
                                                             <a href="{{ route('admin.user.show', $item->id) }}"
@@ -118,6 +118,15 @@
                                                                 <i class="fas fa-pencil"></i>Editar
                                                             </a>
                                                         </li>
+                                                        @if ($item->role == 'employee')
+                                                            <li>
+                                                                <a href="{{ route('admin.users.contract', $item->id) }}"
+                                                                    type="submit" class="dropdown-item"
+                                                                    title="Gerar Contrato" target="_blank">
+                                                                    <i class="fas fa-file-pdf"></i> Baixar Contrato
+                                                                </a>
+                                                            </li>
+                                                        @endif
                                                         <li>
                                                             {{-- <a href="{{ route('admin.user.destroy', $item->id) }}"
                                                     class="dropdown-item">
@@ -135,13 +144,7 @@
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                @if ($item->role == 'employee')
-                                                    <a href="{{ route('admin.user.contract', $item->id) }}" type="submit"
-                                                        class="btn btn-outline-secondary btn-sm" style="width: 40px"
-                                                        title="Gerar Contrato">
-                                                        <i class="fas fa-file-pdf"></i>
-                                                    </a>
-                                                @endif
+
                                             </td>
                                         </tr>
                                     @endforeach

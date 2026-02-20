@@ -38,20 +38,20 @@ class UserController extends Controller
         ]);
 
         $user = new User();
-        if ($request->employee_id) {
-            $employee = Employeee::find($request->employee_id);
-            $user->name = $employee->name;
+        if ($request->employeeId) {
+            $employee = Employeee::find($request->employeeId);
+            $user->name = $employee->fullName;
             $user->email = $employee->email;
         } else {
             $user->name = $request->name;
             $user->email = $request->email;
         }
-        $user->employee_id = $request->employee_id;
+        $user->employeeId = $request->employeeId;
         $user->role = $request->role;
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('admin.users.index')->with('success', 'Utilizador criado com sucesso!');
+        return redirect()->route('admin.user.index')->with('success', 'Utilizador criado com sucesso!');
     }
 
     public function show($id)
@@ -81,19 +81,19 @@ class UserController extends Controller
         ]);
 
         $user = User::findOrFail($id);
-        if ($request->employee_id) {
-            $employee = Employeee::find($request->employee_id);
+        if ($request->employeeId) {
+            $employee = Employeee::find($request->employeeId);
             $user->name = $employee->name;
             $user->email = $employee->email;
         } else {
             $user->name = $request->name;
             $user->email = $request->email;
         }
-        $user->employee_id = $request->employee_id;
+        $user->employeeId = $request->employeeId;
         $user->role = $request->role;
         $user->save();
 
-        return redirect()->route('admin.user.list.index')->with('success', 'Utilizador atualizado com sucesso!');
+        return redirect()->route('admin.user.index')->with('success', 'Utilizador atualizado com sucesso!');
     }
 
     public function destroy($id)

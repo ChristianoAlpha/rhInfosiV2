@@ -21,7 +21,7 @@
      </div>
      <div class="col-md-6">
          <div class="form-floating">
-             <input type="text" id="name" class="form-control" value="{{ $user->name }}">
+             <input type="text" id="name" name="name" class="form-control" value="{{ $user->name ?? '' }}">
              <label>Nome do Funcionário</label>
          </div>
      </div>
@@ -38,10 +38,10 @@
          <div class="form-floating">
              <select name="role" id="role" class="form-select" required>
                  <option value="">Selecione o Papel</option>
-                 <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Administrador</option>
-                 <option value="departmentHead" {{ $user->role == 'departmentHead' ? 'selected' : '' }}>Chefe de
+                 <option value="admin" {{ ($user->role ?? '') == 'admin' ? 'selected' : '' }}>Administrador</option>
+                 <option value="departmentHead" {{ ($user->role ?? '') == 'departmentHead' ? 'selected' : '' }}>Chefe de
                      Departamento</option>
-                 <option value="employee" {{ $user->role == 'employee' ? 'selected' : '' }}>Funcionário</option>
+                 <option value="employee" {{ ($user->role ?? '') == 'employee' ? 'selected' : '' }}>Funcionário</option>
              </select>
              <label for="role">Papel *</label>
          </div>
@@ -49,26 +49,26 @@
      <div class="col-md-6">
          <div class="form-floating">
              <input type="email" name="email" id="email" class="form-control" placeholder=" "
-                 value="{{ old('email', $user->email) }}" required>
+                 value="{{ old('email', $user->email ?? '') }}" required>
              <label for="email">Email *</label>
          </div>
      </div>
  </div>
 
  <!-- Campos Diretor -->
- <div id="director_fields" style="display: {{ $user->role === 'director' ? 'block' : 'none' }};" class="mb-4">
+ <div id="director_fields" style="display: {{ ($user->role ?? '') === 'director' ? 'block' : 'none' }};" class="mb-4">
      <h5 class="text-primary mb-3"><i class="fas fa-crown me-2"></i>Diretor</h5>
      <div class="row g-3">
          <div class="col-md-6">
              <div class="form-floating">
-                 <textarea name="biography" class="form-control" style="height: 120px;" placeholder=" ">{{ old('biography', $user->biography) }}</textarea>
+                 <textarea name="biography" class="form-control" style="height: 120px;" placeholder=" ">{{ old('biography', $user->biography ?? '') }}</textarea>
                  <label>Biografia</label>
              </div>
          </div>
          <div class="col-md-6">
              <div class="form-floating">
                  <input type="url" name="linkedin" class="form-control" placeholder=" "
-                     value="{{ old('linkedin', $user->linkedin) }}">
+                     value="{{ old('linkedin', $user->linkedin ?? '') }}">
                  <label>LinkedIn</label>
              </div>
          </div>
