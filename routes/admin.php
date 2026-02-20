@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\SpecialtyController;
 use App\Http\Controllers\Admin\StatuteController;
 use App\Http\Controllers\Admin\VacationRequestController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\UserController;
 
 Route::middleware('auth')->name('admin.')->group(function () {
 
@@ -507,6 +508,23 @@ Route::middleware('auth')->name('admin.')->group(function () {
 
         //cotrato em pdf
         Route::get('/{id}/contract', [AdminAuthController::class, 'contractPdf'])->name('users.contract');
+    });
+    // fim users routes
+
+    // inicio users routes
+    Route::prefix('usuários')->group(function () {
+
+        Route::get('/listar', [UserController::class, 'index'])->name('user.index');
+        Route::get('/criar', [UserController::class, 'create'])->name('user.create');
+        Route::post('/salvar', [UserController::class, 'store'])->name('user.store');
+        Route::get('/detalhes/{id}', [UserController::class, 'show'])->name('user.show');
+        Route::get('/editar/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+        Route::put('/atualizar/{id}', [UserController::class, 'update'])->name('user.update');
+        Route::delete('/apagar/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+        Route::post('/login', [UserController::class, 'login'])->name('user.login');
+
+        //cotrato em pdf
+        Route::get('/{id}/contract', [UserController::class, 'contractPdf'])->name('user.contract');
     });
     // fim users routes
 
