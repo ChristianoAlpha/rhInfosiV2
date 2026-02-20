@@ -11,13 +11,24 @@ class CreateMaintenancesTable extends Migration
         Schema::create('maintenance', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vehicleId');
-            $table->enum('type', ['Preventive', 'Corrective']);
-            $table->date('maintenanceDate');
+            $table->enum('type', ['Preventive', 'Corrective', 'Repair']);
+            /* $table->string('subType', 50)->nullable(); */
+            $table->date('date');
+            $table->integer('mileageNow')->nullable();
             $table->decimal('cost', 10, 2);
-             $table->string('invoice_pre')->nullable();      // Fatura Prévia
-            $table->string('invoice_post')->nullable();     // Fatura Concluída
             $table->text('description')->nullable();
+            /* $table->text('piecesReplaced')->nullable(); */
+            $table->json('services')->nullable();
+            /* $table->date('nextMaintenanceDate')->nullable(); */
+            /* $table->integer('nextMileage')->nullable(); */
+            $table->string('responsibleName', 100)->nullable();
+            $table->string('responsiblePhone', 20)->nullable();
+            $table->string('responsibleEmail', 100)->nullable();
+            /* $table->text('observations')->nullable(); */
+            /* $table->string('invoice_pre')->nullable(); */
+            $table->string('file')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('vehicleId')->references('id')->on('vehicles')->onDelete('cascade');
         });

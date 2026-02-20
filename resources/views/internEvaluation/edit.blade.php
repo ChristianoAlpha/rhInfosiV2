@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Editar Avaliação')
 
 @section('content')
@@ -127,7 +127,7 @@
         </select>
       </div>
 
-      <button type="submit" class="btn btn-success w-100">Atualizar Avaliação</button>
+      <button type="submit" class="btn btn-outline-secondary w-100">Atualizar Avaliação</button>
     </form>
   </div>
 </div>

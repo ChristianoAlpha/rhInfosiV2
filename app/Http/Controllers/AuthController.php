@@ -36,7 +36,7 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect('/dashboard')->with('msg', 'Login realizado com sucesso!');
+            return redirect('/dashboard')->with('success', 'Login realizado com sucesso!');
         }
         return redirect()->back()->withErrors(['email' => 'E-mail ou senha inválidos.'])->withInput();
     }
@@ -44,7 +44,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('login')->with('msg', 'Você saiu do sistema com sucesso!');
+        return redirect('login')->with('success', 'Você saiu do sistema com sucesso!');
     }
 
     // Exibe o formulário de recuperação de senha

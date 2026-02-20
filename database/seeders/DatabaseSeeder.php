@@ -21,8 +21,15 @@ class DatabaseSeeder extends Seeder
         Admin::create([
             'employeeId' => null, // ou a ID de algum Employee(funcionario, caso eu queira futuramente vincular a um)
             'email'      => 'admin@infosi.gov.ao',
-            'password'   => Hash::make('123456'),
+            'password'   => Hash::make('admin123'),
             'role'       => 'admin',
         ]);
+        $this->call(UsersTableSeeder::class);
+        $this->call(PositionsTableSeeder::class);
+        $this->call(DepartmentsTableSeeder::class);
+        $this->call(SpecialtiesTableSeeder::class);
+        $this->call(EmployeeTypesTableSeeder::class);
+        $this->call(EmployeeCategoriesTableSeeder::class);
+        $this->call(CoursesTableSeeder::class);
     }
 }

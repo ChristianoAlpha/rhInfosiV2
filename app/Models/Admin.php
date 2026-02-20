@@ -34,4 +34,9 @@ class Admin extends Authenticatable implements CanResetPasswordContract
     {
         return $this->belongsTo(Employeee::class, 'employeeId');
     }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
+    }
 }

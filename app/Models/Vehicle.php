@@ -7,9 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Vehicle extends Model
 {
     protected $fillable = [
-        'plate','model','brand','yearManufacture','color',
-        'loadCapacity','totalMileage','lastMaintenanceDate',
-        'status','notes'
+        'plate',
+        'model',
+        'brand',
+        'yearManufacture',
+        'color',
+        'loadCapacity',
+        'totalMileage',
+        'currentMileage',
+        'lastMaintenanceDate',
+        'nextMaintenanceDate',
+        'status',
+        'notes'
     ];
 
     public function maintenance()
@@ -17,15 +26,8 @@ class Vehicle extends Model
         return $this->hasMany(Maintenance::class, 'vehicleId');
     }
 
-    public function drivers()
+    public function employees()
     {
-        return $this->belongsToMany(
-            Driver::class,
-            'vehicle_driver',
-            'vehicleId',
-            'driverId'
-        )
-        ->withPivot('startDate','endDate')
-        ->withTimestamps();
+        return $this->hasMany(Employeee::class, 'vehicleId');
     }
 }

@@ -11,29 +11,8 @@ class Employeee extends Authenticatable implements CanResetPasswordContract
 {
     use Notifiable, CanResetPassword;
 
-    protected $fillable = [
-        "departmentId",
-        "fullName",
-        "photo",
-        "iban",
-        "address",
-        "mobile",
-        "phone_code",
-        "bi",
-        "biPhoto",
-        "birth_date",
-        "nationality",
-        "gender",
-        "email",
-        "positionId",
-        "specialtyId",
-        "employeeTypeId",
-        "employeeCategoryId",
-        "academicLevel", 
-        "courseId", 
-        "employmentStatus",
-        "password",
-    ];
+    protected $table = "employeees";
+    protected $guarded = ['id'];
 
     protected $hidden = [
         "password",
@@ -93,6 +72,12 @@ class Employeee extends Authenticatable implements CanResetPasswordContract
                     ->orderByDesc("startDate");
     }
 
+    // relacionamento entre employeee e historico de funcionário
+    public function employeeHistories()
+    {
+        return $this->hasMany(EmployeeHistory::class, 'employeeId');
+    }
+
 
 // Trabalhos Extras dos quais este funcionário participou.
 
@@ -108,27 +93,26 @@ class Employeee extends Authenticatable implements CanResetPasswordContract
         ->withTimestamps();
     }
 
-
-     //Relaçionamento(vinculo) entre Employeee e Driver.
-    // Por um funcionário poder ser um motorista, então a relação é de um para muitos.
-
-    public function drivers()
+    //relacionamento employeee com mobilety
+    public function mobilities()
     {
-        return $this->hasMany(Driver::class, "employeeId");
+        return $this->hasMany(Mobility::class, 'employeeId');
     }
 
-
-     // Veículos que este funcionário conduziu (através de Driver e pivot).
-
-    public function vehicles()
+    //relacionamento com salarypayment
+    public function salaryPayments()
     {
-        return $this->hasManyThrough(
-            Vehicle::class,
-            Driver::class,
-            "employeeId", // FK em drivers
-            "id",         // PK em vehicles
-            "id",         // FK local employeees.id
-            "id"          // PK em drivers.id
-        );
+        return $this->hasMany(SalaryPayment::class, 'employeeId');
+    }
+
+    //relacionamento com vehicle
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class, 'vehicleId');
+    }
+
+    /* relação função -> funcionario */
+    public function role(){
+        return $this->belongsTo(Role::class, 'roleId');
     }
 }

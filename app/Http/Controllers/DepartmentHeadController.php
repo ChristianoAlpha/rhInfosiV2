@@ -80,27 +80,27 @@ class DepartmentHeadController extends Controller
         return view('departmentHead.pendingVacationRequests', compact('pendingRequests', 'from', 'to'));
     }
 
-    // Aprova um pedido de férias e envia e‑mail de notificação
+    // Valida um pedido de férias (Chefe de Departamento)
     public function approveVacation($id, Request $request)
     {
         $user = Auth::user();
         if ($user->role !== 'department_head') {
-            abort(403, 'Acesso negada.');
+            abort(403, 'Acesso negado.');
         }
         $vacation = VacationRequest::findOrFail($id);
         if (! $vacation->employee || $vacation->employee->departmentId !== $user->employee->departmentId) {
-            abort(403, 'Você não pode aprovar pedidos de outro departamento.');
+            abort(403, 'Você não pode validar pedidos de outro departamento.');
         }
 
-        $vacation->approvalStatus  = 'Aprovado';
-        $vacation->approvalComment = $request->input('approvalComment') ?? 'Aprovado pelo chefe';
+        $vacation->approvalStatus  = 'Validado';
+        $vacation->approvalComment = $request->input('approvalComment') ?? 'Validado pelo chefe de departamento';
         $vacation->save();
 
-        Mail::to($vacation->employee->email)
-            ->send(new VacationResponseNotification($vacation));
+        // Nota: A notificação por e-mail pode ser mantida ou ajustada conforme necessário
+        // Mail::to($vacation->employee->email)->send(new VacationResponseNotification($vacation));
 
         return redirect()->route('dh.pendingVacations')
-            ->with('msg', 'Pedido de férias aprovado com sucesso!');
+            ->with('success', 'Pedido de férias validado com sucesso e encaminhado para o RH!');
     }
 
     // Rejeita um pedido de férias e envia e‑mail de notificação
@@ -123,7 +123,7 @@ class DepartmentHeadController extends Controller
             ->send(new VacationResponseNotification($vacation));
 
         return redirect()->route('dh.pendingVacations')
-            ->with('msg', 'Pedido de férias rejeitado com sucesso!');
+            ->with('success', 'Pedido de férias rejeitado com sucesso!');
     }
 
     // ------------------- PEDIDOS DE LICENÇA -------------------
@@ -183,7 +183,7 @@ class DepartmentHeadController extends Controller
             ->send(new LeaveResponseNotification($leave));
 
         return redirect()->route('dh.pendingLeaves')
-            ->with('msg', 'Pedido de licença aprovado com sucesso!');
+            ->with('success', 'Pedido de licença aprovado com sucesso!');
     }
 
     // Rejeita um pedido de licença e envia e‑mail de notificação
@@ -206,7 +206,7 @@ class DepartmentHeadController extends Controller
             ->send(new LeaveResponseNotification($leave));
 
         return redirect()->route('dh.pendingLeaves')
-            ->with('msg', 'Pedido de licença rejeitado com sucesso!');
+            ->with('success', 'Pedido de licença rejeitado com sucesso!');
     }
 
     // ------------------- PEDIDOS DE REFORMA (Retirement) -------------------
@@ -271,7 +271,7 @@ class DepartmentHeadController extends Controller
         }
 
         return redirect()->route('dh.pendingRetirements')
-            ->with('msg', 'Pedido de reforma aprovado com sucesso!');
+            ->with('success', 'Pedido de reforma aprovado com sucesso!');
     }
 
     // Rejeita um pedido de reforma e envia e‑mail de notificação
@@ -294,7 +294,7 @@ class DepartmentHeadController extends Controller
             ->send(new RetirementResponseNotification($retirement));
 
         return redirect()->route('dh.pendingRetirements')
-            ->with('msg', 'Pedido de reforma rejeitado com sucesso!');
+            ->with('success', 'Pedido de reforma rejeitado com sucesso!');
     }
 
     // ------------------- MÉTODOS DE DOWNLOAD DE PDF -------------------

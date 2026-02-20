@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title','Nova Avaliação de Funcionário')
 @section('content')
 <div class="card my-4 shadow">
@@ -45,7 +45,7 @@
         </div>
         <div class="row mt-4">
           <div class="col text-center">
-            <button type="submit" class="btn btn-success w-50">Salvar Avaliação</button>
+            <button type="submit" class="btn btn-outline-secondary w-50">Salvar Avaliação</button>
           </div>
         </div>
       </div>

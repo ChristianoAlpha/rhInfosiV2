@@ -1,0 +1,102 @@
+<div class="row">
+    <h3>Informações sobre o produto</h3>
+    <hr>
+    <div class="col-md-6 mb-3">
+        <div class="form-floating">
+            <select name="heritageTypeId" id="heritageTypeId" class="form-select" placeholder=""
+                value="{{ old('heritageTypeId') }}" required>
+                <option value="{{ $heritage->heritageTypeId ?? ''}}">{{ $heritage->supplier->name ?? 'Selecione'}}</option>
+                @foreach ($heritageTypes as $item)
+                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                @endforeach
+            </select>
+            <label for="heritageTypeId">Categoria <span class="text-danger">*</span></label>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="form-floating">
+            <select name="supplierId" id="supplierId" class="form-select" placeholder=""
+                value="{{ old('supplierId') }}" required>
+                <option value="{{ $heritage->supplierId ?? ''}}">{{ $heritage->supplier->name ?? 'Selecione'}}</option>
+                @foreach ($suppliers as $item)
+                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                @endforeach
+            </select>
+            <label for="supplierId">Fornecedor <span class="text-danger">*</span></label>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="form-floating">
+            <input type="text" name="name" id="name" class="form-control" placeholder=""
+                value="{{ old('name', $heritage->name ?? '') }}" required>
+            <label for="name">Nome do Produto <span class="text-danger">*</span></label>
+        </div>
+    </div>
+{{--     <div class="col-md-6 mb-3">
+        <div class="form-floating">
+            <input type="text" name="serialNumber" id="serialNumber" class="form-control" placeholder=""
+                value="{{ old('serialNumber', $heritage->serialNumber ?? '') }}" >
+            <label for="serialNumber">Número de Série</label>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="form-floating">
+            <input type="text" name="macAddress" id="macAddress" class="form-control" placeholder=""
+                value="{{ old('macAddress', $heritage->macAddress ?? '') }}" >
+            <label for="macAddress">Endereço MAC</label>
+        </div>
+    </div> --}}
+    <div class="col-md-6 mb-3">
+        <div class="form-floating">
+            <input type="text" name="model" id="model" class="form-control" placeholder=""
+                value="{{ old('model', $heritage->model ?? '') }}" >
+            <label for="model">Modelo</label>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="form-floating">
+            <input type="date" name="manufactureDate" id="manufactureDate" class="form-control" placeholder=""
+                value="{{ old('manufactureDate', $heritage->manufactureDate ?? '') }}" >
+            <label for="manufactureDate">Data de Fabrico</label>
+        </div>
+    </div>
+{{--     <div class="col-md-6 mb-3">
+        <div class="form-floating">
+            <input type="text" name="nif" id="nif" class="form-control" placeholder=""
+                value="{{ old('nif', $heritage->supplier->nif ?? '') }}" required>
+            <label for="nif">NIF</label>
+        </div>
+    </div> --}}
+{{--     <div class="col-md-6 mb-3">
+        <div class="form-floating">
+            <input type="date" name="entryDate" id="entryDate" class="form-control" placeholder=""
+                value="{{ old('entryDate', $heritage->entryDate ?? '') }}" required>
+            <label for="entryDate">Data de Entrada</label>
+        </div>
+    </div> --}}
+    <div class="col-md-6 mb-3">
+        <div class="form-floating">
+            <input type="number" name="quantity" id="quantity" class="form-control" placeholder=""
+                value="{{ old('quantity', $heritage->quantity ?? '') }}" min="0" required>
+            <label for="quantity">Quantidade <span class="text-danger">*</span></label>
+        </div>
+    </div>
+    <div class="col-md-12 mb-3">
+        <div class="form-floating">
+            <input type="file" name="document" id="document" class="form-control" placeholder="">
+            <label for="document">Documento</label>
+            @isset($heritage->document)
+                <small>Documento actual <a href="{{ route('file/'.$heritage->document )}}" class="text-success">ver</a></small>
+            @endisset
+        </div>
+    </div>
+    <div class="col-md-12 mb-3">
+        <div class="form-floating">
+            <textarea name="notes" id="notes" class="form-control" placeholder="" style="height: 100px;">{{ old('notes') }}</textarea>
+            <label for="notes">Observações</label>
+        </div>
+    </div>
+</div>
+<div class="d-grid gap-2 col-4 mx-auto mt-4">
+    <buttontype="submit" class="btn btn-outline-secondary"><i class="fas fa-check-circle me-1"></i> Salvar</button>
+</div>

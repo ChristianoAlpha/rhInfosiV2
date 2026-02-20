@@ -1,5 +1,5 @@
 {{-- resources/views/employeeEvaluations/pdf.blade.php --}}
-@extends('layouts.admin.pdf')
+@extends('layouts.pdf')
 @section('pdfTitle','Avaliação de Funcionário')
 @section('titleSection')
   <h4>Avaliação do(a) Funcionario: {{ $evaluation->employee->fullName }}</h4>

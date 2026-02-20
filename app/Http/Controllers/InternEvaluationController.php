@@ -14,6 +14,10 @@ class InternEvaluationController extends Controller
         // Lista todas as avaliações de estagiários, carregando também o relacionamento com Intern
         $evaluations = InternEvaluation::with('intern')->orderByDesc('id')->get();
         return view('internEvaluation.index', compact('evaluations'));
+
+          if ($request->filled('search')) {
+                $query->where('fullName','LIKE','%'.$request->search.'%');
+        }
     }
 
     public function create()
@@ -72,7 +76,7 @@ class InternEvaluationController extends Controller
         InternEvaluation::create($data);
 
         return redirect()->route('internEvaluation.index')
-                         ->with('msg', 'Avaliação registrada com sucesso!');
+                         ->with('success', 'Avaliação registrada com sucesso!');
     }
 
     public function show($id)
@@ -108,14 +112,14 @@ class InternEvaluationController extends Controller
         $evaluation->update($request->all());
 
         return redirect()->route('internEvaluation.show', $id)
-                         ->with('msg', 'Avaliação atualizada com sucesso!');
+                         ->with('success', 'Avaliação atualizada com sucesso!');
     }
 
     public function destroy($id)
     {
         InternEvaluation::destroy($id);
         return redirect()->route('internEvaluation.index')
-                         ->with('msg', 'Avaliação removida com sucesso!');
+                         ->with('success', 'Avaliação removida com sucesso!');
     }
 
     public function pdf($id)

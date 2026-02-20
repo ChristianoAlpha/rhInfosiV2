@@ -1,8 +1,8 @@
-@extends('layouts.admin.layout')
+@extends('layouts.merge.admin')
 @section('title', 'Pedidos de Reforma Pendentes')
 @section('content')
 
-<div class="card mb-4 shadow">
+<div class="card mt-4 shadow">
   <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
     <h4 class="mb-0">Pedidos de Reforma Pendentes</h4>
     <a href="{{ route('dh.myEmployees') }}" class="btn btn-outline-light btn-sm" title="Voltar">
@@ -26,7 +26,7 @@
         <input type="date" name="to" id="to" value="{{ old('to', $to) }}" class="form-control">
       </div>
       <div class="col-md-4 align-self-end">
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-outline-secondary">
           <i class="fas fa-funnel-fill me-1"></i>Filtrar
         </button>
         <a href="{{ route('dh.pendingRetirements') }}" class="btn btn-secondary">
@@ -79,7 +79,7 @@
                     @csrf
                     @method('PUT')
                     <input type="hidden" id="hidden-approve-{{ $req->id }}" name="approvalComment">
-                    <button type="submit" class="btn btn-success btn-sm">
+                    <button type="submit" class="btn btn-outline-secondary btn-sm">
                       <i class="fas fa-check-circle"></i> Aprovar
                     </button>
                   </form>

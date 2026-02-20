@@ -18,8 +18,18 @@ class DriverController extends Controller
         if ($request->filled('endDate')) {
             $query->whereDate('created_at','<=',$request->endDate);
         }
+
+         if ($request->filled('search')) {
+        $query->whereHas('employee', function ($q) use ($request) {
+            $q->where('fullName','LIKE','%'.$request->search.'%');
+        });
+    }
+
+    
         $drivers = $query->orderByDesc('id')->get();
         return view('drivers.index', compact('drivers'));
+        
+        
     }
 
     public function create()
@@ -48,7 +58,7 @@ class DriverController extends Controller
         Driver::create($data);
 
         return redirect()->route('drivers.index')
-                         ->with('msg','Motorista cadastrado com sucesso.');
+                         ->with('success','Motorista cadastrado com sucesso.');
     }
 
     public function show(Driver $driver)
@@ -83,7 +93,7 @@ class DriverController extends Controller
         $driver->update($data);
 
         return redirect()->route('drivers.edit',$driver)
-                         ->with('msg','Dados do motorista atualizados com sucesso.');
+                         ->with('success','Dados do motorista atualizados com sucesso.');
     }
 
     public function exportFilteredPDF(Request $request)
@@ -138,6 +148,6 @@ class DriverController extends Controller
     {
         $driver->delete();
         return redirect()->route('drivers.index')
-                         ->with('msg','Motorista excluído com sucesso.');
+                         ->with('success','Motorista excluído com sucesso.');
     }
 }

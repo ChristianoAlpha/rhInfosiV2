@@ -78,7 +78,7 @@ class AttendanceController extends Controller
         AttendanceRecord::create($request->all());
 
         return redirect()->route('attendance.index')
-            ->with('msg', $flashMessage ?? 'Registro de presença salvo com sucesso.');
+            ->with('success', $flashMessage ?? 'Registro de presença salvo com sucesso.');
     }
 
     /**
@@ -94,6 +94,13 @@ class AttendanceController extends Controller
             $query->where('employeeId', $request->employeeId);
         }
         $records = $query->get();
+
+        if ($request->filled('search')) {
+        $query->whereHas('employee', fn($q) =>
+            $q->where('fullName','LIKE','%'.$request->search.'%')
+        );
+    }
+    
         return view('attendance.index', compact('records'));
     }
 
@@ -265,7 +272,7 @@ class AttendanceController extends Controller
         }
 
         return redirect()->route('attendance.index')
-            ->with('msg', 'Registros de presença salvos com sucesso.');
+            ->with('success', 'Registros de presença salvos com sucesso.');
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('layouts.admin.chat-layout')
+@extends('layouts.chat-layout')
 
 @section('content')
 <!-- Grupo de botões para navegação -->
@@ -19,9 +19,28 @@
   <div class="card-body chat-body" id="chatMessages">
     @foreach($messages as $m)
       @php
-          // Define se a mensagem é minha para alinhar a bolha
           $mine = ($m->senderId === auth()->id());
-          $name = $m->senderEmail;
+
+          // Resolver o nome bonito (compatível com Laravel 7 / PHP 7.4)
+          $name = 'Usuário';
+
+          if ($m->senderType === 'admin') {
+              $sender = \App\Models\Admin::find($m->senderId);
+              if ($sender) {
+                  if ($sender->role === 'director' && !empty($sender->directorName)) {
+                      $name = $sender->directorName;
+                  } elseif ($sender->role === 'department_head' && $sender->employee && !empty($sender->employee->fullName)) {
+                      $name = $sender->employee->fullName;
+                  } else {
+                      $name = $sender->email;
+                  }
+              }
+          } elseif ($m->senderType === 'employeee') {
+              $employee = \App\Models\Employeee::find($m->senderId);
+              $name = $employee ? ($employee->fullName ?? $m->senderEmail ?? 'Usuário') : 'Usuário';
+          } else {
+              $name = $m->senderEmail ?? 'Usuário';
+          }
       @endphp
 
       <div class="mb-3 d-flex {{ $mine ? 'justify-content-end' : 'justify-content-start' }}">
@@ -33,12 +52,13 @@
       </div>
     @endforeach
   </div>
+
   <div class="card-footer">
     <form id="chatForm" class="d-flex" autocomplete="off">
       @csrf
       <input type="hidden" name="chatGroupId" value="{{ $group->id }}">
-      <input type="text" name="message" class="form-control me-2" placeholder="Digite sua mensagem..." required>
-      <button type="submit" class="btn btn-success">
+      <input type="text" name="message" class="form-control me-2" placeholder="Digite sua mensagem..." required autofocus>
+      <button type="submit" class="btn btn-outline-secondary">
         <i class="fa fa-paper-plane"></i> Enviar
       </button>
     </form>
@@ -49,13 +69,14 @@
 @push('styles')
 <style>
   .chat-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
     height: 500px;
     overflow-y: auto;
     background: #f9f9f9;
-    -webkit-overflow-scrolling: touch; /* ADICIONADO para iOS Safari */
+    padding: 15px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    -webkit-overflow-scrolling: touch;
   }
   .bubble-left, .bubble-right {
     max-width: 60%;
@@ -67,10 +88,12 @@
   .bubble-left {
     background: #e2e2e2;
     color: #000;
+    align-self: flex-start;
   }
   .bubble-right {
     background: #007bff;
     color: #fff;
+    align-self: flex-end;
   }
 </style>
 @endpush
@@ -79,7 +102,8 @@
 <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.11.0/echo.iife.js"></script>
 <script>
-  Pusher.logToConsole = false;
+  Pusher.logToConsole = false; // Muda para true se quiseres ver logs no console durante testes
+
   window.Echo = new Echo({
     broadcaster: 'pusher',
     key: '{{ env("PUSHER_APP_KEY") }}',
@@ -89,18 +113,14 @@
 
   const chatBox = document.getElementById('chatMessages');
 
-  // Função para forçar scroll ao final
   function scrollToBottom() {
     chatBox.scrollTop = chatBox.scrollHeight;
   }
 
-  // Força o scroll para o fim assim que a página carrega
-  document.addEventListener('DOMContentLoaded', () => {
-    scrollToBottom();
-    setTimeout(scrollToBottom, 200);
-  });
+  // Scroll inicial ao carregar a página
+  scrollToBottom();
 
-  // Recebendo novas mensagens via Pusher
+  // Recebe mensagens em tempo real
   window.Echo.channel('chat-group.{{ $group->id }}')
     .listen('NewChatMessageSent', (e) => {
       const mine = (e.senderId === {{ auth()->id() }});
@@ -111,20 +131,24 @@
       const msgHtml = `
         <div class="mb-3 d-flex ${alignment}">
           <div class="${bubbleClass}">
-            <strong>${e.senderName}</strong><br>
+            <strong>${e.prettyName || e.senderName}</strong><br>
             <span>${e.message}</span><br>
             <small class="text-muted">${time}</small>
           </div>
         </div>
       `;
+
       chatBox.insertAdjacentHTML('beforeend', msgHtml);
       scrollToBottom();
     });
 
-  // Envio de mensagem
+  // Envio da mensagem
   document.getElementById('chatForm').addEventListener('submit', function(e) {
     e.preventDefault();
+
     const formData = new FormData(this);
+    const messageInput = this.querySelector('input[name="message"]');
+
     fetch("{{ route('new-chat.sendMessage') }}", {
       method: 'POST',
       headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
@@ -133,10 +157,11 @@
     .then(response => response.json())
     .then(data => {
       if (data.status === 'ok') {
-        this.message.value = '';
+        messageInput.value = '';
+        messageInput.focus();
       }
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error('Erro ao enviar:', err));
   });
 </script>
 @endpush
