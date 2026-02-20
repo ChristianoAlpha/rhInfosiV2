@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Admin;
 use App\Models\Employeee;
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -48,5 +49,24 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('manage-heritage', function ($user) {
             return $user->role === 'admin';
         });
+
+        /* inicio declarações de Gate para diferentes funções de usuário */
+
+        // Gate para admins
+        Gate::define('isAdmin', function (User $user) {
+            return $user->role === 'admin';
+        });
+
+        // Gate para chefes de departamento
+        Gate::define('isDepartmentHead', function (User $user) {
+            return $user->role === 'departmentHead';
+        });
+
+        // Gate para Funcionários comuns
+        Gate::define('isEmployee', function (User $user) {
+            return $user->role === 'employee';
+        });
+        
+        /*fim declarações de Gate para diferentes funções de usuário */
     }
 }

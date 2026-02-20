@@ -40,10 +40,12 @@
                                 class="fas fa-tachometer-alt me-2"></i>
                             Painel de Controle</a>
                     </li>
-                    <li class="nxl-item nxl-hasmenu">
-                        <a class="nxl-link" href="{{ route('frontend.index') }}" target="_blank"><i
-                                class="fas fa-globe me-2"></i> SITE</a>
-                    </li>
+                    {{-- @can('isAdmin') --}}
+                        <li class="nxl-item nxl-hasmenu">
+                            <a class="nxl-link" href="{{ route('frontend.index') }}" target="_blank"><i
+                                    class="fas fa-globe me-2"></i> SITE</a>
+                        </li>
+                   {{--  @endcan --}}
 
                     @if ($role === 'admin' || $role === 'hr')
                         <!-- Estrutura Organizacional -->
@@ -509,10 +511,10 @@
                                 <span class="nxl-arrow"><i class="fas fa-chevron-right"></i></span>
                             </a>
                             <ul class="nxl-submenu">
-                                <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.users.index') }}"><i
+                                <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.user.index') }}"><i
                                             class="fas fa-eye me-2"></i>Ver
                                         Todos</a></li>
-                                <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.users.create') }}"><i
+                                <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.user.create') }}"><i
                                             class="fas fa-plus me-2"></i>Adicionar Novo</a></li>
                             </ul>
                         </li>

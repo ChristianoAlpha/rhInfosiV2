@@ -41,8 +41,8 @@ class CreateEmployeeesTable extends Migration
             $table->foreign('employeeCategoryId')->references('id')->on('employee_categories')->onDelete('set null');
             $table->unsignedBigInteger('courseId')->nullable(); 
             $table->foreign('courseId')->references('id')->on('courses')->onDelete('set null');
-            $table->unsignedBigInteger('vehicleId')->nullable();
-            $table->foreign('vehicleId')->references('id')->on('vehicles')->onDelete('set null');
+            /* $table->unsignedBigInteger('vehicleId')->nullable();
+            $table->foreign('vehicleId')->references('id')->on('vehicles')->onDelete('set null'); */
             $table->timestamps();
         });
     }
